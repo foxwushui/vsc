@@ -1,6 +1,10 @@
 <template>
   <div id="app">
+    <h1>这个是公共模板页面</h1>
     <router-view></router-view>
+    <footer>
+      
+    </footer>
   </div>
 </template>
 

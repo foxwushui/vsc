@@ -22,6 +22,7 @@
         <button @click="todos.splice(index,1)">X</button>
       </li>
     </ul>
+    <router-link to="/Menu">菜单</router-link>
   </div>
 </template>
 
@@ -63,7 +64,7 @@ export default {
     }
   },
   created () {
-    console.log('aaa')
+    document.title = 'hello页面'
   }
 }
 </script>
