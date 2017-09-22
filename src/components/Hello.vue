@@ -1,14 +1,27 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <div v-bind:title='msg2'>
-        鼠标悬停几秒钟就可以了
+    <div :title='msg2'>
+      鼠标悬停几秒钟就可以了
     </div>
-    <p v-if='seen'>你看到我了吗</p>
+    <p v-if='seen' :class="{active:seen}" :style="styleObj">你看到我了吗</p>
     <ul>
-      <li v-for='todo in todos' v-bind:key='todo.id'>{{todo.text}}</li>
+      <li v-for='(todo,index) of todos' :key='todo.id'>{{index}},{{todo.text}}</li>
     </ul>
-    <button v-on:click='reversMsg'>翻转信息</button>
+    <button @click='reversMsg'>翻转信息</button>
+    <input type="text" v-model="msg">
+    <p>{{reverseMsg2()}}</p>
+    <template v-if="seen">
+      <h1>你好</h1>
+    </template>
+
+    <input type="text" v-model="newTodoText" @keyup.enter="addNewTodo" placeholder="add a todo">
+    <ul>
+      <li v-for="(todo,index) of todos" :key="todo.id" :title="todo.text">
+        {{todo.text}}
+        <button @click="todos.splice(index,1)">X</button>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -21,22 +34,43 @@ export default {
       msg2: '页面加载与' + new Date().toLocaleString(),
       seen: true,
       todos: [
-        {text: '学习javascript'},
-        {text: '学习js'},
-        {text: '学习abc'}
-      ]
+        { id: 0, text: '学习javascript' },
+        { id: 1, text: '学习js' },
+        { id: 2, text: '学习abc' }
+      ],
+      styleObj: {
+        fontSize: '14px',
+        transform: 'all 0.5 ease'
+      },
+      newTodoText: '',
+      nextTodoOd: 3
     }
   },
   methods: {
     reversMsg () {
       this.msg = this.msg.split('').reverse().join('')
+    },
+    reverseMsg2 () {
+      return this.msg.split('').reverse().join('')
+    },
+    addNewTodo (e) {
+      console.log(e)
+      this.todos.push({
+        id: this.nextTodoOd++,
+        text: this.newTodoText
+      })
+      this.newTodoText = ''
     }
+  },
+  created () {
+    console.log('aaa')
   }
 }
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
+h1,
+h2 {
   font-weight: normal;
 }
 
