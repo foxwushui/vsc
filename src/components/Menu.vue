@@ -11,6 +11,9 @@ export default {
     return {
       msg: '123'
     }
+  },
+  created () {
+    document.title = 'menu页面'
   }
 }
 </script>
