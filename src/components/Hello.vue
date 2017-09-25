@@ -15,6 +15,7 @@
       <h1>你好</h1>
     </template>
 
+    
     <input type="text" v-model="newTodoText" @keyup.enter="addNewTodo" placeholder="add a todo">
     <ul>
       <li v-for="(todo,index) of todos" :key="todo.id" :title="todo.text">
@@ -23,10 +24,17 @@
       </li>
     </ul>
     <router-link to="/Menu">菜单</router-link>
+    <div>    
+
+<child></child>
+
+    </div>
   </div>
 </template>
 
 <script>
+import Child from './Child1'
+
 export default {
   name: 'hello',
   data () {
@@ -46,6 +54,9 @@ export default {
       newTodoText: '',
       nextTodoOd: 3
     }
+  },
+  components: {
+    Child
   },
   methods: {
     reversMsg () {
