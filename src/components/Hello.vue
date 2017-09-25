@@ -24,9 +24,12 @@
       </li>
     </ul>
     <router-link to="/Menu">菜单</router-link>
-    <div>    
+    <p @click="$store.dispatch('switch_child')">点击</p>
+    <div> 
+
 
 <child></child>
+
 
     </div>
   </div>
