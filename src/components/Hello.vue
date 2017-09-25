@@ -26,39 +26,42 @@
     <div> 
 <child></child>
     </div>
+  <div v-if="message.length" class="message">
+
     <ul>
-      <li  v-for="item of message" :key="item.Id" :title="item.Title">
-                            <h6 class="text-overflow" style="width:220px;">{{ item.Title}}</h6>
-                            <div class="f-l f-16 text-l">
-                                <span>{{ item.SmallTypeName}}</span>
-                                <p>票据类型</p>
-                            </div>
-                            <div class="f-r f-16 text-r">
-                                <span class="je">{{item.Amount}}</span>
-                                <p>票据金额</p>
-                            </div>
-                            <div class="cl line"></div>
-                            <div class="f-l f-16 text-l">
-                                <span>{{ item.SurplusDays}}天</span>
-                                <p>剩余天数</p>
-                            </div>
-                            <div class="f-r f-16 text-r">
-                                <span>{{ item.DueDate}}</span>
-                                <p>汇票到期日1</p>
-                            </div>
-                            <div class="cl line"></div>
-                            <div class="f-l f-16 text-l">
-                                <span class="offerNum">{{ item.OfferCount}}</span>
-                                <p>报价数</p>
-                            </div>
-                            <div class="f-r f-16 text-r">
-                                <span>{{ item.ViewCount}}</span>
-                                <p>浏览量</p>
-                            </div>
-                            <div class="cl line"></div>
-                            <router-link :to="{path:'/Menu?BillNo='+item.BillNo}">查看详细</router-link>
-                        </li>
+      <li v-for="item of message" :key="item.Id" :title="item.Title">
+              <h6 class="text-overflow" style="width:220px;">{{ item.Title}}</h6>
+              <div class="f-l f-16 text-l">
+                  <span>{{ item.SmallTypeName}}</span>
+                  <p>票据类型</p>
+              </div>
+              <div class="f-r f-16 text-r">
+                  <span class="je">{{item.Amount}}</span>
+                  <p>票据金额</p>
+              </div>
+              <div class="cl line"></div>
+              <div class="f-l f-16 text-l">
+                  <span>{{ item.SurplusDays}}天</span>
+                  <p>剩余天数</p>
+              </div>
+              <div class="f-r f-16 text-r">
+                  <span>{{ item.DueDate}}</span>
+                  <p>汇票到期日1</p>
+              </div>
+              <div class="cl line"></div>
+              <div class="f-l f-16 text-l">
+                  <span class="offerNum">{{ item.OfferCount}}</span>
+                  <p>报价数</p>
+              </div>
+              <div class="f-r f-16 text-r">
+                  <span>{{ item.ViewCount}}</span>
+                  <p>浏览量</p>
+              </div>
+              <div class="cl line"></div>
+              <router-link :to="{path:'/Menu?BillNo='+item.BillNo}">查看详细</router-link>
+          </li>
       </ul>
+  </div>
   </div>
 </template>
 

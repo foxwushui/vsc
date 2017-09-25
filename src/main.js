@@ -7,9 +7,10 @@ import store from './store'
 import axios from 'axios'
 
 import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-default/index.css'
+import './css/element-ui.css'
+import './css/main.css'
 
-Vue.config.productionTip = false
+Vue.config.productionTip = true
 Vue.prototype.$ajax = axios
 Vue.use(ElementUI)
 
