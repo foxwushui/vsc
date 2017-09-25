@@ -8,14 +8,12 @@
     <ul>
       <li v-for='(todo,index) of todos' :key='todo.id'>{{index}},{{todo.text}}</li>
     </ul>
-    <button @click='reversMsg'>翻转信息</button>
+    <button @click='reversMsg'>翻转信asdas息</button>
     <input type="text" v-model="msg">
     <p>{{reverseMsg2()}}</p>
     <template v-if="seen">
       <h1>你好</h1>
     </template>
-
-    
     <input type="text" v-model="newTodoText" @keyup.enter="addNewTodo" placeholder="add a todo">
     <ul>
       <li v-for="(todo,index) of todos" :key="todo.id" :title="todo.text">
@@ -26,12 +24,41 @@
     <router-link to="/Menu">菜单</router-link>
     <p @click="$store.dispatch('switch_child')">点击</p>
     <div> 
-
-
 <child></child>
-
-
     </div>
+    <ul>
+      <li  v-for="item of message" :key="item.Id" :title="item.Title">
+                            <h6 class="text-overflow" style="width:220px;">{{ item.Title}}</h6>
+                            <div class="f-l f-16 text-l">
+                                <span>{{ item.SmallTypeName}}</span>
+                                <p>票据类型</p>
+                            </div>
+                            <div class="f-r f-16 text-r">
+                                <span class="je">{{item.Amount}}</span>
+                                <p>票据金额</p>
+                            </div>
+                            <div class="cl line"></div>
+                            <div class="f-l f-16 text-l">
+                                <span>{{ item.SurplusDays}}天</span>
+                                <p>剩余天数</p>
+                            </div>
+                            <div class="f-r f-16 text-r">
+                                <span>{{ item.DueDate}}</span>
+                                <p>汇票到期日1</p>
+                            </div>
+                            <div class="cl line"></div>
+                            <div class="f-l f-16 text-l">
+                                <span class="offerNum">{{ item.OfferCount}}</span>
+                                <p>报价数</p>
+                            </div>
+                            <div class="f-r f-16 text-r">
+                                <span>{{ item.ViewCount}}</span>
+                                <p>浏览量</p>
+                            </div>
+                            <div class="cl line"></div>
+                            <router-link :to="{path:'/Menu?BillNo='+item.BillNo}">查看详细</router-link>
+                        </li>
+      </ul>
   </div>
 </template>
 
@@ -55,7 +82,8 @@ export default {
         transform: 'all 0.5 ease'
       },
       newTodoText: '',
-      nextTodoOd: 3
+      nextTodoOd: 3,
+      message: []
     }
   },
   components: {
@@ -79,6 +107,16 @@ export default {
   },
   created () {
     document.title = 'hello页面'
+    this.$ajax({
+      method: 'Post',
+      url: '/api/billinfo/GetIndexBillList',
+      data: {
+        SmallType: '1',
+        PageSize: '3'
+      }
+    }).then(res => {
+      this.message = res.data.Message
+    })
   }
 }
 </script>
