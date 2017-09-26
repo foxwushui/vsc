@@ -1,6 +1,9 @@
 export default {
   state: {
-    show: false
+    show: false,
+    _config: {
+      name: '1'
+    }
   },
   mutations: {
     switch_child (state) {

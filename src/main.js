@@ -18,6 +18,9 @@ Vue.config.productionTip = true
 Vue.prototype.$ajax = axios
 Vue.use(ElementUI)
 
+// 全局挂载dd
+Vue.prototype.dd = window.dd
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

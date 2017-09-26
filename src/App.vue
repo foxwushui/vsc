@@ -18,6 +18,19 @@ export default {
   },
   components: {
     Footers
+  },
+  created () {
+    this.dd.ready(function () {
+      this.dd.runtime.permission.requestAuthCode({
+        corpId: 'corpid',
+        onSuccess: function (result) {
+          console.log(1)
+        },
+        onFail: err => {
+          console.log(err)
+        }
+      })
+    })
   }
 }
 </script>
