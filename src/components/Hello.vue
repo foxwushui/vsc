@@ -2,7 +2,7 @@
   <div class="hello">
     <h1>{{ msg }}</h1>
     <div :title='msg2'>
-      鼠标悬停几秒钟就可以了
+      鼠标悬停几秒急急急焊接工艺加工与
     </div>
     <p v-if='seen' :class="{active:seen}" :style="styleObj">你看到我了吗</p>
     <ul>

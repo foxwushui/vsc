@@ -4,14 +4,14 @@
         <p v-if="show">我是child页面的p</p>
 
 <el-row>
-  <el-col :span="24"><div class="grid-content bg-purple-dark">sda</div></el-col>
+  <el-col :span="24"><div class="grid-content bg-purple-dark">ssadda</div></el-col>
 </el-row>
 <el-row>
-  <el-col :span="12"><div class="grid-content bg-purple"></div>1</el-col>
+  <el-col :span="12"><div class="grid-content bg-purple"></div></el-col>
   <el-col :span="12"><div class="grid-content bg-purple-light"></div></el-col>
 </el-row>
 <el-row>
-  <el-col :span="8"><div claass="grid-content bg-purple"></div>1</el-col>
+  <el-col :span="8"><div claass="grid-content bg-purple"></div></el-col>
   <el-col :span="12"><div class="grid-content bg-purple-light"></div></el-col>
 </el-row>
 <el-row>
@@ -20,7 +20,7 @@
   <el-col :span="8"><div class="grid-content bg-purple"></div></el-col>
 </el-row>
 <el-row>
-  <el-col :span="6"><div class="grid-content bg-purple"></div>1</el-col>
+  <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
   <el-col :span="6"><div class="grid-content bg-purple-light"></div></el-col>
   <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
   <el-col :span="6"><div class="grid-content bg-purple-light"></div></el-col>
