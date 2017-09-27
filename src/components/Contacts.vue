@@ -33,36 +33,25 @@ export default {
   },
   created () {
     // 设置钉钉相关内容
-    this.dd.ready(() => {
-      this.dd.runtime.permission.requestAuthCode({
-        corpId: 'dingf53c8d834194138b35c2f4657eb6378f',
-        onSuccess: function (res) {
-          console.log(res)
+    this.dd.biz.navigation.setMenu({
+      backgroundColor: '#ADD8E6',
+      textColor: '#ADD8E611',
+      items: [
+        {
+          'id': '1',
+          'iconId': 'add',
+          'text': '添加'
         }
-      })
-      this.dd.error(function (err) {
-        alert(window.JSON.stringify(err))
-      })
-      this.dd.biz.navigation.setMenu({
-        backgroundColor: '#ADD8E6',
-        textColor: '#ADD8E611',
-        items: [
-          {
-            'id': '1',
-            'iconId': 'add',
-            'text': '添加'
-          }
-        ],
-        onSuccess: data => {
-          this.addContact()
-        },
-        onFail: function (err) {
-          console.log(err)
-        }
-      })
-      this.dd.biz.navigation.setTitle({
-        title: '外部联系人'
-      })
+      ],
+      onSuccess: data => {
+        this.addContact()
+      },
+      onFail: function (err) {
+        console.log(err)
+      }
+    })
+    this.dd.biz.navigation.setTitle({
+      title: '外部联系人'
     })
   }
 }
