@@ -20,16 +20,18 @@ export default {
     Footers
   },
   created () {
+    let _this = this
     this.dd.ready(function () {
-      this.dd.runtime.permission.requestAuthCode({
-        corpId: 'corpid',
-        onSuccess: function (result) {
-          console.log(1)
-        },
-        onFail: err => {
-          console.log(err)
+      console.log(this)
+      _this.dd.runtime.permission.requestAuthCode({
+        corpId: 'dingf53c8d834194138b35c2f4657eb6378f',
+        onSuccess: function (res) {
+          console.log(res)
         }
       })
+    })
+    this.dd.error(function (err) {
+      alert(window.JSON.stringify(err))
     })
   }
 }
