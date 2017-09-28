@@ -46,6 +46,14 @@ export default {
   methods: {
   },
   created () {
+    this.dd.ready(() => {
+      this.dd.runtime.permission.requestAuthCode({
+        corpId: 'dingf53c8d834194138b35c2f4657eb6378f',
+        onSuccess: res => {
+          console.log(res)
+        }
+      })
+    })
   }
 }
 </script>
