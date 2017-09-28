@@ -12,19 +12,6 @@
         <Info></Info>
       </mt-tab-container-item>
     </mt-tab-container>
-    <!-- tabbar -->
-    <mt-tabbar v-model="selected" fixed>
-      <mt-tab-item id="Contacts">
-        <img src="http://192.168.3.50:8001/Content/images/tms_02.png" slot="icon">
-        客户
-      </mt-tab-item>
-      <mt-tab-item id="Business">
-        业务
-      </mt-tab-item>
-      <mt-tab-item id="Info">
-        我的
-      </mt-tab-item>
-    </mt-tabbar>
   </div>
 </template>
 

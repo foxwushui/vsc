@@ -1,12 +1,12 @@
-<<template>
-  <div class="business">
-      业务页23
-  </div>
+<template>
+  <div class="addBusiness">
+    添加业务
+    </div>
 </template>
 
 <script>
 export default {
-  name: 'business',
+  name: 'addBusiness',
   data () {
     return {}
   }

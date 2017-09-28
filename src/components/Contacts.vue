@@ -48,6 +48,7 @@ export default {
   },
   created () {
     // 设置钉钉相关内容
+<<<<<<< HEAD
     this.dd.ready(() => {
       this.dd.biz.navigation.setMenu({
         backgroundColor: '#ADD8E6',
@@ -69,6 +70,27 @@ export default {
       this.dd.biz.navigation.setTitle({
         title: '外部联系人'
       })
+=======
+    this.dd.biz.navigation.setMenu({
+      backgroundColor: '#ADD8E6',
+      textColor: '#ADD8E611',
+      items: [
+        {
+          'id': '1',
+          'iconId': 'add',
+          'text': '添加'
+        }
+      ],
+      onSuccess: data => {
+        this.addContact()
+      },
+      onFail: function (err) {
+        console.log(err)
+      }
+    })
+    this.dd.biz.navigation.setTitle({
+      title: '外部联系人'
+>>>>>>> c37b42436e774d3a76951c98cb7b56a131c7e0c1
     })
   }
 }
