@@ -7,16 +7,14 @@ import App from './App'
 import router from './router'
 import store from './store'
 import axios from 'axios'
-import MintUI from 'mint-ui'
 
 // css
-import './css/style.css'
-import './css/main.css'
+import './assets/css/amazeui.css'
+import './assets/css/main.css'
 
 // 配置
 Vue.config.productionTip = true
 Vue.prototype.$ajax = axios
-Vue.use(MintUI)
 
 // 全局挂载dd
 Vue.prototype.dd = window.dd

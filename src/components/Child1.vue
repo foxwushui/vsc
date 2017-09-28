@@ -1,9 +1,7 @@
 <template>
     <div class="child1">
         <h1>{{msg}}</h1>
-        <p v-if="show">我是child页面的p</p>
-
- 
+        <p v-if="show">我是child页面的p</p> 
     </div>
     
 </template>

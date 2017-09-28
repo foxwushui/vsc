@@ -9,28 +9,27 @@ import Info from '@/components/Info'
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
   routes: [
     {
-      // 默认客户页面
+      // 默认客户
       path: '/',
       name: 'Contacts',
       component: Contacts
     },
     {
-      // 添加客户页面
+      // 添加客户
       path: '/addContacts',
       name: 'addContacts',
       component: addContacts
     },
     {
-      // 业务页面
+      // 业务
       path: '/Business',
       name: 'Business',
       component: Business
     },
     {
-      // 添加业务页面
+      // 添加业务
       path: '/addBusiness',
       name: 'addBusiness',
       component: addBusiness
