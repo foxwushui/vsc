@@ -15,8 +15,6 @@ import './assets/css/main.css'
 // 配置
 Vue.config.productionTip = true
 Vue.prototype.$ajax = axios
-
-// 全局挂载dd
 Vue.prototype.dd = window.dd
 
 /* eslint-disable no-new */
