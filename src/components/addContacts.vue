@@ -1,90 +1,96 @@
 <template>
   <div class="addContacts">
-    <form class="am-form am-form-horizontal">
+    <form class="am-form am-form-horizontal" @submit.prevent="add">
       <div class="am-form-group  am-container">
-        <label for="doc-ipt-3" class="am-u-sm-2 am-form-label">姓名<span>*</span></label>
+        <label for="name" class="am-u-sm-2 am-form-label">姓名<span>*</span></label>
         <div class="am-u-sm-10">
-          <input type="text" id="doc-ipt-3" placeholder="输入联系人姓名（必填）">
+          <input type="text" id="name" placeholder="输入联系人姓名（必填）">
         </div>
       </div>
       <div class="am-form-group am-container">
-        <label for="doc-ipt-pwd-2" class="am-u-sm-2 am-form-label">电话</label>
+        <label for="tel" class="am-u-sm-2 am-form-label">电话<span>*</span></label>
         <div class="am-u-sm-10">
-          <input type="password" id="doc-ipt-pwd-2" placeholder="请输入手机号或固定号码（必填）">
+          <input type="tel" id="tel" placeholder="请输入手机号或固定号码（必填）">
         </div>
       </div>
       <div class="am-form-group am-container">
-        <label for="doc-ipt-pwd-2" class="am-u-sm-2 am-form-label">公司</label>
+        <label for="" class="am-u-sm-2 am-form-label">公司<span>*</span></label>
         <div class="am-u-sm-10">
-          <input type="password" id="doc-ipt-pwd-2" placeholder="请输入手机号或固定号码（必填）">
+          <input type="text" id="" placeholder="必填">
         </div>
       </div>
       <div class="am-form-group am-container">
-        <label for="doc-ipt-pwd-2" class="am-u-sm-2 am-form-label">职位</label>
+        <label for="" class="am-u-sm-2 am-form-label">职位</label>
         <div class="am-u-sm-10">
-          <input type="password" id="doc-ipt-pwd-2" placeholder="请输入手机号或固定号码（必填）">
+          <input type="text" id="" placeholder="选填">
         </div>
       </div>
       <div class="am-form-group am-container">
-        <label for="doc-ipt-pwd-2" class="am-u-sm-2 am-form-label">地址</label>
+        <label for="" class="am-u-sm-2 am-form-label">地址</label>
         <div class="am-u-sm-10">
-          <input type="password" id="doc-ipt-pwd-2" placeholder="请输入手机号或固定号码（必填）">
+          <input type="text" id="" placeholder="选填">
         </div>
       </div>
       <div class="am-form-group am-container">
-        <label for="doc-ipt-pwd-2" class="am-u-sm-2 am-form-label">邮箱</label>
+        <label for="" class="am-u-sm-2 am-form-label">邮箱</label>
         <div class="am-u-sm-10">
-          <input type="password" id="doc-ipt-pwd-2" placeholder="请输入手机号或固定号码（必填）">
+          <input type="email" id="" placeholder="选填">
         </div>
       </div>
       <div class="am-form-group am-container">
-        <label for="doc-ipt-pwd-2" class="am-u-sm-2 am-form-label">备注</label>
+        <label for="" class="am-u-sm-2 am-form-label">备注</label>
         <div class="am-u-sm-10">
-          <input type="text" id="doc-ipt-pwd-2" placeholder="请输入手机号或固定号码（必填）">
+          <input type="text" id="" placeholder="选填">
         </div>
       </div>
 
       <br/>
       
       <div class="am-form-group am-container">
-        <label for="doc-ipt-pwd-2" class="am-u-sm-2 am-form-label">类型</label>
-        <div class="am-u-sm-10">
+        <label for="" class="am-u-sm-3 am-form-label">类型</label>
+        <div class="am-u-sm-9">
           <select name="" id="">
-            <option value="1">请选择</option>
-            <option value="1">1</option>
-            <option value="1">2</option>
+            <option value="0" disabled="true" selected="selected" class="dispaly-none">选择类型</option>
+            <option value="1">终端企业</option>
+            <option value="2">中介</option>
+            <option value="3">银行</option>
           </select>
         </div>
       </div>
 
       <div class="am-form-group am-container">
-        <label for="doc-ipt-pwd-2" class="am-u-sm-2 am-form-label">级别</label>
-        <div class="am-u-sm-10">
+        <label for="" class="am-u-sm-3 am-form-label">获取方式</label>
+        <div class="am-u-sm-9">
           <select name="" id="">
-            <option value="1">请选择</option>
-            <option value="1">1</option>
-            <option value="1">2</option>
+            <option value="0" disabled="true" selected="selected" class="dispaly-none">选择方式</option>
+            <option value="1">陌拜</option>
+            <option value="2">转介绍</option>
+            <option value="2">电销</option>
+            <option value="2">微信</option>
+            <option value="2">QQ</option>
+            <option value="2">其他</option>
           </select>
         </div>
       </div>
 
       <div class="am-form-group am-container">
-        <label for="doc-ipt-pwd-2" class="am-u-sm-2 am-form-label">状态</label>
-        <div class="am-u-sm-10">
+        <label for="" class="am-u-sm-3 am-form-label">级别</label>
+        <div class="am-u-sm-9">
           <select name="" id="">
-            <option value="1">请选择</option>
-            <option value="1">1</option>
-            <option value="1">2</option>
+            <option value="0" disabled="true" selected="selected" class="dispaly-none">选择级别</option>
+            <option value="1">一般</option>
+            <option value="1">重要</option>
+            <option value="1">核心</option>
           </select>
         </div>
       </div>
 
-
-      <div class="am-form-group am-container">
-        <div class="am-u-sm-10 am-u-sm-offset-2">
-          <button type="submit" class="am-btn am-btn-default">提交登入</button>
+      <div class="am-form-group am-container noBg">
+        <div class="am-u-sm-12 ">
+          <input type="submit" value="确定" class="sub" >
         </div>
       </div>
+
     </form>
   </div>
 </template>
@@ -95,28 +101,38 @@ export default {
   data () {
     return {}
   },
-  created () {
-    // 隐藏tabbar
-    this.$store.state.tabbar.show = false
-    // 设置钉钉相关内容
-    this.dd.ready(() => {
+  methods: {
+    add () {
+      alert('发生请求')
+    },
+    ddReady () {
       this.dd.biz.navigation.setRight({
         show: false
       })
       this.dd.biz.navigation.setTitle({
         title: '添加客户'
       })
-    })
+    }
+  },
+  created () {
+    // 隐藏tabbar
+    this.$store.state.tabbar.show = false
+    // 设置钉钉相关内容
+    this.ddReady()
   }
 }
 </script>
 
 <style>
 label{font-weight: normal;}
-.addContacts .am-form{padding-top: 10px;}
+.dispaly-none{display: none;}
+.addContacts .am-form{overflow: auto; position: absolute; left: 0; right: 0; top:10px; bottom: 0;}
 .addContacts .am-form-group{background: #fff; line-height: 45px; margin-bottom: 0;border-bottom: 1px solid #f1f1f1;}
-.addContacts .am-form-group input{border: none; margin-top: 5px;}
+.addContacts .am-form-group.noBg{background: none;}
+.addContacts .am-form-group input{border: none; margin-top: 5px; text-align: right;}
 .addContacts .am-form-group label{padding: 0;}
 .addContacts .am-form-group label span{color: #ff5a09;margin-left: 5px;}
-input::-webkit-datetime-edit-fields-wrapper{background-color:red;} 
+.addContacts .am-form-group select{width: 100px;float: right;margin-top: 5px;border: none; text-align: right;}
+.addContacts .am-form-group option{text-align: right;}
+.addContacts .am-form-group .sub{width: 60%;margin: 20px auto 30px;text-align: center; line-height: 45px;background: #ff5a09;color: #fff;border-radius: 4px;font-size: 20px;display: block;}
 </style>

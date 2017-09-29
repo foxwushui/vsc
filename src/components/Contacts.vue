@@ -42,16 +42,9 @@ export default {
     tabClick (index) {
       // 切换列表
       this.tabIndex = index
-    }
-  },
-  created () {
-    // 显示tabbar
-    this.$store.state.tabbar = {
-      show: true,
-      tabIndex: 0
-    }
-    // 设置钉钉相关内容
-    this.dd.ready(() => {
+    },
+    ddReady () {
+      // 默认添加联系人页面相关
       this.dd.biz.navigation.setMenu({
         backgroundColor: '#ADD8E6',
         textColor: '#ADD8E611',
@@ -72,14 +65,65 @@ export default {
       this.dd.biz.navigation.setTitle({
         title: '外部联系人'
       })
-    })
+    }
+  },
+  computed: {
+    isReady () {
+      return this.$store.state.user.isReady
+    }
+  },
+  created () {
+    // 显示tabbar
+    this.$store.state.tabbar = {
+      show: true,
+      tabIndex: 0
+    }
+    if (this.isReady) {
+      this.ddReady()
+    } else {
+      // 首次进入应用
+      this.$ajax.get('/api/user/GetDDingConfig', {
+        url: 'http://192.168.1.210:8080/'
+      }).then(res => {
+        // var data = {
+        //   agentId: res.data.AgentId,
+        //   corpId: res.data.CorpId,
+        //   timeStamp: res.data.TimeStamp,
+        //   nonceStr: res.data.NonceStr,
+        //   signature: res.data.Signature,
+        //   type: 0,
+        //   jsApiList: ['runtime.info']
+        // }
+        // this.dd.config(data)
+      }).then(() => {
+        // 入口页 免登陆
+        this.dd.ready(() => {
+          this.$store.state.user.isReady = true
+          this.dd.runtime.permission.requestAuthCode({
+            corpId: 'dingf53c8d834194138b35c2f4657eb6378f',
+            onSuccess: res => {
+              this.$ajax.get('/api/User/GetUserInfo', {
+                code: res.code
+              }).then(res => {
+                // 保存用户信息
+                this.$store.state.user.data = res.data.Message
+              })
+            }
+          })
+          this.ddReady()
+        })
+        this.dd.error(err => {
+          alert(window.JSON.stringify(err))
+        })
+      })
+    }
   }
 }
 </script>
 <style>
-.tabs{background: #fff;height: 60px;text-align: center;color: #6f6f6f;border-bottom:1px solid #d8d8d8;}
+.tabs{background: #fff;height: 60px;text-align: center;color: #999;border-bottom:1px solid #d8d8d8;}
 .tab{line-height: 58px;}
-.tab.active{border-bottom:2px solid #ff5a09;}
+.tab.active{border-bottom:2px solid #ff5a09; color: #ff5a09;}
 .cells{margin-top: 10px;}
 .cell{background: #fff;padding: 10px;}
 .cell-icon{background: #ff5a09;border-radius: 50%; color: #fff;width: 50px;height: 50px; line-height:50px; text-align: center;}

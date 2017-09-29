@@ -4,11 +4,13 @@ import Contacts from '@/components/Contacts'
 import addContacts from '@/components/addContacts'
 import Business from '@/components/Business'
 import addBusiness from '@/components/addBusiness'
+import businessDetail from '@/components/businessDetail'
 import Info from '@/components/Info'
 
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       // 默认客户
@@ -33,6 +35,12 @@ export default new Router({
       path: '/addBusiness',
       name: 'addBusiness',
       component: addBusiness
+    },
+    {
+      // 业务详细
+      path: '/businessDetail',
+      name: 'businessDetail',
+      component: businessDetail
     },
     {
       // 个人信息
