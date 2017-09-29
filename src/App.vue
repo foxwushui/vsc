@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <!-- 主体部分，使用uirouter -->
-    <transition name="component-fade" mode="out-in">
+    <!-- <transition name="component-fade" mode="out-in"> -->
       <router-view></router-view>
-    </transition>
+    <!-- </transition> -->
     <!-- 底部tabbar -->
     <Tabbar v-show="tabbarShow"></Tabbar>
   </div>
