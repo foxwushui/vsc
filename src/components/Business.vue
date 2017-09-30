@@ -1,51 +1,12 @@
 <template>
   <div class="business">
-     <div class="am-container">
+     <div class="am-container" v-for="(item,index) of lists" :key="item.Id"  @click="cellClick(item.Id)">
        <router-link :to="{ path: '/businessDetail',query:{id: '3'}}">
-        <h6>上海某某某公司<span><i></i>审核中</span></h6>
-        <p>打款名称：上海得到解答额度和都饿和</p>
-        <p>打款开户行：杀打死大四的家啊</p>
-        <p>买断金额：啊撒低级啊速度加啊四的就啊加的就啊时代是</p>
-       </router-link>
-     </div>
-     <div class="am-container">
-       <router-link :to="{ path: '/businessDetail'}">
-        <h6>上海某某某公司<span><i></i>审核中</span></h6>
-        <p>打款名称：上海得到解答额度和都饿和</p>
-        <p>打款开户行：杀打死大四的家啊</p>
-        <p>买断金额：啊撒低级啊速度加啊四的就啊加的就啊时代是</p>
-       </router-link>
-     </div>
-     <div class="am-container">
-       <router-link :to="{ path: '/businessDetail'}">
-        <h6>上海某某某公司<span><i></i>审核中</span></h6>
-        <p>打款名称：上海得到解答额度和都饿和</p>
-        <p>打款开户行：杀打死大四的家啊</p>
-        <p>买断金额：啊撒低级啊速度加啊四的就啊加的就啊时代是</p>
-       </router-link>
-     </div>
-     <div class="am-container">
-       <router-link :to="{ path: '/businessDetail'}">
-        <h6>上海某某某公司<span><i></i>审核中</span></h6>
-        <p>打款名称：上海得到解答额度和都饿和</p>
-        <p>打款开户行：杀打死大四的家啊</p>
-        <p>买断金额：啊撒低级啊速度加啊四的就啊加的就啊时代是</p>
-       </router-link>
-     </div>
-     <div class="am-container">
-       <router-link :to="{ path: '/businessDetail'}">
-        <h6>上海某某某公司<span><i></i>审核中</span></h6>
-        <p>打款名称：上海得到解答额度和都饿和</p>
-        <p>打款开户行：杀打死大四的家啊</p>
-        <p>买断金额：啊撒低级啊速度加啊四的就啊加的就啊时代是</p>
-       </router-link>
-     </div>
-     <div class="am-container">
-       <router-link :to="{ path: '/businessDetail'}">
-        <h6>上海某某某公司<span><i></i>审核中</span></h6>
-        <p>打款名称：上海得到解答额度和都饿和</p>
-        <p>打款开户行：杀打死大四的家啊</p>
-        <p>买断金额：啊撒低级啊速度加啊四的就啊加的就啊时代是</p>
+        <h6>{{item.CorpName}}<span><i></i>{{item.Status | selectTypes('Status')}}</span></h6>
+        <p>打款名称：{{item.TradeCorp}}</p>
+        <p>打款账号：{{item.BankAcount}}</p>
+        <p>打款开户行：{{item.AccountBank}}</p>
+        <p>买断金额：{{item.TotalAmount}}</p>
        </router-link>
      </div>
   </div>
@@ -55,12 +16,28 @@
 export default {
   name: 'business',
   data () {
-    return {}
+    return {
+      lists: []
+    }
   },
   methods: {
     addContacts () {
       // 添加审批
       this.$router.push({path: '/addBusiness'})
+    },
+    cellClick (id) {
+      // 审批详细
+      this.$router.push({path: '/businessDetail', query: {id: id}})
+    },
+    getList () {
+      this.$ajax.get('/api/SalesOrderCorp/GetList', {
+        params: {
+          CreateUserId: this.$store.state.user.data.Id,
+          PageIndex: 1
+        }
+      }).then(res => {
+        this.lists = this.lists.concat(res.data.Message.SalesOrderCorpList)
+      })
     },
     ddReady () {
       this.dd.biz.navigation.setMenu({
@@ -83,6 +60,7 @@ export default {
       this.dd.biz.navigation.setTitle({
         title: '审核管理'
       })
+      this.getList()
     }
   },
   created () {

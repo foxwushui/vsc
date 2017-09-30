@@ -7,6 +7,7 @@ import contactsDetail from '@/components/contactsDetail'
 import Business from '@/components/Business'
 import addBusiness from '@/components/addBusiness'
 import businessDetail from '@/components/businessDetail'
+import chose from '@/components/chose'
 import Info from '@/components/Info'
 
 Vue.use(Router)
@@ -55,6 +56,12 @@ export default new Router({
       path: '/businessDetail',
       name: 'businessDetail',
       component: businessDetail
+    },
+    {
+      // 选择银行
+      path: '/chose',
+      name: 'chose',
+      component: chose
     },
     {
       // 个人信息

@@ -1,7 +1,10 @@
 export default {
   state: {
-    data: {},
+    data: {
+      Id: '4'
+    },
     isReady: false,
-    contacts: {}
+    contacts: {},
+    chose: null
   }
 }

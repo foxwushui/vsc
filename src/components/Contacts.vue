@@ -4,18 +4,6 @@
       <div class="am-u-sm-6 tab" v-for="(item,index) of tab" :key="item.id" @click="tabClick(index)" :class="{active: index==tabIndex}">{{item.text}}</div>
     </div>
     <div class="cells">
-      <!-- <div class="am-container cell" @click="cellClick('123')">
-        <div class="cell-icon am-fl">小妹</div>
-        <div class="cell-cont am-fl">
-          <div class="cell-title">樊小妹</div>
-          <div class="cell-tips">
-            <span>一般</span>
-            <span>潜在</span>
-            <span>其他类型</span>
-          </div>
-        </div>
-          <div class="cell-more am-fr">张大大负责</div>
-      </div> -->
       <div class="am-container cell" v-for="(item,index) of lists" :key="item.Id"  @click="cellClick(item.Id)">
         <div class="cell-icon am-fl"><img src="../assets/imgs/logo.png" width="45" /></div>
         <div class="cell-cont am-fl">

@@ -23,7 +23,8 @@ Vue.filter('selectTypes', function (val, name) {
     CorpType: ['客户', '渠道商'],
     Grade: ['一般', '重要', '核心'],
     CorpNature: ['终端企业', '中介', '银行'],
-    GetWay: ['陌拜', '转介绍', '电销', '微信', 'QQ', '其他']
+    GetWay: ['陌拜', '转介绍', '电销', '微信', 'QQ', '其他'],
+    Status: ['审核中', '审核通过', '审核失败']
   }
   return json[name][val - 1]
 })
