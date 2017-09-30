@@ -10,18 +10,19 @@ export default {
   data () {
     return {}
   },
-  created () {
-    // 隐藏tabbar
-    this.$store.state.tabbar.show = false
-    // 设置钉钉相关内容
-    this.dd.ready(() => {
+  methods: {
+    ddReady () {
       this.dd.biz.navigation.setRight({
         show: false
       })
       this.dd.biz.navigation.setTitle({
         title: '业务相关'
       })
-    })
+    }
+  },
+  created () {
+    this.$store.state.tabbar.show = false
+    this.ddReady()
   }
 }
 </script>

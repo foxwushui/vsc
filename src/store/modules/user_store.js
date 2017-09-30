@@ -1,6 +1,7 @@
 export default {
   state: {
     data: {},
-    isReady: false
+    isReady: false,
+    contacts: {}
   }
 }

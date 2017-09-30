@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Contacts from '@/components/Contacts'
 import addContacts from '@/components/addContacts'
+import upContacts from '@/components/upContacts'
+import contactsDetail from '@/components/contactsDetail'
 import Business from '@/components/Business'
 import addBusiness from '@/components/addBusiness'
 import businessDetail from '@/components/businessDetail'
@@ -13,7 +15,7 @@ export default new Router({
   mode: 'history',
   routes: [
     {
-      // 默认客户
+      // 默认客户列表
       path: '/',
       name: 'Contacts',
       component: Contacts
@@ -23,6 +25,18 @@ export default new Router({
       path: '/addContacts',
       name: 'addContacts',
       component: addContacts
+    },
+    {
+      // 客户详细
+      path: '/contactsDetail',
+      name: 'contactsDetail',
+      component: contactsDetail
+    },
+    {
+      // 编辑客户
+      path: '/upContacts',
+      name: 'upContacts',
+      component: upContacts
     },
     {
       // 业务

@@ -1,6 +1,6 @@
 <template>
   <div class="tabbar am-g">
-    <div class="am-u-sm-4 item" v-for="(item,index) of tab" :key="item.id" :class="{active: index==tabIndex}" @click="changeView(index,item.url)"><img v-bind:src="item.img" width="45" height="45" >{{item.name}}</div>
+    <div class="am-u-sm-4 item" v-for="(item,index) of tab" :key="item.id" :class="{active: index==tabIndex}" @click="changeView(index,item.url)"><img v-bind:src="index==tabIndex ? item.img_a : item.img"  height="26" >{{item.name}}</div>
   </div>
 </template>
 
@@ -12,17 +12,20 @@ export default {
       tab: [{
         name: '客户',
         url: '/',
-        img: require('../assets/imgs/my.png')
+        img: require('../assets/imgs/cont.png'),
+        img_a: require('../assets/imgs/cont_active.png')
       },
       {
         name: '业务',
         url: '/Business',
-        img: require('../assets/imgs/my.png')
+        img: require('../assets/imgs/bus.png'),
+        img_a: require('../assets/imgs/bus_active.png')
       },
       {
         name: '我的',
         url: '/Info',
-        img: require('../assets/imgs/my.png')
+        img: require('../assets/imgs/my.png'),
+        img_a: require('../assets/imgs/my_active.png')
       }]
     }
   },
@@ -41,8 +44,8 @@ export default {
 </script>
 
 <style>
-.tabbar{position: fixed; bottom: 0; line-height: 32px; color: #6f6f6f;background: #fff;}
+.tabbar{position: fixed; bottom: 0; line-height: 28px; color: #6f6f6f;background: #fff;}
 .tabbar .item{ text-align: center;}
 .tabbar .item.active{color: #ff5a09;}
-.tabbar .item img{display: block; margin:0 auto;}
+.tabbar .item img{display: block; margin:10px auto 0;}
 </style>

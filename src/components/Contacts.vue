@@ -4,7 +4,7 @@
       <div class="am-u-sm-6 tab" v-for="(item,index) of tab" :key="item.id" @click="tabClick(index)" :class="{active: index==tabIndex}">{{item.text}}</div>
     </div>
     <div class="cells">
-      <div class="am-container cell">
+      <!-- <div class="am-container cell" @click="cellClick('123')">
         <div class="cell-icon am-fl">小妹</div>
         <div class="cell-cont am-fl">
           <div class="cell-title">樊小妹</div>
@@ -15,6 +15,16 @@
           </div>
         </div>
           <div class="cell-more am-fr">张大大负责</div>
+      </div> -->
+      <div class="am-container cell" v-for="(item,index) of lists" :key="item.Id"  @click="cellClick(item.Id)">
+        <div class="cell-icon am-fl"><img src="../assets/imgs/logo.png" width="45" /></div>
+        <div class="cell-cont am-fl">
+          <div class="cell-title">{{item.CorpName}}</div>
+          <div class="cell-tips">
+            <span>姓名：{{item.LinkMan}}</span>
+            <span>电话：{{item.Mobile}}</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -31,20 +41,35 @@ export default {
       {
         text: '我下属的'
       }],
-      tabIndex: 0
+      tabIndex: 0,
+      lists: []
     }
   },
   methods: {
     addContact () {
-      // 添加联系人
+    // 添加联系人
       this.$router.push({path: '/addContacts'})
     },
     tabClick (index) {
-      // 切换列表
+    // 切换列表
       this.tabIndex = index
     },
+    // 查看详细
+    cellClick (id) {
+      this.$router.push({path: '/contactsDetail', query: {id: id}})
+    },
+    getList () {
+      this.$ajax.get('/api/Customers/GetList', {
+        params: {
+          OwnUserId: this.$store.state.user.data.Id,
+          PageIndex: 1
+        }
+      }).then(res => {
+        this.lists = this.lists.concat(res.data.Message.CustomersList)
+      })
+    },
     ddReady () {
-      // 默认添加联系人页面相关
+      // dd相关
       this.dd.biz.navigation.setMenu({
         backgroundColor: '#ADD8E6',
         textColor: '#ADD8E611',
@@ -65,6 +90,7 @@ export default {
       this.dd.biz.navigation.setTitle({
         title: '外部联系人'
       })
+      this.getList()
     }
   },
   computed: {
@@ -83,18 +109,20 @@ export default {
     } else {
       // 首次进入应用
       this.$ajax.get('/api/user/GetDDingConfig', {
-        url: 'http://192.168.1.210:8080/'
+        params: {
+          url: 'http://192.168.1.210:8080/'
+        }
       }).then(res => {
-        // var data = {
-        //   agentId: res.data.AgentId,
-        //   corpId: res.data.CorpId,
-        //   timeStamp: res.data.TimeStamp,
-        //   nonceStr: res.data.NonceStr,
-        //   signature: res.data.Signature,
-        //   type: 0,
-        //   jsApiList: ['runtime.info']
-        // }
-        // this.dd.config(data)
+        var data = {
+          agentId: res.data.AgentId,
+          corpId: res.data.CorpId,
+          timeStamp: res.data.TimeStamp,
+          nonceStr: res.data.NonceStr,
+          signature: res.data.Signature,
+          type: 0,
+          jsApiList: ['runtime.info', 'biz.telephone.showCallMenu']
+        }
+        this.dd.config(data)
       }).then(() => {
         // 入口页 免登陆
         this.dd.ready(() => {
@@ -107,10 +135,10 @@ export default {
               }).then(res => {
                 // 保存用户信息
                 this.$store.state.user.data = res.data.Message
+                this.ddReady()
               })
             }
           })
-          this.ddReady()
         })
         this.dd.error(err => {
           alert(window.JSON.stringify(err))
@@ -121,15 +149,14 @@ export default {
 }
 </script>
 <style>
-.tabs{background: #fff;height: 60px;text-align: center;color: #999;border-bottom:1px solid #d8d8d8;}
-.tab{line-height: 58px;}
-.tab.active{border-bottom:2px solid #ff5a09; color: #ff5a09;}
-.cells{margin-top: 10px;}
-.cell{background: #fff;padding: 10px;}
-.cell-icon{background: #ff5a09;border-radius: 50%; color: #fff;width: 50px;height: 50px; line-height:50px; text-align: center;}
-.cell-cont{padding-left: 10px;}
-.cell-tips{font-size: 12px;}
-.cell-tips span{padding:2px 5px;background: #d8d8d8;margin-right: 2px;color: #6f6f6f;}
-.cell-more{font-size: 12px;color: #d2d2d2;}
+.contacts .tabs{background: #fff;height: 60px;text-align: center;color: #999;border-bottom:1px solid #d8d8d8;}
+.contacts .tab{line-height: 58px; cursor: pointer;}
+.contacts .tab.active{border-bottom:2px solid #ff5a09; color: #ff5a09;}
+.contacts .cells{margin-top: 10px; border-top: 1px solid #f6f6f6;}
+.contacts .cell{background: #fff;padding: 10px; border-bottom: 1px solid #f6f6f6;}
+.contacts .cell-icon{border-radius: 50%; color: #fff;width: 50px;height: 50px; line-height:50px; text-align: center;}
+.contacts .cell-cont{padding-left: 10px;}
+.contacts .cell-tips{font-size: 12px;}
+.contacts .cell-tips span{padding:2px 5px;margin-right: 2px;}
+.contacts .cell-more{font-size: 12px;color: #d2d2d2;}
 </style>
-

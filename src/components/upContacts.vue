@@ -1,6 +1,6 @@
 <template>
   <div class="addContacts">
-    <form class="am-form am-form-horizontal" @submit.prevent="add">
+    <form class="am-form am-form-horizontal" @submit.prevent="update">
       <div class="am-form-group  am-container">
         <label for="name" class="am-u-sm-2 am-form-label">姓名<span>*</span></label>
         <div class="am-u-sm-10">
@@ -98,21 +98,18 @@
 export default {
   name: 'addContacts',
   data () {
-    return {
-      msg: {
-        CorpNature: '0',
-        CorpType: '0',
-        GetWay: '0',
-        Grade: '0'
-      }
+    return {}
+  },
+  computed: {
+    msg () {
+      return this.$store.state.user.contacts
     }
   },
-  computed: {},
   methods: {
-    add () {
+    update () {
       this.msg.OwnUserId = this.$store.state.user.data.Id
       alert(window.JSON.stringify(this.msg))
-      this.$ajax.post('/api/Customers/add', this.msg).then(res => {
+      this.$ajax.post('/api/Customers/Update', this.msg).then(res => {
         if (res.data.RetCode === '10000') {
           this.$router.push({path: '/'})
         }
@@ -123,7 +120,7 @@ export default {
         show: false
       })
       this.dd.biz.navigation.setTitle({
-        title: '添加客户'
+        title: '编辑客户'
       })
     }
   },
