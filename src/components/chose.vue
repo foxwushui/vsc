@@ -14,7 +14,7 @@ export default {
   methods: {
     chose_click (n) {
       this.$store.state.user.chose = n
-      this.$router.push({path: '/addBusiness'})
+      this.$router.go(-1)
     }
   }
 }
