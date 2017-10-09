@@ -1,7 +1,7 @@
 <template>
   <div class="business">
      <div class="am-container" v-for="(item,index) of lists" :key="item.Id"  @click="cellClick(item.Id)">
-       <router-link :to="{ path: '/businessDetail',query:{id: '3'}}">
+       <router-link :to="{ path: '/businessDetail',query:{id: item.Id}}">
         <h6>{{item.CorpName}}<span><i></i>{{item.Status | selectTypes('Status')}}</span></h6>
         <p>打款名称：{{item.TradeCorp}}</p>
         <p>打款账号：{{item.BankAcount}}</p>

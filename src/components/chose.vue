@@ -1,7 +1,24 @@
 <template>
   <div class="chose">
     <!-- 选择银行账户 -->
-    <div v-for="n in 10" @click="chose_click(n)">{{ n }}</div>
+   <div v-for="(item,index) of TradeCompanyList" :key="item.Id"  @click="chose_click(item.AccountName,item.AccountNo,item.AccountBank)">
+     <div class="item">
+       <div class="top">
+             <p>
+                <span class="content">{{item.AccountName}}</span>
+                <span class="title">账户名称</span>
+             </p>
+             <p>
+               <span class="content">{{item.AccountNo}}</span>
+              <span class="title">账户</span>
+             </p>
+        </div>
+       <div class="bottom">
+             <span class="title">开户行</span><span class="content">{{item.AccountBank}}</span>
+       </div>
+ 
+     </div>
+    </div>
   </div>  
 </template>
 
@@ -9,17 +26,43 @@
 export default {
   name: 'chose',
   data () {
-    return {}
+    return {
+      TradeCompanyList: {}
+    }
   },
   methods: {
-    chose_click (n) {
-      this.$store.state.user.chose = n
+    chose_click (n, n1, n2) {
+      this.$store.state.user.chose.AccountName = n
+      this.$store.state.user.chose.AccountNo = n1
+      this.$store.state.user.chose.AccountBank = n2
       this.$router.go(-1)
+    },
+    getTradeCompany () {
+      // var id = this.$route.query.id
+      // 获取交易公司
+      this.$ajax.get('/api/TradeCompany/GetListByCId', {
+        params: {
+          cid: 1
+        }
+      }).then(res => {
+        this.TradeCompanyList = res.data.Message
+      })
     }
+  },
+  created () {
+    this.getTradeCompany()
   }
 }
 </script>
 
 <style>
-
+.chose{background: #f5f4f9;padding:10px;}
+.chose .item {background-color: #FFFFFF; padding:10px; border-radius: 10px;}
+.chose .top{background: url(../assets/imgs/logo.png) no-repeat 10px 0px;border-bottom: 1px dashed #9e9e9e;}
+.chose .item .top p{margin:0;padding-left: 60px;}
+.chose .item .top span{display:block;}
+.chose .item .top .content{font-size: 18px; font-weight: bold; color:#696969;}
+.chose .item .top .title{color:#9e9e9e;font-size:14px;}
+.chose .bottom .title{color:#9e9e9e;font-size:14px;}
+.chose .bottom .content{color:#696969;font-size:14px;padding-left: 20px;}
 </style>

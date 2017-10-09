@@ -5,6 +5,6 @@ export default {
     },
     isReady: false,
     contacts: {},
-    chose: null
+    chose: {}
   }
 }
