@@ -6,8 +6,8 @@
         <div class="am-u-sm-9">
            <select name="" id="" v-model="msg.CorpId">
             <option value="0" disabled="true" selected="selected" class="dispaly-none">选择贴现公司</option>
-            <option v-for="option in CorpList" v-bind:value="option.Id">  
-                {{ option.CorpName }}  
+            <option v-for="option in CorpList" :value="option.Id" v-bind:text="option.CorpName" :key="option.Id">  
+                {{ option.CorpName | trim }}  
              </option> 
           </select>
         </div>
@@ -48,19 +48,19 @@
       </div>
       <div class="pic_title">图片</div>
       <div class="pic_list">
-       
-        <div class="up">
+        <div class="pic_list_img left" v-for="img in imgs" :key="img.Id">
+         <img v-bind:src="img" width="80" height="80" />
+        </div>
+        <div class="up left">
         <input class="file" type="file" multiple @change="onFileChange">
            +
        </div>
-      </div>
-      
+      </div>      
       <div class="am-form-group am-container noBg">
         <div class="am-u-sm-12 ">
           <input type="submit" value="确定" class="sub" >
         </div>
       </div>
-
     </form>
   </div>
 </template>
@@ -70,12 +70,16 @@ export default {
   data () {
     return {
       msg: {
+        CorpId: this.$store.state.user.chose.CorpId || 0,
         AccountName: '',
         AccountNo: '',
         AccountBank: '',
-        OfferType: 1
+        OfferType: 1,
+        pic: [],
+        CreateUserId: this.$store.state.user.data.Id
       },
-      CorpList: []
+      CorpList: [],
+      imgs: []
     }
   },
   computed: {
@@ -87,8 +91,9 @@ export default {
     getCorps () {
       this.$ajax.get('/api/Customers/GetList', {
         params: {
-          OwnUserId: 4,
-          PageIndex: 1
+          OwnUserId: this.msg.CreateUserId,
+          PageIndex: 1,
+          PageSize: 100
         }
       }).then(res => {
         this.CorpList = res.data.Message.CustomersList
@@ -103,12 +108,23 @@ export default {
       this.msg.AccountBank = this.chose_msg.AccountBank
     },
     add () {
-      this.msg.OwnUserId = this.$store.state.user.data.Id
-      alert(window.JSON.stringify(this.msg))
-      this.$ajax.post('/api/SalesOrderCorp/add', this.msg).then(res => {
-        if (res.data.RetCode === '10000') {
-          this.$router.push({path: '/'})
-        }
+      if (this.msg.CorpId === '0') {
+        return
+      }
+      this.$ajax({
+        url: '/api/SalesOrderCorp/add',
+        method: 'POST',
+        transformRequest: data => {
+          let obj = {}
+          obj = window.JSON.parse(window.JSON.stringify(data))
+          obj.pic = obj.pic && obj.pic.join(',')
+          obj.CorpName = this.CorpList.find(item => item.Id === this.msg.CorpId)['CorpName']
+          obj = window.JSON.stringify(obj)
+          return obj
+        },
+        data: this.msg
+      }).then(res => {
+        console.log(res)
       })
     },
     ddReady () {
@@ -125,17 +141,27 @@ export default {
       this.msg.OfferType = n
     },
     onFileChange (e) {
-      var that = this
-      var files = e.target.files || e.dataTransfer.files
-      var image = new Image()
-      var leng = files.length
-      for (var i = 0; i < leng; i++) {
-        var reader = new FileReader()
-        reader.readAsDataURL(files[i])
-        reader.onload = function (e) {
-          var file = e.target.result
-          that.$ajax.post('/api/SalesOrderCorp/UploadFile', {'flie': file}).then(res => { alert(res) })
-        }
+      let file = e.target.files[0]
+      let reader = new FileReader()
+      reader.readAsDataURL(file)
+      reader.onload = e => {
+        this.$ajax({
+          url: '/api/SalesOrderCorp/UploadFile',
+          method: 'POST',
+          transformRequest: data => {
+            var formData = new FormData()
+            formData.append('file', data.file)
+            return formData
+          },
+          data: {
+            file: file
+          }
+        }).then(res => {
+          if (res.data.RetCode === '10000') {
+            this.imgs.push(e.currentTarget.result)
+            this.msg.pic.push(res.data.Message)
+          }
+        })
       }
     }
   },
@@ -152,17 +178,8 @@ export default {
 <style>
 label{font-weight: normal;}
 .dispaly-none{display: none;}
-.addBusiness .am-form{overflow: auto; position: absolute; left: 0; right: 0; top:10px; bottom: 0;}
-.addBusiness .am-form-group{background: #fff; line-height: 45px; margin-bottom: 0;border-bottom: 1px solid #f1f1f1;}
-.addBusiness .am-form-group.noBg{background: none;}
-.addBusiness .am-form-group input{border: none; margin-top: 5px; text-align: right;}
-.addBusiness .am-form-group label{padding: 0;}
-.addBusiness .am-form-group label span{color: #ff5a09;margin-left: 5px;}
-.addBusiness .am-form-group select{width: 100px;float: right;margin-top: 5px;border: none; text-align: right;}
-.addBusiness .am-form-group option{text-align: right;}
-.addBusiness .am-form-group .sub{width: 60%;margin: 20px auto 30px;text-align: center; line-height: 45px;background: #ff5a09;color: #fff;border-radius: 4px;font-size: 20px;display: block;}
 .otype{float: right;}
-.otype  span{display:inline-block;width: 60px; text-align: center; line-height: 35px; height: 35px;margin-top:5px; float: left;}
+.otype  span{display:inline-block;width: 60px; text-align: center; line-height: 35px; height: 35px;margin-top:5px; float: left; cursor: pointer;}
 .otype .left{border-radius: 20px 0px 0px 20px;}
 .otype .right{border-radius: 0px 20px 20px 0px;}
 .otype .active{background:#ff5a09;color:#ffffff; }
@@ -171,4 +188,5 @@ label{font-weight: normal;}
 .pic_list{height: 100px; background: #FFFFFF; overflow:hidden;}
 .pic_list .up{ height: 80px; width: 80px; border:1px solid #9c9c9c; margin-top: 10px; margin-left: 20px; font-size: 60px; line-height: 60px; text-align: center;position: relative;}
 .file{width:80px; height:80px; opacity: 0; filter:Alpha(opacity=0); position: absolute; top: 0; left: 0 }
+.pic_list_img{margin: 10px 0 0 20px;}
 </style>

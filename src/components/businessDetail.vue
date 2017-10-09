@@ -36,7 +36,7 @@
     </div>
     <div class="am-container piclist">
       <div class="title">查看图片</div>
-      <div v-for="pic in pics" class="am-g">
+      <div v-for="pic in pics" class="am-g" :key="pic.id">
         <img v-bind:src="pic" class="am-radius am-u-sm-4"/>
       </div>
     </div>

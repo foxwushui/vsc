@@ -50,10 +50,13 @@ export default {
       this.$ajax.get('/api/Customers/GetList', {
         params: {
           OwnUserId: this.$store.state.user.data.Id,
-          PageIndex: 1
+          PageIndex: 1,
+          PageSize: 10
         }
       }).then(res => {
         this.lists = this.lists.concat(res.data.Message.CustomersList)
+        // 加载完成
+        this.dd.device.notification.hidePreloader()
       })
     },
     ddReady () {
@@ -115,11 +118,15 @@ export default {
         // 入口页 免登陆
         this.dd.ready(() => {
           this.$store.state.user.isReady = true
+          // 显示加载中
+          this.dd.device.notification.showPreloader()
           this.dd.runtime.permission.requestAuthCode({
             corpId: 'dingf53c8d834194138b35c2f4657eb6378f',
             onSuccess: res => {
               this.$ajax.get('/api/User/GetUserInfo', {
-                code: res.code
+                params: {
+                  code: res.code
+                }
               }).then(res => {
                 // 保存用户信息
                 this.$store.state.user.data = res.data.Message
@@ -140,7 +147,7 @@ export default {
 .contacts .tabs{background: #fff;height: 60px;text-align: center;color: #999;border-bottom:1px solid #d8d8d8;}
 .contacts .tab{line-height: 58px; cursor: pointer;}
 .contacts .tab.active{border-bottom:2px solid #ff5a09; color: #ff5a09;}
-.contacts .cells{margin-top: 10px; border-top: 1px solid #f6f6f6;}
+.contacts .cells{ border-top: 1px solid #f6f6f6; position: absolute; left: 0; right: 0; top: 60px; bottom: 64px; overflow: auto;}
 .contacts .cell{background: #fff;padding: 10px; border-bottom: 1px solid #f6f6f6;}
 .contacts .cell-icon{border-radius: 50%; color: #fff;width: 50px;height: 50px; line-height:50px; text-align: center;}
 .contacts .cell-cont{padding-left: 10px;}

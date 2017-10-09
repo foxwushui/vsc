@@ -15,8 +15,7 @@
         </div>
        <div class="bottom">
              <span class="title">开户行</span><span class="content">{{item.AccountBank}}</span>
-       </div>
- 
+       </div> 
      </div>
     </div>
   </div>  
@@ -30,27 +29,42 @@ export default {
       TradeCompanyList: {}
     }
   },
+  computed: {
+    cid () {
+      return this.$route.query.id
+    }
+  },
   methods: {
     chose_click (n, n1, n2) {
+      this.$store.state.user.chose.CorpId = this.cid
       this.$store.state.user.chose.AccountName = n
       this.$store.state.user.chose.AccountNo = n1
       this.$store.state.user.chose.AccountBank = n2
       this.$router.go(-1)
     },
     getTradeCompany () {
-      // var id = this.$route.query.id
       // 获取交易公司
       this.$ajax.get('/api/TradeCompany/GetListByCId', {
         params: {
-          cid: 1
+          cid: this.cid
         }
       }).then(res => {
         this.TradeCompanyList = res.data.Message
       })
+    },
+    ddReady () {
+      // dd相关
+      this.dd.biz.navigation.setRight({
+        show: false
+      })
+      this.dd.biz.navigation.setTitle({
+        title: '选择账户'
+      })
+      this.getTradeCompany()
     }
   },
   created () {
-    this.getTradeCompany()
+    this.ddReady()
   }
 }
 </script>

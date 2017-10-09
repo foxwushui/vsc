@@ -30,6 +30,10 @@ Vue.filter('selectTypes', function (val, name) {
   return json[name][val - 1]
 })
 
+Vue.filter('trim', function (val) {
+  return val.trim()
+})
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

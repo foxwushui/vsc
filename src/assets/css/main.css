@@ -2,3 +2,15 @@
  * admin.css
  */
 html,body {height: 100%;overflow: hidden;background: #f3f3f3;}
+.left{float: left}
+.right{float: right}
+
+.am-form{overflow: auto; position: absolute; left: 0; right: 0; top:10px; bottom: 0;}
+.am-form-group{background: #fff; line-height: 45px; margin-bottom: 0;border-bottom: 1px solid #f1f1f1;}
+.am-form-group.noBg{background: none;}
+.am-form-group input{border: none; margin-top: 5px; text-align: right;}
+.am-form-group label{padding: 0;}
+.am-form-group label span{color: #ff5a09;margin-left: 5px;}
+.am-form-group select{ float: right;margin-top: 5px;border: none; text-align: right; min-width: 100px; width:auto;}
+.am-form-group option{text-align: right;}
+.am-form-group .sub{width: 60%;margin: 20px auto 30px;text-align: center; line-height: 45px;background: #ff5a09;color: #fff;border-radius: 4px;font-size: 20px;display: block;}
