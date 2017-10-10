@@ -1,8 +1,8 @@
 <template>
   <div class='contacts'>
-    <div class="am-g tabs">
+    <!-- <div class="am-g tabs">
       <div class="am-u-sm-6 tab" v-for="(item,index) of tab" :key="item.id" @click="tabClick(index)" :class="{active: index==tabIndex}">{{item.text}}</div>
-    </div>
+    </div> -->
     <div class="cells">
       <div class="am-container cell" v-for="(item,index) of lists" :key="item.Id"  @click="cellClick(item.Id)">
         <div class="cell-icon am-fl"><img src="../assets/imgs/logo.png" width="45" /></div>
@@ -55,8 +55,6 @@ export default {
         }
       }).then(res => {
         this.lists = this.lists.concat(res.data.Message.CustomersList)
-        // 加载完成
-        this.dd.device.notification.hidePreloader()
       })
     },
     ddReady () {
@@ -82,6 +80,7 @@ export default {
         title: '外部联系人'
       })
       this.getList()
+      // 加载完成
     }
   },
   computed: {
@@ -101,7 +100,7 @@ export default {
       // 首次进入应用
       this.$ajax.get('/api/user/GetDDingConfig', {
         params: {
-          url: 'http://192.168.1.210:8080/'
+          url: 'http://192.168.1.210:8080/?dd_nav_bgcolor=FFFF5A09'
         }
       }).then(res => {
         var data = {
@@ -118,8 +117,6 @@ export default {
         // 入口页 免登陆
         this.dd.ready(() => {
           this.$store.state.user.isReady = true
-          // 显示加载中
-          this.dd.device.notification.showPreloader()
           this.dd.runtime.permission.requestAuthCode({
             corpId: 'dingf53c8d834194138b35c2f4657eb6378f',
             onSuccess: res => {
@@ -147,7 +144,7 @@ export default {
 .contacts .tabs{background: #fff;height: 60px;text-align: center;color: #999;border-bottom:1px solid #d8d8d8;}
 .contacts .tab{line-height: 58px; cursor: pointer;}
 .contacts .tab.active{border-bottom:2px solid #ff5a09; color: #ff5a09;}
-.contacts .cells{ border-top: 1px solid #f6f6f6; position: absolute; left: 0; right: 0; top: 60px; bottom: 64px; overflow: auto;}
+.contacts .cells{ border-top: 1px solid #f6f6f6; position: absolute; left: 0; right: 0; top: 10px; bottom: 64px; overflow: auto;}
 .contacts .cell{background: #fff;padding: 10px; border-bottom: 1px solid #f6f6f6;}
 .contacts .cell-icon{border-radius: 50%; color: #fff;width: 50px;height: 50px; line-height:50px; text-align: center;}
 .contacts .cell-cont{padding-left: 10px;}

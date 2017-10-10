@@ -89,7 +89,12 @@ export default {
         bf: require('../assets/imgs/bf.png'),
         tel_l: require('../assets/imgs/tel_l.png')
       },
-      msg: {},
+      msg: {
+        CorpType: '',
+        Grade: '',
+        CorpNature: '',
+        GetWay: ''
+      },
       Accountlist: [],
       isAccountlist: false
     }
@@ -155,6 +160,7 @@ export default {
           }).then(res => {
             this.isAccountlist = true
             this.Accountlist = res.data.Message
+            alert(window.JSON.stringify(res.data.Message))
           })
         } else {
           this.isAccountlist = true

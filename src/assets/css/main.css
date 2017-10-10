@@ -5,6 +5,7 @@ html,body {height: 100%;overflow: hidden;background: #f3f3f3;}
 .left{float: left}
 .right{float: right}
 
+
 .am-form{overflow: auto; position: absolute; left: 0; right: 0; top:10px; bottom: 0;}
 .am-form-group{background: #fff; line-height: 45px; margin-bottom: 0;border-bottom: 1px solid #f1f1f1;}
 .am-form-group.noBg{background: none;}
@@ -14,3 +15,47 @@ html,body {height: 100%;overflow: hidden;background: #f3f3f3;}
 .am-form-group select{ float: right;margin-top: 5px;border: none; text-align: right; min-width: 100px; width:auto;}
 .am-form-group option{text-align: right;}
 .am-form-group .sub{width: 60%;margin: 20px auto 30px;text-align: center; line-height: 45px;background: #ff5a09;color: #fff;border-radius: 4px;font-size: 20px;display: block;}
+
+
+.am-form select,
+.am-form textarea,
+.am-form input[type="text"],
+.am-form input[type="password"],
+.am-form input[type="datetime"],
+.am-form input[type="datetime-local"],
+.am-form input[type="date"],
+.am-form input[type="month"],
+.am-form input[type="time"],
+.am-form input[type="week"],
+.am-form input[type="number"],
+.am-form input[type="email"],
+.am-form input[type="url"],
+.am-form input[type="search"],
+.am-form input[type="tel"],
+.am-form input[type="color"],
+.am-form-field {
+  border:none;
+}
+.am-form select:focus,
+.am-form textarea:focus,
+.am-form input[type="text"]:focus,
+.am-form input[type="password"]:focus,
+.am-form input[type="datetime"]:focus,
+.am-form input[type="datetime-local"]:focus,
+.am-form input[type="date"]:focus,
+.am-form input[type="month"]:focus,
+.am-form input[type="time"]:focus,
+.am-form input[type="week"]:focus,
+.am-form input[type="number"]:focus,
+.am-form input[type="email"]:focus,
+.am-form input[type="url"]:focus,
+.am-form input[type="search"]:focus,
+.am-form input[type="tel"]:focus,
+.am-form input[type="color"]:focus,
+.am-form-field:focus {
+  background-color: #fefffe;
+  border-color: #3bb4f2;
+  outline: 0;
+  -webkit-box-shadow:none;
+          box-shadow: none;
+}

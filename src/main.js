@@ -12,6 +12,24 @@ import axios from 'axios'
 import './assets/css/amazeui.css'
 import './assets/css/main.css'
 
+// ajax拦截器  请求之前和请求错误
+axios.interceptors.request.use(function (config) {
+  // 显示加载中
+  window.dd.device.notification.showPreloader()
+  return config;
+}, function (error) {
+  return window.Promise.reject(error);
+})
+// 请求结束之后
+axios.interceptors.response.use(function (response) {
+  // 加载完成
+  window.dd.device.notification.hidePreloader()
+  console.log(response)
+  return response;
+}, function (error) {
+  return window.Promise.reject(error);
+});
+
 // 配置
 Vue.config.productionTip = true
 Vue.prototype.$ajax = axios
@@ -29,7 +47,6 @@ Vue.filter('selectTypes', function (val, name) {
   }
   return json[name][val - 1]
 })
-
 Vue.filter('trim', function (val) {
   return val.trim()
 })

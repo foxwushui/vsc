@@ -33,7 +33,11 @@ export default {
   name: 'addAccount',
   data () {
     return {
-      msg: {}
+      msg: {
+        AccountBank: '',
+        AccountName: '',
+        AccountNo: ''
+      }
     }
   },
   methods: {
@@ -48,9 +52,12 @@ export default {
     },
     add () {
       this.$ajax.post('/api/TradeCompany/add', {
-        cid: this.$route.query.id
+        cid: this.$route.query.id,
+        AccountBank: this.msg.AccountBank,
+        AccountName: this.msg.AccountName,
+        AccountNo: this.msg.AccountNo
       }).then(res => {
-        console.log(res)
+        alert(window.JSON.stringify(res))
       })
     }
   },

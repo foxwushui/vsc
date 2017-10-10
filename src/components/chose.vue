@@ -43,7 +43,7 @@ export default {
       this.$router.go(-1)
     },
     getTradeCompany () {
-      // 获取交易公司
+      // 获取交易公司详细信息
       this.$ajax.get('/api/TradeCompany/GetListByCId', {
         params: {
           cid: this.cid

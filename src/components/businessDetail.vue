@@ -3,7 +3,7 @@
     <div class="am-container top">
       <div class="corpName am-g">
         <div class="am-u-sm-2">
-          <img v-bind:src="img_logo"/>
+          <img v-bind:src="img_logo" />
         </div>
         <div class="am-u-sm-10">
           {{detail.InSalesOrderCorp.CorpName}}
@@ -26,7 +26,9 @@
         <div class="am-g">
           <div class="am-u-sm-3">买断价格</div>
           <div class="am-u-sm-4">{{detail.InSalesOrderCorp.OfferAmount}}</div>
-          <div class="am-u-sm-5"><span v-for="(otype, index) in offertype" v-bind:class="{active:index==(detail.InSalesOrderCorp.OfferType-1)}">{{otype}}</span></div>
+          <div class="am-u-sm-5">
+            <span v-for="(otype, index) in offertype" v-bind:class="{active:index===(detail.InSalesOrderCorp.OfferType-1)}" :key="otype.id">{{otype}}</span>
+          </div>
         </div>
         <div class="am-g">
           <div class="am-u-sm-3">买断金额</div>
@@ -37,11 +39,10 @@
     <div class="am-container piclist">
       <div class="title">查看图片</div>
       <div v-for="pic in pics" class="am-g" :key="pic.id">
-        <img v-bind:src="pic" class="am-radius am-u-sm-4"/>
+        <img v-bind:src="pic" class="am-radius am-u-sm-4" />
       </div>
     </div>
   </div>
-  
 </template>
 
 <script>

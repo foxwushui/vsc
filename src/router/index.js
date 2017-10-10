@@ -9,6 +9,7 @@ import addBusiness from '@/components/addBusiness'
 import businessDetail from '@/components/businessDetail'
 import chose from '@/components/chose'
 import addAccount from '@/components/addAccount'
+import choseContact from '@/components/choseContact'
 import Info from '@/components/Info'
 
 Vue.use(Router)
@@ -63,6 +64,12 @@ export default new Router({
       path: '/chose',
       name: 'chose',
       component: chose
+    },
+    {
+      // 选择公司
+      path: '/choseContact',
+      name: 'choseContact',
+      component: choseContact
     },
     {
       // 添加银行

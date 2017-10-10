@@ -2,30 +2,36 @@
   <div class="addBusiness">
     <form class="am-form am-form-horizontal" @submit.prevent="add">
       <div class="am-form-group  am-container">
-        <label for="name" class="am-u-sm-3 am-form-label">贴现公司<span>*</span></label>
-        <div class="am-u-sm-9">
-           <select name="" id="" v-model="msg.CorpId">
+          <label for="tel" class="am-u-sm-4 am-form-label">选择贴现公司
+            <span>*</span>
+          </label>
+          <div class="am-u-sm-8" @click="choseContact()">
+            <input type="text" id="" placeholder="选择贴现公司" v-model="msg.CorpName">
+          </div>
+
+          <!-- <select name="" id="" v-model="msg.CorpId">
             <option value="0" disabled="true" selected="selected" class="dispaly-none">选择贴现公司</option>
-            <option v-for="option in CorpList" :value="option.Id" v-bind:text="option.CorpName" :key="option.Id">  
-                {{ option.CorpName | trim }}  
-             </option> 
-          </select>
-        </div>
+            <option v-for="option in CorpList" :value="option.Id" v-bind:text="option.CorpName" :key="option.Id">
+              {{ option.CorpName | trim }}
+            </option>
+          </select> -->
       </div>
-      <div class="am-form-group am-container" @click="chose()">
-        <label for="tel" class="am-u-sm-3 am-form-label">账户名称<span>*</span></label>
-        <div class="am-u-sm-9">
+      <div class="am-form-group am-container">
+        <label for="tel" class="am-u-sm-3 am-form-label">账户名称
+          <span>*</span>
+        </label>
+        <div class="am-u-sm-9" @click="chose()">
           <input type="text" id="" placeholder="选择账户" v-model="msg.AccountName">
         </div>
       </div>
-       <div class="am-form-group am-container">
+      <div class="am-form-group am-container">
         <label for="" class="am-u-sm-3 am-form-label">账号</label>
         <div class="am-u-sm-9">
           <input type="text" id="" placeholder="账号" v-model="msg.AccountNo">
         </div>
       </div>
-      
-       <div class="am-form-group am-container">
+
+      <div class="am-form-group am-container">
         <label for="" class="am-u-sm-3 am-form-label">开户行</label>
         <div class="am-u-sm-9">
           <input type="text" id="" placeholder="开户行" v-model="msg.AccountBank">
@@ -36,8 +42,9 @@
         <div class="am-u-sm-9">
           <div class="otype">
             <input type="text" style="float:left;width:100px;" id="" placeholder="买断价格" v-model="msg.OfferAmount">
-            <span  :class="msg.OfferType==1 ? 'active left' : 'noactive left' "  @click="chooseotype(1)">利率</span>
-            <span  :class="msg.OfferType==2 ? 'active right' : 'noactive right' "  @click="chooseotype(2)" >十万</span></div>
+            <span :class="msg.OfferType==1 ? 'active left' : 'noactive left' " @click="chooseotype(1)">利率</span>
+            <span :class="msg.OfferType==2 ? 'active right' : 'noactive right' " @click="chooseotype(2)">十万</span>
+          </div>
         </div>
       </div>
       <div class="am-form-group am-container">
@@ -49,20 +56,20 @@
       <div class="pic_title">图片</div>
       <div class="pic_list">
         <div class="pic_list_img left" v-for="img in imgs" :key="img.Id">
-         <img v-bind:src="img" width="80" height="80" />
+          <img v-bind:src="img" width="80" height="80" />
         </div>
         <div class="up left">
-        <input class="file" type="file" multiple @change="onFileChange">
-           +
-       </div>
-      </div>      
+          <input class="file" type="file" multiple @change="onFileChange"> +
+        </div>
+      </div>
       <div class="am-form-group am-container noBg">
         <div class="am-u-sm-12 ">
-          <input type="submit" value="确定" class="sub" >
+          <input type="submit" value="确定" class="sub">
         </div>
       </div>
     </form>
   </div>
+
 </template>
 <script>
 export default {
@@ -71,6 +78,7 @@ export default {
     return {
       msg: {
         CorpId: this.$store.state.user.chose.CorpId || 0,
+        CorpName: this.$store.state.user.chose.CorpName || '选择贴现公司',
         AccountName: '',
         AccountNo: '',
         AccountBank: '',
@@ -78,7 +86,6 @@ export default {
         pic: [],
         CreateUserId: this.$store.state.user.data.Id
       },
-      CorpList: [],
       imgs: []
     }
   },
@@ -88,24 +95,18 @@ export default {
     }
   },
   methods: {
-    getCorps () {
-      this.$ajax.get('/api/Customers/GetList', {
-        params: {
-          OwnUserId: this.msg.CreateUserId,
-          PageIndex: 1,
-          PageSize: 100
-        }
-      }).then(res => {
-        this.CorpList = res.data.Message.CustomersList
-      })
-    },
     chose () {
       this.$router.push({path: '/chose', query: {id: this.msg.CorpId}})
+    },
+    choseContact () {
+      this.$router.push({path: '/choseContact'})
     },
     choseEd () {
       this.msg.AccountName = this.chose_msg.AccountName
       this.msg.AccountNo = this.chose_msg.AccountNo
       this.msg.AccountBank = this.chose_msg.AccountBank
+      this.msg.CorpId = this.chose_msg.CorpId
+      this.msg.CorpName = this.chose_msg.CorpName
     },
     add () {
       if (this.msg.CorpId === '0') {
@@ -118,7 +119,6 @@ export default {
           let obj = {}
           obj = window.JSON.parse(window.JSON.stringify(data))
           obj.pic = obj.pic && obj.pic.join(',')
-          obj.CorpName = this.CorpList.find(item => item.Id === this.msg.CorpId)['CorpName']
           obj = window.JSON.stringify(obj)
           return obj
         },
@@ -170,7 +170,6 @@ export default {
     this.$store.state.tabbar.show = false
     // 设置钉钉相关内容
     this.ddReady()
-    this.getCorps()
   }
 }
 </script>
