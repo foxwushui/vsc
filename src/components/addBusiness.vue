@@ -6,7 +6,7 @@
             <span>*</span>
           </label>
           <div class="am-u-sm-8" @click="choseContact()">
-            <input type="text" id="" placeholder="选择贴现公司" v-model="msg.CorpName">
+            <input type="text" id="" placeholder="选择贴现公司" v-model="msg.CorpName" required>
           </div>
 
           <!-- <select name="" id="" v-model="msg.CorpId">
@@ -21,27 +21,27 @@
           <span>*</span>
         </label>
         <div class="am-u-sm-9" @click="chose()">
-          <input type="text" id="" placeholder="选择账户" v-model="msg.AccountName">
+          <input type="text" id="" placeholder="选择账户" v-model="msg.TradeCorp" readonly required>
         </div>
       </div>
       <div class="am-form-group am-container">
         <label for="" class="am-u-sm-3 am-form-label">账号</label>
         <div class="am-u-sm-9">
-          <input type="text" id="" placeholder="账号" v-model="msg.AccountNo">
+          <input type="text" id="" placeholder="账号" v-model="msg.BankAcount" readonly>
         </div>
       </div>
 
       <div class="am-form-group am-container">
         <label for="" class="am-u-sm-3 am-form-label">开户行</label>
         <div class="am-u-sm-9">
-          <input type="text" id="" placeholder="开户行" v-model="msg.AccountBank">
+          <input type="text" id="" placeholder="开户行" v-model="msg.AccountBank" readonly>
         </div>
       </div>
       <div class="am-form-group am-container">
         <label for="" class="am-u-sm-3 am-form-label">买断价格</label>
         <div class="am-u-sm-9">
           <div class="otype">
-            <input type="text" style="float:left;width:100px;" id="" placeholder="买断价格" v-model="msg.OfferAmount">
+            <input type="text" style="float:left;width:100px;" id="" placeholder="买断价格" v-model="msg.OfferAmount" required>
             <span :class="msg.OfferType==1 ? 'active left' : 'noactive left' " @click="chooseotype(1)">利率</span>
             <span :class="msg.OfferType==2 ? 'active right' : 'noactive right' " @click="chooseotype(2)">十万</span>
           </div>
@@ -50,7 +50,7 @@
       <div class="am-form-group am-container">
         <label for="" class="am-u-sm-3 am-form-label">买断金额</label>
         <div class="am-u-sm-9">
-          <input type="text" id="" placeholder="买断金额" v-model="msg.TotalAmount">
+          <input type="text" id="" placeholder="买断金额" v-model="msg.TotalAmount" required>
         </div>
       </div>
       <div class="pic_title">图片</div>
@@ -59,7 +59,7 @@
           <img v-bind:src="img" width="80" height="80" />
         </div>
         <div class="up left">
-          <input class="file" type="file" multiple @change="onFileChange"> +
+          <input class="file" type="file" accept="image/*" multiple @change="onFileChange"> +
         </div>
       </div>
       <div class="am-form-group am-container noBg">
@@ -79,8 +79,8 @@ export default {
       msg: {
         CorpId: this.$store.state.user.chose.CorpId || 0,
         CorpName: this.$store.state.user.chose.CorpName || '选择贴现公司',
-        AccountName: '',
-        AccountNo: '',
+        TradeCorp: '',
+        BankAcount: '',
         AccountBank: '',
         OfferType: 1,
         pic: [],
@@ -96,14 +96,17 @@ export default {
   },
   methods: {
     chose () {
+      if (!this.msg.CorpId) {
+        return
+      }
       this.$router.push({path: '/chose', query: {id: this.msg.CorpId}})
     },
     choseContact () {
       this.$router.push({path: '/choseContact'})
     },
     choseEd () {
-      this.msg.AccountName = this.chose_msg.AccountName
-      this.msg.AccountNo = this.chose_msg.AccountNo
+      this.msg.TradeCorp = this.chose_msg.AccountName
+      this.msg.BankAcount = this.chose_msg.AccountNo
       this.msg.AccountBank = this.chose_msg.AccountBank
       this.msg.CorpId = this.chose_msg.CorpId
       this.msg.CorpName = this.chose_msg.CorpName
@@ -112,9 +115,14 @@ export default {
       if (this.msg.CorpId === '0') {
         return
       }
+      if (!this.msg.pic.length) {
+        alert('请上传图片')
+        return
+      }
       this.$ajax({
         url: '/api/SalesOrderCorp/add',
         method: 'POST',
+        headers: {'Content-Type': 'application/json'},
         transformRequest: data => {
           let obj = {}
           obj = window.JSON.parse(window.JSON.stringify(data))
@@ -124,7 +132,7 @@ export default {
         },
         data: this.msg
       }).then(res => {
-        console.log(res)
+        this.$router.go(-1)
       })
     },
     ddReady () {
@@ -175,6 +183,7 @@ export default {
 </script>
 
 <style>
+.addBusiness{position: absolute;left: 0;right: 0;top: 0px;bottom: 0;overflow: auto;}
 label{font-weight: normal;}
 .dispaly-none{display: none;}
 .otype{float: right;}

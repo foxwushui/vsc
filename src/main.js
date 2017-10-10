@@ -13,22 +13,23 @@ import './assets/css/amazeui.css'
 import './assets/css/main.css'
 
 // ajax拦截器  请求之前和请求错误
+axios.defaults.baseURL = 'http://ddingapi.91hpzj.com/'
 axios.interceptors.request.use(function (config) {
   // 显示加载中
   window.dd.device.notification.showPreloader()
-  return config;
+  return config
 }, function (error) {
-  return window.Promise.reject(error);
+  return window.Promise.reject(error)
 })
 // 请求结束之后
 axios.interceptors.response.use(function (response) {
   // 加载完成
   window.dd.device.notification.hidePreloader()
   console.log(response)
-  return response;
+  return response
 }, function (error) {
-  return window.Promise.reject(error);
-});
+  return window.Promise.reject(error)
+})
 
 // 配置
 Vue.config.productionTip = true

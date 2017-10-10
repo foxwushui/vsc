@@ -7,6 +7,10 @@
         <p>打款开户行：{{item.AccountBank}}</p>
         <p>买断金额：{{item.TotalAmount}}</p>
      </div>
+    <div class="noMsg" v-if="!lists.length">
+      <img src="../assets/imgs/nosearch.png" alt="">
+      还没有审批
+    </div>
   </div>
 </template>
 

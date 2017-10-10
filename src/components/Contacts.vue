@@ -3,7 +3,7 @@
     <!-- <div class="am-g tabs">
       <div class="am-u-sm-6 tab" v-for="(item,index) of tab" :key="item.id" @click="tabClick(index)" :class="{active: index==tabIndex}">{{item.text}}</div>
     </div> -->
-    <div class="cells">
+    <div class="cells" v-if="lists.length">
       <div class="am-container cell" v-for="(item,index) of lists" :key="item.Id"  @click="cellClick(item.Id)">
         <div class="cell-icon am-fl"><img src="../assets/imgs/logo.png" width="45" /></div>
         <div class="cell-cont am-fl">
@@ -14,6 +14,10 @@
           </div>
         </div>
       </div>
+    </div>
+    <div class="noMsg" v-if="!lists.length">
+      <img src="../assets/imgs/nosearch.png" alt="">
+      还没有外部联系人
     </div>
   </div>
 </template>
@@ -151,4 +155,6 @@ export default {
 .contacts .cell-tips{font-size: 12px;}
 .contacts .cell-tips span{padding:2px 5px;margin-right: 2px;}
 .contacts .cell-more{font-size: 12px;color: #d2d2d2;}
+.noMsg{text-align: center; line-height: 45px;color: #ff5a09;padding-top: 100px;}
+.noMsg img{display:block; margin: 0 auto;}
 </style>

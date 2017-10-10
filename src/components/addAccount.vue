@@ -4,19 +4,19 @@
        <div class="am-form-group am-container">
         <label for="" class="am-u-sm-3 am-form-label">开户行</label>
         <div class="am-u-sm-9">
-          <input type="text" id="" placeholder="开户行" v-model="msg.AccountBank">
+          <input type="text" id="" placeholder="开户行" v-model="msg.AccountBank" required>
         </div>
       </div>
        <div class="am-form-group am-container">
         <label for="" class="am-u-sm-3 am-form-label">开户名</label>
         <div class="am-u-sm-9">
-          <input type="text" id="" placeholder="开户名" v-model="msg.AccountName">
+          <input type="text" id="" placeholder="开户名" v-model="msg.AccountName" required>
         </div>
       </div>
        <div class="am-form-group am-container">
         <label for="" class="am-u-sm-3 am-form-label">账号</label>
         <div class="am-u-sm-9">
-          <input type="text" id="" placeholder="账号" v-model="msg.AccountNo">
+          <input type="text" id="" placeholder="账号" v-model="msg.AccountNo" required>
         </div>
       </div>  
       <div class="am-form-group am-container noBg">
@@ -57,7 +57,7 @@ export default {
         AccountName: this.msg.AccountName,
         AccountNo: this.msg.AccountNo
       }).then(res => {
-        alert(window.JSON.stringify(res))
+        this.$router.go(-1)
       })
     }
   },

@@ -1,6 +1,6 @@
 <template>
   <div class="businessDetail">
-    <div class="am-container top">
+    <div class="am-container top" v-if="detail.InSalesOrderCorp">
       <div class="corpName am-g">
         <div class="am-u-sm-2">
           <img v-bind:src="img_logo" />
@@ -38,8 +38,10 @@
     </div>
     <div class="am-container piclist">
       <div class="title">查看图片</div>
-      <div v-for="pic in pics" class="am-g" :key="pic.id">
-        <img v-bind:src="pic" class="am-radius am-u-sm-4" />
+      <div class="am-g">
+        <div  :key="pic.id" v-for="pic in pics" class="am-radius am-u-sm-4" @click="showImg(pic)" >
+          <img v-bind:src="pic" width="100" />
+        </div>
       </div>
     </div>
   </div>
@@ -72,6 +74,14 @@ export default {
         this.pics = res.data.Message.BillPics.split(',')
       })
     },
+    showImg (src) {
+      this.dd.biz.util.previewImage({
+        urls: this.pics,
+        current: src,
+        onSuccess: res => {
+        }
+      })
+    },
     // 设置DD相关
     ddready () {
       this.dd.biz.navigation.setRight({
@@ -84,12 +94,12 @@ export default {
         urls: this.pics,
         current: this.pics[0]
       })
+      this.getDetail()
     }
   },
   created () {
     this.$store.state.tabbar.show = false
     this.ddready()
-    this.getDetail()
   }
 }
 </script>
@@ -107,7 +117,7 @@ export default {
   .businessDetail .am-container .am-u-sm-3,.am-u-sm-9,.am-u-sm-5,.am-u-sm-4{padding: 0; line-height: 2.5rem;}
   .businessDetail .am-container .am-u-sm-3{color: #AAA;}
   .businessDetail .am-container .item{margin:1rem 0;}
-  .businessDetail .am-container .item .am-u-sm-5 span{ height: 22px; line-height: 22px; background-color: #d8d8d8; display: inline-block; width: 60px; text-align: center;margin-right: 5px; font-size: 14px;}
+  .businessDetail .am-container .item .am-u-sm-5 span{ height: 22px; line-height: 22px; background-color: #d8d8d8; float: left; width: 60px; text-align: center;margin-right: 5px; font-size: 14px;}
   .businessDetail .am-container .item .am-u-sm-5 .active{background-color: #ff5a09; color: #FFF;}
   .businessDetail .piclist{overflow: hidden; background-color: #FFF;}
   .businessDetail .piclist .title{line-height: 2.5rem; margin: 0.5rem 0 1rem;}

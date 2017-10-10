@@ -32,9 +32,9 @@ export default {
   methods: {
     chose_click (id) {
       this.$store.state.user.chose.CorpId = id
-      for (let i = 0;i < this.CorpList.length ; i++ ){
-        if (this.CorpList[i].Id == id) {
-           this.$store.state.user.chose.CorpName = this.CorpList[i].CorpName
+      for (let i = 0; i < this.CorpList.length; i++) {
+        if (this.CorpList[i].Id === id) {
+          this.$store.state.user.chose.CorpName = this.CorpList[i].CorpName
         }
       }
       this.$store.state.user.chose.AccountName = ''

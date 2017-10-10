@@ -47,7 +47,7 @@
         </div>
 
         <div v-show="Accountlist.length && isAccountlist">              
-          <div v-for="(item,index) of Accountlist" :key="item.Id" class="am-g more_list"  @click="chose_click(item.AccountName,item.AccountNo,item.AccountBank)">
+          <div v-for="(item,index) of Accountlist" :key="item.Id" class="am-g more_list"  @click="accountClick(index,item.Id)">
                     <div class="am-u-sm-6">
                     <div class="title">账户名称</div>
                     <div class="msg">
@@ -131,6 +131,7 @@ export default {
       this.dd.biz.navigation.setTitle({
         title: '详细信息'
       })
+      this.getMsg()
     },
     // 编辑联系人
     upContacts () {
@@ -160,7 +161,6 @@ export default {
           }).then(res => {
             this.isAccountlist = true
             this.Accountlist = res.data.Message
-            alert(window.JSON.stringify(res.data.Message))
           })
         } else {
           this.isAccountlist = true
@@ -170,12 +170,30 @@ export default {
     addAccount () {
       // 添加账户
       this.$router.push({path: '/addAccount', query: {id: this.mode_id}})
+    },
+    accountClick (index, id) {
+      // 删除账户
+      this.dd.device.notification.confirm({
+        message: '确认删除？',
+        title: '提示',
+        buttonLabels: ['删除', '取消'],
+        onSuccess: res => {
+          if (!res.buttonIndex) {
+            this.$ajax.get('/api/TradeCompany/delete', {
+              params: {
+                id: id
+              }
+            }).then(res => {
+              this.Accountlist.splice(index, 1)
+            })
+          }
+        }
+      })
     }
   },
   created () {
     this.$store.state.tabbar.show = false
     this.ddready()
-    this.getMsg()
   }
 }
 </script>

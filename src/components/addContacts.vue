@@ -4,19 +4,19 @@
       <div class="am-form-group  am-container">
         <label for="name" class="am-u-sm-2 am-form-label">姓名<span>*</span></label>
         <div class="am-u-sm-10">
-          <input type="text" id="name" placeholder="输入联系人姓名（必填）" v-model="msg.LinkMan">
+          <input type="text" id="name" placeholder="输入联系人姓名（必填）" v-model="msg.LinkMan" required>
         </div>
       </div>
       <div class="am-form-group am-container">
         <label for="tel" class="am-u-sm-2 am-form-label">电话<span>*</span></label>
         <div class="am-u-sm-10">
-          <input type="tel" id="tel" placeholder="请输入手机号或固定号码（必填）" v-model="msg.Mobile">
+          <input type="tel" id="tel" placeholder="请输入手机号或固定号码（必填）" v-model="msg.Mobile" required>
         </div>
       </div>
       <div class="am-form-group am-container">
         <label for="" class="am-u-sm-2 am-form-label">公司<span>*</span></label>
         <div class="am-u-sm-10">
-          <input type="text" id="" placeholder="必填" v-model="msg.CorpName">
+          <input type="text" id="" placeholder="必填" v-model="msg.CorpName" required>
         </div>
       </div>
       <div class="am-form-group am-container">
@@ -37,7 +37,7 @@
       <div class="am-form-group am-container">
         <label for="" class="am-u-sm-3 am-form-label">企业性质</label>
         <div class="am-u-sm-9">
-          <select name="" id="" v-model="msg.CorpNature">
+          <select name="" id="" v-model="msg.CorpNature" required>
             <option value="0" disabled="true" selected="selected" class="dispaly-none">选择性质</option>
             <option value="1">终端企业</option>
             <option value="2">中介</option>
@@ -49,7 +49,7 @@
       <div class="am-form-group am-container">
         <label for="" class="am-u-sm-3 am-form-label">类型</label>
         <div class="am-u-sm-9">
-          <select name="" id="" v-model="msg.CorpType">
+          <select name="" id="" v-model="msg.CorpType" required>
             <option value="0" disabled="true" selected="selected" class="dispaly-none">选择类型</option>
             <option value="1">客户</option>
             <option value="2">渠道商</option>
@@ -60,7 +60,7 @@
       <div class="am-form-group am-container">
         <label for="" class="am-u-sm-3 am-form-label">获取方式</label>
         <div class="am-u-sm-9">
-          <select name="" id="" v-model="msg.GetWay">
+          <select name="" id="" v-model="msg.GetWay" required>
             <option value="0" disabled="true" selected="selected" class="dispaly-none">选择方式</option>
             <option value="1">陌拜</option>
             <option value="2">转介绍</option>
@@ -75,7 +75,7 @@
       <div class="am-form-group am-container">
         <label for="" class="am-u-sm-3 am-form-label">级别</label>
         <div class="am-u-sm-9">
-          <select name="" id="" v-model="msg.Grade">
+          <select name="" id="" v-model="msg.Grade" required>
             <option value="0" disabled="true" selected="selected" class="dispaly-none">选择级别</option>
             <option value="1">一般</option>
             <option value="2">重要</option>
@@ -104,14 +104,14 @@ export default {
         CorpType: '0',
         GetWay: '0',
         Grade: '0'
-      }
+      },
+      confim: false
     }
   },
   computed: {},
   methods: {
     add () {
       this.msg.OwnUserId = this.$store.state.user.data.Id
-      alert(window.JSON.stringify(this.msg))
       this.$ajax.post('/api/Customers/add', this.msg).then(res => {
         if (res.data.RetCode === '10000') {
           this.$router.push({path: '/'})
