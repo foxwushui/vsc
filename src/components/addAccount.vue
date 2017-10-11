@@ -23,7 +23,7 @@ export default {
   data () {
     return {
       msg: {
-        AccountBank: 'asd'
+        AccountBank: ''
       }
     }
   },

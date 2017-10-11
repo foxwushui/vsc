@@ -118,7 +118,7 @@ export default {
       this.msg.OwnUserId = this.$store.state.user.data.Id
       this.$ajax.post('/api/Customers/Update', this.msg).then(res => {
         if (res.data.RetCode === '10000') {
-          this.$router.push({path: '/'})
+          this.$router.go(-1)
         }
       })
     },
@@ -129,27 +129,27 @@ export default {
       this.dd.biz.navigation.setTitle({
         title: '编辑客户'
       })
-    }
-  },
-  validate () {
-    let json = {
-      isValidata: false,
-      msg: '输入错误'
-    }
-    if (!this.msg.LinkMan) {
-      json.msg = '请填写联系人姓名'
+    },
+    validate () {
+      let json = {
+        isValidata: false,
+        msg: '输入错误'
+      }
+      if (!this.msg.LinkMan) {
+        json.msg = '请填写联系人姓名'
+        return json
+      }
+      if (!this.msg.Mobile) {
+        json.msg = '请填写电话'
+        return json
+      }
+      if (!this.msg.CorpName) {
+        json.msg = '请填写公司'
+        return json
+      }
+      json.isValidata = true
       return json
     }
-    if (!this.msg.Mobile) {
-      json.msg = '请填写电话'
-      return json
-    }
-    if (!this.msg.CorpName) {
-      json.msg = '请填写公司'
-      return json
-    }
-    json.isValidata = true
-    return json
   },
   created () {
     // 隐藏tabbar

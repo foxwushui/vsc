@@ -40,7 +40,6 @@ export default {
           cid: this.cid
         }
       }).then(res => {
-        alert(window.JSON.stringify(res.data.Message))
         this.TradeCompanyList = res.data.Message
       })
     },

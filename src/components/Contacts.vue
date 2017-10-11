@@ -104,7 +104,7 @@ export default {
       // 首次进入应用
       this.$ajax.get('/api/user/GetDDingConfig', {
         params: {
-          url: 'http://192.168.1.210:8080/?dd_nav_bgcolor=FFFF5A09'
+          url: location.href
         }
       }).then(res => {
         var data = {
@@ -148,7 +148,7 @@ export default {
 .contacts .tabs{background: #fff;height: 60px;text-align: center;color: #999;border-bottom:1px solid #d8d8d8;}
 .contacts .tab{line-height: 58px; cursor: pointer;}
 .contacts .tab.active{border-bottom:2px solid #ff5a09; color: #ff5a09;}
-.contacts .cells{ border-top: 1px solid #f6f6f6; position: absolute; left: 0; right: 0; top: 10px; bottom: 64px; overflow: auto;}
+.contacts .cells{ border-top: 1px solid #f6f6f6; position: absolute; left: 0; right: 0; top: 10px; bottom: 56px; overflow: auto;}
 .contacts .cell{background: #fff;padding: 10px; border-bottom: 1px solid #f6f6f6;}
 .contacts .cell-icon{border-radius: 50%; color: #fff;width: 50px;height: 50px; line-height:50px; text-align: center;}
 .contacts .cell-cont{padding-left: 10px;}

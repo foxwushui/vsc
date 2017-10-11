@@ -22,10 +22,10 @@
       <div class="list">
         <div class="title">标签</div>
         <div class="msg">
-          <span :v-if="msg.CorpType">{{msg.CorpType | selectTypes('CorpType')}}</span>
-          <span :v-if="msg.Grade">{{msg.Grade | selectTypes('Grade') }}</span>
-          <span :v-if="msg.CorpNature">{{msg.CorpNature | selectTypes('CorpNature') }}</span>
-          <span :v-if="msg.GetWay">{{msg.GetWay | selectTypes('GetWay') }}</span>
+          <span v-if="msg.CorpType">{{msg.CorpType | selectTypes('CorpType')}}</span>
+          <span v-if="msg.Grade">{{msg.Grade | selectTypes('Grade') }}</span>
+          <span v-if="msg.CorpNature">{{msg.CorpNature | selectTypes('CorpNature') }}</span>
+          <span v-if="msg.GetWay">{{msg.GetWay | selectTypes('GetWay') }}</span>
         </div>
       </div>
       <div class="list">

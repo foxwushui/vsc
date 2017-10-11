@@ -7,33 +7,36 @@
         </div>
         <div class="am-u-sm-10">
           {{detail.InSalesOrderCorp.CorpName}}
-          <p>{{detail.Status | selectTypes('Status')}}</p>
+          <p>{{detail.InSalesOrderCorp.Status | selectTypes('Status')}}</p>
         </div>
       </div>
       <div class="item">
-        <div class="am-g">
+        <!-- <div class="am-g">
           <div class="am-u-sm-3">账户名称</div>
           <div class="am-u-sm-9">{{detail.InSalesOrderCorp.TradeCorp}}</div>
         </div>
         <div class="am-g">
           <div class="am-u-sm-3">打款账号</div>
           <div class="am-u-sm-9">{{detail.InSalesOrderCorp.BankAcount}}</div>
-        </div>
+        </div> -->
         <div class="am-g">
-          <div class="am-u-sm-3">开户行</div>
+          <div class="am-u-sm-3">账号信息</div>
           <div class="am-u-sm-9">{{detail.InSalesOrderCorp.AccountBank}}</div>
         </div>
         <div class="am-g">
           <div class="am-u-sm-3">买断价格</div>
           <div class="am-u-sm-4">{{detail.InSalesOrderCorp.OfferAmount}}</div>
           <div class="am-u-sm-5">
-            <span v-for="(otype, index) in offertype" v-bind:class="{active:index===(detail.InSalesOrderCorp.OfferType-1)}" :key="otype.id">{{otype}}</span>
+            <span v-for="(otype, index) in offertype" class="am-u-sm-6" v-bind:class="{active:index===(detail.InSalesOrderCorp.OfferType-1)}" :key="otype.id">{{otype}}</span>
           </div>
         </div>
         <div class="am-g">
           <div class="am-u-sm-3">买断金额</div>
           <div class="am-u-sm-9">{{detail.InSalesOrderCorp.TotalAmount}}</div>
         </div>
+
+        <div class="spimg"><img  v-bind:src="spimg[detail.InSalesOrderCorp.Status-1]" width="100"></div>
+
       </div>
     </div>
     <div class="am-container piclist">
@@ -55,7 +58,12 @@ export default {
       img_logo: require('../assets/imgs/logo.png'),
       detail: {},
       pics: [],
-      offertype: ['利率', '十万']
+      offertype: ['利率', '十万'],
+      spimg: [
+        '',
+        require('../assets/imgs/sp_succ.png'),
+        require('../assets/imgs/sp_err.png')
+      ]
     }
   },
   computed: {
@@ -116,8 +124,9 @@ export default {
   .businessDetail .am-container .corpName .am-u-sm-10 p{font-size: 14px; color: #AAA; padding: 0; margin: 0;}
   .businessDetail .am-container .am-u-sm-3,.am-u-sm-9,.am-u-sm-5,.am-u-sm-4{padding: 0; line-height: 2.5rem;}
   .businessDetail .am-container .am-u-sm-3{color: #AAA;}
-  .businessDetail .am-container .item{margin:1rem 0;}
-  .businessDetail .am-container .item .am-u-sm-5 span{ height: 22px; line-height: 22px; background-color: #d8d8d8; float: left; width: 60px; text-align: center;margin-right: 5px; font-size: 14px;}
+  .businessDetail .am-container .item{margin:1rem 0; position: relative;}
+  .businessDetail .am-container .item .spimg{position: absolute;top: 0px; right: 20px;}
+  .businessDetail .am-container .item .am-u-sm-5 span{ height: 22px; line-height: 22px; background-color: #d8d8d8; text-align: center;font-size: 14px;}
   .businessDetail .am-container .item .am-u-sm-5 .active{background-color: #ff5a09; color: #FFF;}
   .businessDetail .piclist{overflow: hidden; background-color: #FFF;}
   .businessDetail .piclist .title{line-height: 2.5rem; margin: 0.5rem 0 1rem;}

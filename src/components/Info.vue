@@ -12,6 +12,9 @@ export default {
   },
   methods: {
     ddReady () {
+      this.dd.biz.navigation.setRight({
+        show: false
+      })
       this.dd.biz.navigation.setTitle({
         title: '我的'
       })
