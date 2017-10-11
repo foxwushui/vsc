@@ -46,32 +46,20 @@
           <div class="msg right" @click="getAccountlist()"><span>查看</span><i class="am-icon-chevron-down"></i></div>
         </div>
 
-        <div v-show="Accountlist.length && isAccountlist">              
-          <div v-for="(item,index) of Accountlist" :key="item.Id" class="am-g more_list"  @click="accountClick(index,item.Id)">
-                    <div class="am-u-sm-6">
-                    <div class="title">账户名称</div>
-                    <div class="msg">
-                      <p>{{item.AccountName}}</p>
-                    </div>
-                    </div>
-                    <div class="am-u-sm-6">
-                    <div class="title">开户行</div>
-                    <div class="msg">
-                      <p>{{item.AccountBank}}</p>
-                    </div>
-                    </div>
-                  <div class="am-u-sm-12">
-                    <div class="title">账户</div>
-                    <div class="msg">
-                      <p>{{item.AccountNo}}</p>
-                    </div>
-                  </div>
-              </div>
-        </div>
 
-        <div class="more_add" @click="addAccount">
-            添加账户
-        </div>
+          <div v-show="Accountlist.length && isAccountlist">
+            <div v-for="(item,index) of Accountlist" :key="item.Id" class="am-g more_list" @click="accountClick(index,item.Id)">
+
+              <div class="am-u-sm-6">
+                <div class="title">账户信息</div>
+                <div class="msg">
+                  <p>{{item.AccountBank}}</p>
+                </div>
+              </div>
+              
+
+            </div>
+          </div>
 
     </div>
   </div>
@@ -166,10 +154,6 @@ export default {
           this.isAccountlist = true
         }
       }
-    },
-    addAccount () {
-      // 添加账户
-      this.$router.push({path: '/addAccount', query: {id: this.mode_id}})
     },
     accountClick (index, id) {
       // 删除账户

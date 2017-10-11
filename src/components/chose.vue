@@ -1,21 +1,14 @@
 <template>
   <div class="chose">
     <!-- 选择银行账户 -->
-   <div v-for="(item,index) of TradeCompanyList" :key="item.Id"  @click="chose_click(item.AccountName,item.AccountNo,item.AccountBank)">
+   <div v-for="(item,index) of TradeCompanyList" :key="item.Id"  @click="chose_click(item.AccountBank)">
      <div class="item">
        <div class="top">
              <p>
-                <span class="content">{{item.AccountName}}</span>
-                <span class="title">账户名称</span>
-             </p>
-             <p>
-               <span class="content">{{item.AccountNo}}</span>
-              <span class="title">账户</span>
+                <span class="content">{{item.AccountBank}}</span>
+                <span class="title">账户详情</span>
              </p>
         </div>
-       <div class="bottom">
-             <span class="title">开户行</span><span class="content">{{item.AccountBank}}</span>
-       </div> 
      </div>
     </div>
   </div>  
@@ -35,11 +28,9 @@ export default {
     }
   },
   methods: {
-    chose_click (n, n1, n2) {
+    chose_click (str) {
       this.$store.state.user.chose.CorpId = this.cid
-      this.$store.state.user.chose.AccountName = n
-      this.$store.state.user.chose.AccountNo = n1
-      this.$store.state.user.chose.AccountBank = n2
+      this.$store.state.user.chose.AccountBank = str
       this.$router.go(-1)
     },
     getTradeCompany () {
@@ -49,13 +40,31 @@ export default {
           cid: this.cid
         }
       }).then(res => {
+        alert(window.JSON.stringify(res.data.Message))
         this.TradeCompanyList = res.data.Message
       })
     },
+    addAccount () {
+      this.$router.push({path: '/addAccount', query: {id: this.cid}})
+    },
     ddReady () {
       // dd相关
-      this.dd.biz.navigation.setRight({
-        show: false
+      this.dd.biz.navigation.setMenu({
+        backgroundColor: '#ADD8E6',
+        textColor: '#ADD8E611',
+        items: [
+          {
+            'id': '1',
+            'iconId': 'add',
+            'text': '添加'
+          }
+        ],
+        onSuccess: data => {
+          this.addAccount()
+        },
+        onFail: function (err) {
+          console.log(err)
+        }
       })
       this.dd.biz.navigation.setTitle({
         title: '选择账户'

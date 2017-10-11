@@ -2,23 +2,12 @@
   <div class="addAccount">
     <form class="am-form am-form-horizontal" @submit.prevent="add">
        <div class="am-form-group am-container">
-        <label for="" class="am-u-sm-3 am-form-label">开户行</label>
+        <label for="" class="am-u-sm-3 am-form-label">账户信息</label>
         <div class="am-u-sm-9">
-          <input type="text" id="" placeholder="开户行" v-model="msg.AccountBank" required>
+          <input type="text" id="" placeholder="账户信息" name="AccountBank" v-model.trim="msg.AccountBank" required />
         </div>
       </div>
-       <div class="am-form-group am-container">
-        <label for="" class="am-u-sm-3 am-form-label">开户名</label>
-        <div class="am-u-sm-9">
-          <input type="text" id="" placeholder="开户名" v-model="msg.AccountName" required>
-        </div>
-      </div>
-       <div class="am-form-group am-container">
-        <label for="" class="am-u-sm-3 am-form-label">账号</label>
-        <div class="am-u-sm-9">
-          <input type="text" id="" placeholder="账号" v-model="msg.AccountNo" required>
-        </div>
-      </div>  
+      
       <div class="am-form-group am-container noBg">
         <div class="am-u-sm-12 ">
           <input type="submit" value="确定" class="sub" >
@@ -34,9 +23,7 @@ export default {
   data () {
     return {
       msg: {
-        AccountBank: '',
-        AccountName: '',
-        AccountNo: ''
+        AccountBank: 'asd'
       }
     }
   },
@@ -51,14 +38,32 @@ export default {
       })
     },
     add () {
+      let json = this.validate()
+      if (!json.isValidata) {
+        this.dd.device.notification.toast({
+          icon: 'error',
+          text: json.msg
+        })
+        return
+      }
       this.$ajax.post('/api/TradeCompany/add', {
         cid: this.$route.query.id,
-        AccountBank: this.msg.AccountBank,
-        AccountName: this.msg.AccountName,
-        AccountNo: this.msg.AccountNo
+        AccountBank: this.msg.AccountBank
       }).then(res => {
         this.$router.go(-1)
       })
+    },
+    validate () {
+      let json = {
+        isValidata: false,
+        msg: '输入错误'
+      }
+      if (!this.msg.AccountBank) {
+        json.msg = '请输入账户信息'
+        return json
+      }
+      json.isValidata = true
+      return json
     }
   },
   created () {

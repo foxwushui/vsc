@@ -1,6 +1,6 @@
 <template>
   <div class="tabbar am-g">
-    <div class="am-u-sm-4 item" v-for="(item,index) of tab" :key="item.id" :class="{active: index==tabIndex}" @click="changeView(index,item.url)"><img v-bind:src="index==tabIndex ? item.img_a : item.img"  height="26" >{{item.name}}</div>
+    <div class="am-u-sm-4 item" v-for="(item,index) of tab" :key="item.id" :class="{active: index==tabIndex}" @click="changeView(index,item.url)"><img v-bind:src="index==tabIndex ? item.img_a : item.img"  height="18" >{{item.name}}</div>
   </div>
 </template>
 
@@ -44,7 +44,7 @@ export default {
 </script>
 
 <style>
-.tabbar{position: fixed; bottom: 0; line-height: 28px; color: #6f6f6f;background: #fff;}
+.tabbar{position: fixed; bottom: 0; line-height: 28px; color: #6f6f6f;background: #fff; font-size: 1.2rem;}
 .tabbar .item{ text-align: center;}
 .tabbar .item.active{color: #ff5a09;}
 .tabbar .item img{display: block; margin:10px auto 0;}

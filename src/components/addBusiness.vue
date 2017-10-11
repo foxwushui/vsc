@@ -6,7 +6,7 @@
             <span>*</span>
           </label>
           <div class="am-u-sm-8" @click="choseContact()">
-            <input type="text" id="" placeholder="选择贴现公司" v-model="msg.CorpName" required>
+            <input type="text" id="" placeholder="选择贴现公司" v-model.trim="msg.CorpName" required>
           </div>
 
           <!-- <select name="" id="" v-model="msg.CorpId">
@@ -16,15 +16,17 @@
             </option>
           </select> -->
       </div>
+
       <div class="am-form-group am-container">
-        <label for="tel" class="am-u-sm-3 am-form-label">账户名称
+        <label for="tel" class="am-u-sm-3 am-form-label">账户详细
           <span>*</span>
         </label>
         <div class="am-u-sm-9" @click="chose()">
-          <input type="text" id="" placeholder="选择账户" v-model="msg.TradeCorp" readonly required>
+          <input type="text" id="" placeholder="选择账户" v-model.trim="msg.AccountBank" readonly required>
         </div>
       </div>
-      <div class="am-form-group am-container">
+
+      <!-- <div class="am-form-group am-container">
         <label for="" class="am-u-sm-3 am-form-label">账号</label>
         <div class="am-u-sm-9">
           <input type="text" id="" placeholder="账号" v-model="msg.BankAcount" readonly>
@@ -36,12 +38,13 @@
         <div class="am-u-sm-9">
           <input type="text" id="" placeholder="开户行" v-model="msg.AccountBank" readonly>
         </div>
-      </div>
+      </div> -->
+
       <div class="am-form-group am-container">
         <label for="" class="am-u-sm-3 am-form-label">买断价格</label>
         <div class="am-u-sm-9">
           <div class="otype">
-            <input type="text" style="float:left;width:100px;" id="" placeholder="买断价格" v-model="msg.OfferAmount" required>
+            <input type="number" step="0.01" style="float:left;width:100px;" id="" placeholder="买断价格" v-model.trim="msg.OfferAmount" required>
             <span :class="msg.OfferType==1 ? 'active left' : 'noactive left' " @click="chooseotype(1)">利率</span>
             <span :class="msg.OfferType==2 ? 'active right' : 'noactive right' " @click="chooseotype(2)">十万</span>
           </div>
@@ -50,7 +53,7 @@
       <div class="am-form-group am-container">
         <label for="" class="am-u-sm-3 am-form-label">买断金额</label>
         <div class="am-u-sm-9">
-          <input type="text" id="" placeholder="买断金额" v-model="msg.TotalAmount" required>
+          <input type="number" step="0.01" id="" placeholder="买断金额" v-model.trim="msg.TotalAmount" required>
         </div>
       </div>
       <div class="pic_title">图片</div>
@@ -79,8 +82,6 @@ export default {
       msg: {
         CorpId: this.$store.state.user.chose.CorpId || 0,
         CorpName: this.$store.state.user.chose.CorpName || '选择贴现公司',
-        TradeCorp: '',
-        BankAcount: '',
         AccountBank: '',
         OfferType: 1,
         pic: [],
@@ -105,18 +106,17 @@ export default {
       this.$router.push({path: '/choseContact'})
     },
     choseEd () {
-      this.msg.TradeCorp = this.chose_msg.AccountName
-      this.msg.BankAcount = this.chose_msg.AccountNo
       this.msg.AccountBank = this.chose_msg.AccountBank
       this.msg.CorpId = this.chose_msg.CorpId
       this.msg.CorpName = this.chose_msg.CorpName
     },
     add () {
-      if (this.msg.CorpId === '0') {
-        return
-      }
-      if (!this.msg.pic.length) {
-        alert('请上传图片')
+      let json = this.validate()
+      if (!json.isValidata) {
+        this.dd.device.notification.toast({
+          icon: 'error',
+          text: json.msg
+        })
         return
       }
       this.$ajax({
@@ -171,6 +171,34 @@ export default {
           }
         })
       }
+    },
+    validate () {
+      let json = {
+        isValidata: false,
+        msg: '输入错误'
+      }
+      if (!this.msg.CorpId) {
+        json.msg = '请选择贴现公司'
+        return json
+      }
+      if (!this.msg.AccountBank) {
+        json.msg = '请选择详细账户'
+        return json
+      }
+      if (!this.msg.OfferAmount) {
+        json.msg = '请填写买断价格'
+        return json
+      }
+      if (!this.msg.TotalAmount) {
+        json.msg = '请填写买断金额'
+        return json
+      }
+      if (!this.msg.pic.length) {
+        json.msg = '请上传图片'
+        return json
+      }
+      json.isValidata = true
+      return json
     }
   },
   created () {

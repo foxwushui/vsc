@@ -4,19 +4,19 @@
       <div class="am-form-group  am-container">
         <label for="name" class="am-u-sm-2 am-form-label">姓名<span>*</span></label>
         <div class="am-u-sm-10">
-          <input type="text" id="name" placeholder="输入联系人姓名（必填）" v-model="msg.LinkMan" required>
+          <input type="text" id="name" placeholder="输入联系人姓名（必填）" v-model="msg.LinkMan">
         </div>
       </div>
       <div class="am-form-group am-container">
         <label for="tel" class="am-u-sm-2 am-form-label">电话<span>*</span></label>
         <div class="am-u-sm-10">
-          <input type="tel" id="tel" placeholder="请输入手机号或固定号码（必填）" v-model="msg.Mobile" required>
+          <input type="tel" id="tel" placeholder="请输入手机号或固定号码（必填）" v-model="msg.Mobile">
         </div>
       </div>
       <div class="am-form-group am-container">
         <label for="" class="am-u-sm-2 am-form-label">公司<span>*</span></label>
         <div class="am-u-sm-10">
-          <input type="text" id="" placeholder="必填" v-model="msg.CorpName" required>
+          <input type="text" id="" placeholder="必填" v-model="msg.CorpName">
         </div>
       </div>
       <div class="am-form-group am-container">
@@ -37,7 +37,7 @@
       <div class="am-form-group am-container">
         <label for="" class="am-u-sm-3 am-form-label">企业性质</label>
         <div class="am-u-sm-9">
-          <select name="" id="" v-model="msg.CorpNature" required>
+          <select name="" id="" v-model="msg.CorpNature">
             <option value="0" disabled="true" selected="selected" class="dispaly-none">选择性质</option>
             <option value="1">终端企业</option>
             <option value="2">中介</option>
@@ -49,7 +49,7 @@
       <div class="am-form-group am-container">
         <label for="" class="am-u-sm-3 am-form-label">类型</label>
         <div class="am-u-sm-9">
-          <select name="" id="" v-model="msg.CorpType" required>
+          <select name="" id="" v-model="msg.CorpType">
             <option value="0" disabled="true" selected="selected" class="dispaly-none">选择类型</option>
             <option value="1">客户</option>
             <option value="2">渠道商</option>
@@ -60,7 +60,7 @@
       <div class="am-form-group am-container">
         <label for="" class="am-u-sm-3 am-form-label">获取方式</label>
         <div class="am-u-sm-9">
-          <select name="" id="" v-model="msg.GetWay" required>
+          <select name="" id="" v-model="msg.GetWay">
             <option value="0" disabled="true" selected="selected" class="dispaly-none">选择方式</option>
             <option value="1">陌拜</option>
             <option value="2">转介绍</option>
@@ -75,7 +75,7 @@
       <div class="am-form-group am-container">
         <label for="" class="am-u-sm-3 am-form-label">级别</label>
         <div class="am-u-sm-9">
-          <select name="" id="" v-model="msg.Grade" required>
+          <select name="" id="" v-model="msg.Grade">
             <option value="0" disabled="true" selected="selected" class="dispaly-none">选择级别</option>
             <option value="1">一般</option>
             <option value="2">重要</option>
@@ -107,6 +107,14 @@ export default {
   },
   methods: {
     update () {
+      let json = this.validate()
+      if (!json.isValidata) {
+        this.dd.device.notification.toast({
+          icon: 'error',
+          text: json.msg
+        })
+        return
+      }
       this.msg.OwnUserId = this.$store.state.user.data.Id
       this.$ajax.post('/api/Customers/Update', this.msg).then(res => {
         if (res.data.RetCode === '10000') {
@@ -122,6 +130,26 @@ export default {
         title: '编辑客户'
       })
     }
+  },
+  validate () {
+    let json = {
+      isValidata: false,
+      msg: '输入错误'
+    }
+    if (!this.msg.LinkMan) {
+      json.msg = '请填写联系人姓名'
+      return json
+    }
+    if (!this.msg.Mobile) {
+      json.msg = '请填写电话'
+      return json
+    }
+    if (!this.msg.CorpName) {
+      json.msg = '请填写公司'
+      return json
+    }
+    json.isValidata = true
+    return json
   },
   created () {
     // 隐藏tabbar
