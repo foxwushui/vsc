@@ -7,6 +7,7 @@ import App from './App'
 import router from './router'
 import store from './store'
 import axios from 'axios'
+import FastClick from 'fastclick'
 
 // css
 import './assets/css/amazeui.css'
@@ -36,6 +37,7 @@ axios.interceptors.response.use(function (response) {
 Vue.config.productionTip = true
 Vue.prototype.$ajax = axios
 Vue.prototype.dd = window.dd
+FastClick.attach(document.body)
 
 // 全局filter
 Vue.filter('selectTypes', function (val, name) {

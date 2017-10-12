@@ -181,28 +181,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.contactsDetail{ position: absolute; left: 0;top:0;right: 0; bottom: 0; overflow: auto;}
-.contactsDetail .am-container{background: #fff;}
-.contactsDetail .top{text-align: center; padding-top:30px;}
-.contactsDetail .cont{text-align: center; padding-bottom: 20px; font-size: 1.4rem;}
-.contactsDetail .cont img{display: block; margin: 10px auto;}
-.contactsDetail .lists{margin-top: 20px; border-top:1px solid #ddd;border-bottom: 1px solid #ddd;}
-.contactsDetail .list{background: #fff; padding: 10px; border-bottom: 1px solid #ddd;}
-.contactsDetail .list .title{color: #9a9a9a;}
-.contactsDetail .list .msg{font-size: 1.2rem; padding-top: 5px;}
-.contactsDetail .list span{color: #9a9a9a; background: #ebebeb; padding: 2px 5px; border-radius: 4px;}
-.contactsDetail .list p{margin: 0; color: #333;font-size: 1.6rem;}
-.contactsDetail .list strong{color: #ff5a09; font-size: 1.6rem;}
-.contactsDetail .list img{float: right;}
-.contactsDetail .list:last-child{border:none;}
-.contactsDetail .more{margin-top: 20px;border-top: 1px solid #ddd;}
-.contactsDetail .more_t{padding: 10px;color: #9a9a9a; line-height: 40px; clear: both; overflow: hidden;border-bottom: 1px solid #ddd;}
-.contactsDetail .more_t .msg span{font-size: 1.4rem;}
-.contactsDetail .more_t i{font-size: 1.2rem;margin-left: 5px;}
-.more_list{ color: #9a9a9a;padding: 10px; border-bottom: 1px solid #ddd;}
-.more_list p{color: #333; margin: 0;}
-.more_list .am-u-sm-12{margin-top: 10px;}
-.more_add{ text-align:center;line-height: 40px; color:#ff5a09;};
-</style>

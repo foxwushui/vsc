@@ -42,10 +42,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.tabbar{position: fixed; bottom: 0; line-height: 28px; color: #6f6f6f;background: #fff; font-size: 1.2rem;}
-.tabbar .item{ text-align: center;}
-.tabbar .item.active{color: #ff5a09;}
-.tabbar .item img{display: block; margin:10px auto 0;}
-</style>

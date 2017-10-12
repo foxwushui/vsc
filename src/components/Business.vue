@@ -1,5 +1,5 @@
 <template>
-  <div class="business">
+  <div class="business wraper_b">
      <div class="am-container" v-for="(item,index) of lists" :key="item.Id"  @click="cellClick(item.Id)">
         <h6>{{item.CorpName}}<span><i></i>{{item.Status | selectTypes('Status')}}</span></h6>
         <!-- <p>打款名称：{{item.TradeCorp}}</p>
@@ -76,11 +76,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.business{position:absolute;left: 0; right: 0;top: 0;bottom: 56px; overflow: auto;}
-.business .am-container{margin-top: 10px; background: #fff; padding-top: 10px;padding-bottom: 10px;}
-.business h6{font-weight: normal;font-size: 2rem; line-height: 1.6;}
-.business h6 span{font-size: 1.2rem; vertical-align: middle; border:1px solid #999; border-radius: 4px; padding: 2px 8px; margin-left: 10px; color: #999;}
-.business p{margin: .3rem 0;font-size: 1.4rem; color: #666}
-</style>

@@ -76,15 +76,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.chose{background: #f5f4f9;padding:10px;}
-.chose .item {background-color: #FFFFFF; padding:10px; border-radius: 10px;}
-.chose .top{background: url(../assets/imgs/logo.png) no-repeat 10px 0px;border-bottom: 1px dashed #9e9e9e;}
-.chose .item .top p{margin:0;padding-left: 60px;}
-.chose .item .top span{display:block;}
-.chose .item .top .content{font-size: 18px; font-weight: bold; color:#696969;}
-.chose .item .top .title{color:#9e9e9e;font-size:14px;}
-.chose .bottom .title{color:#9e9e9e;font-size:14px;}
-.chose .bottom .content{color:#696969;font-size:14px;padding-left: 20px;}
-</style>

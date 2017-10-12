@@ -1,5 +1,5 @@
 <template>
-  <div class='contacts'>
+  <div class='contacts wraper_b'>
     <!-- <div class="am-g tabs">
       <div class="am-u-sm-6 tab" v-for="(item,index) of tab" :key="item.id" @click="tabClick(index)" :class="{active: index==tabIndex}">{{item.text}}</div>
     </div> -->
@@ -144,17 +144,3 @@ export default {
   }
 }
 </script>
-<style>
-.contacts .tabs{background: #fff;height: 60px;text-align: center;color: #999;border-bottom:1px solid #d8d8d8;}
-.contacts .tab{line-height: 58px; cursor: pointer;}
-.contacts .tab.active{border-bottom:2px solid #ff5a09; color: #ff5a09;}
-.contacts .cells{ border-top: 1px solid #f6f6f6; position: absolute; left: 0; right: 0; top: 10px; bottom: 56px; overflow: auto;}
-.contacts .cell{background: #fff;padding: 10px; border-bottom: 1px solid #f6f6f6;}
-.contacts .cell-icon{border-radius: 50%; color: #fff;width: 50px;height: 50px; line-height:50px; text-align: center;}
-.contacts .cell-cont{padding-left: 10px;}
-.contacts .cell-tips{font-size: 12px;}
-.contacts .cell-tips span{padding:2px 5px;margin-right: 2px;}
-.contacts .cell-more{font-size: 12px;color: #d2d2d2;}
-.noMsg{text-align: center; line-height: 45px;color: #ff5a09;padding-top: 100px;}
-.noMsg img{display:block; margin: 0 auto;}
-</style>

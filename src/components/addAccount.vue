@@ -4,7 +4,7 @@
        <div class="am-form-group am-container">
         <label for="" class="am-u-sm-3 am-form-label">账户信息</label>
         <div class="am-u-sm-9">
-          <input type="text" id="" placeholder="账户信息" name="AccountBank" v-model.trim="msg.AccountBank" required />
+          <input type="text" id="" placeholder="账户信息" name="AccountBank" v-model.trim="msg.AccountBank" />
         </div>
       </div>
       

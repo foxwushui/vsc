@@ -159,17 +159,3 @@ export default {
   }
 }
 </script>
-
-<style>
-label{font-weight: normal;}
-.dispaly-none{display: none;}
-.addContacts .am-form{overflow: auto; position: absolute; left: 0; right: 0; top:10px; bottom: 0;}
-.addContacts .am-form-group{background: #fff; line-height: 45px; margin-bottom: 0;border-bottom: 1px solid #f1f1f1;}
-.addContacts .am-form-group.noBg{background: none;}
-.addContacts .am-form-group input{border: none; margin-top: 5px; text-align: right;}
-.addContacts .am-form-group label{padding: 0;}
-.addContacts .am-form-group label span{color: #ff5a09;margin-left: 5px;}
-.addContacts .am-form-group select{width: 100px;float: right;margin-top: 5px;border: none; text-align: right;}
-.addContacts .am-form-group option{text-align: right;}
-.addContacts .am-form-group .sub{width: 60%;margin: 20px auto 30px;text-align: center; line-height: 45px;background: #ff5a09;color: #fff;border-radius: 4px;font-size: 20px;display: block;}
-</style>

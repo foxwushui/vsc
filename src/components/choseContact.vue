@@ -69,16 +69,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.choseContact .tabs{background: #fff;height: 60px;text-align: center;color: #999;border-bottom:1px solid #d8d8d8;}
-.choseContact .tab{line-height: 58px; cursor: pointer;}
-.choseContact .tab.active{border-bottom:2px solid #ff5a09; color: #ff5a09;}
-.choseContact .cells{ border-top: 1px solid #f6f6f6; position: absolute; left: 0; right: 0; top: 10px; bottom: 0px; overflow: auto;}
-.choseContact .cell{background: #fff;padding: 10px; border-bottom: 1px solid #f6f6f6;}
-.choseContact .cell-icon{border-radius: 50%; color: #fff;width: 50px;height: 50px; line-height:50px; text-align: center;}
-.choseContact .cell-cont{padding-left: 10px;}
-.choseContact .cell-tips{font-size: 12px;}
-.choseContact .cell-tips span{padding:2px 5px;margin-right: 2px;}
-.choseContact .cell-more{font-size: 12px;color: #d2d2d2;}
-</style>

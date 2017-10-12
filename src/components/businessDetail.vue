@@ -111,25 +111,3 @@ export default {
   }
 }
 </script>
-
-<style>
-  .businessDetail{overflow: hidden;}
-  .businessDetail .am-container{background: #fff;}
-  .businessDetail .top{padding-top:1rem; border-top: solid 1px #EEE;border-bottom: solid 1px #EEE;}
-  .businessDetail .am-container .corpName{ border-bottom: solid 1px #EEE; padding-bottom: 1rem;}
-  .businessDetail .am-container .am-g{margin: 0;}
-  .businessDetail .am-container .corpName .am-u-sm-2{padding: 0;margin: 0; text-align: center;}
-  .businessDetail .am-container .corpName .am-u-sm-2 img{width: 85%}
-  .businessDetail .am-container .corpName .am-u-sm-10{font-size: 18px;}
-  .businessDetail .am-container .corpName .am-u-sm-10 p{font-size: 14px; color: #AAA; padding: 0; margin: 0;}
-  .businessDetail .am-container .am-u-sm-3,.am-u-sm-9,.am-u-sm-5,.am-u-sm-4{padding: 0; line-height: 2.5rem;}
-  .businessDetail .am-container .am-u-sm-3{color: #AAA;}
-  .businessDetail .am-container .item{margin:1rem 0; position: relative;}
-  .businessDetail .am-container .item .spimg{position: absolute;top: 0px; right: 20px;}
-  .businessDetail .am-container .item .am-u-sm-5 span{ height: 22px; line-height: 22px; background-color: #d8d8d8; text-align: center;font-size: 14px;}
-  .businessDetail .am-container .item .am-u-sm-5 .active{background-color: #ff5a09; color: #FFF;}
-  .businessDetail .piclist{overflow: hidden; background-color: #FFF;}
-  .businessDetail .piclist .title{line-height: 2.5rem; margin: 0.5rem 0 1rem;}
-  .businessDetail .piclist .am-u-sm-4{padding:0 10px 10px 0;}
-
-</style>
