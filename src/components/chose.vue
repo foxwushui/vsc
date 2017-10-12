@@ -1,17 +1,16 @@
 <template>
-  <div class="chose">
+  <div class="chose wraper">
     <!-- 选择银行账户 -->
-   <div v-for="(item,index) of TradeCompanyList" :key="item.Id"  @click="chose_click(item.AccountBank)">
-     <div class="item">
-       <div class="top">
-             <p>
-                <span class="content">{{item.AccountBank}}</span>
-                <span class="title">账户详情</span>
-             </p>
+    <div v-for="(item,index) of TradeCompanyList" :key="item.Id" @click="chose_click(item.AccountBank)" class="am-container cell">
+      <div class="cell-icon am-fl"><img src="../assets/imgs/logo.png" width="45" /></div>
+      <div class="cell-cont am-fl">
+        <div class="cell-title">账户信息</div>
+        <div class="cell-tips">
+          <textarea v-html="item.AccountBank" readonly rows="5" class="showtext"></textarea>
         </div>
-     </div>
+      </div>
     </div>
-  </div>  
+  </div>
 </template>
 
 <script>

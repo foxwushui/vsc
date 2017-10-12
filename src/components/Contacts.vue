@@ -1,5 +1,5 @@
 <template>
-  <div class='contacts wraper_b'>
+  <div class='contacts wraper_b' ref="viewBox">
     <!-- <div class="am-g tabs">
       <div class="am-u-sm-6 tab" v-for="(item,index) of tab" :key="item.id" @click="tabClick(index)" :class="{active: index==tabIndex}">{{item.text}}</div>
     </div> -->
@@ -34,7 +34,13 @@ export default {
         text: '我下属的'
       }],
       tabIndex: 0,
-      lists: []
+      lists: [],
+      msg: {
+        OwnUserId: this.$store.state.user.data.Id,
+        PageIndex: 1,
+        PageSize: 10,
+        maxpageIndex: 1
+      }
     }
   },
   methods: {
@@ -52,12 +58,9 @@ export default {
     },
     getList () {
       this.$ajax.get('/api/Customers/GetList', {
-        params: {
-          OwnUserId: this.$store.state.user.data.Id,
-          PageIndex: 1,
-          PageSize: 10
-        }
+        params: this.msg
       }).then(res => {
+        this.msg.maxpageIndex = Math.ceil(res.data.Message.Total / this.msg.PageSize)
         this.lists = this.lists.concat(res.data.Message.CustomersList)
       })
     },
@@ -85,12 +88,27 @@ export default {
       })
       this.getList()
       // 加载完成
+    },
+    handlescroll () {
+      var maxHeight = this.box.scrollHeight - document.body.clientHeight + 58
+      if ((maxHeight - this.box.scrollTop) <= 10) {
+        if (this.msg.PageIndex >= this.msg.maxpageIndex) {
+          return
+        }
+        // 加载下一页
+        this.msg.PageIndex++
+        this.getList()
+      }
     }
   },
   computed: {
     isReady () {
       return this.$store.state.user.isReady
     }
+  },
+  mounted () {
+    this.box = this.$refs.viewBox
+    this.box.addEventListener('scroll', this.handlescroll)
   },
   created () {
     // 显示tabbar

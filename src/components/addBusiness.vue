@@ -22,7 +22,10 @@
           <span>*</span>
         </label>
         <div class="am-u-sm-9" @click="chose()">
-          <input type="text" id="" placeholder="选择账户" v-model.trim="msg.AccountBank" readonly>
+
+          <textarea v-html="msg.AccountBank" readonly rows="5" class="showtext"></textarea>
+
+          <!-- <input type="text" id="" placeholder="选择账户" v-model.trim="msg.AccountBank" readonly> -->
         </div>
       </div>
 

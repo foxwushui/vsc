@@ -37,7 +37,7 @@
       <div class="am-form-group am-container">
         <label for="" class="am-u-sm-3 am-form-label">企业性质</label>
         <div class="am-u-sm-9">
-          <span class="right" @click="selectClick('CorpNature')">{{choseMsg.CorpNature}}</span>
+          <span class="right select_span" @click="selectClick('CorpNature')">{{choseMsg.CorpNature}}</span>
           <!-- <select name="" id="" v-model="msg.CorpNature">
             <option value="0" disabled="true" selected="selected" class="dispaly-none">选择性质</option>
             <option value="1">终端企业</option>
@@ -51,7 +51,7 @@
         <label for="" class="am-u-sm-3 am-form-label">类型</label>
         <div class="am-u-sm-9">
 
-          <span class="right" @click="selectClick('CorpType')">{{choseMsg.CorpType}}</span>
+          <span class="right select_span" @click="selectClick('CorpType')">{{choseMsg.CorpType}}</span>
           <!-- <select name="" id="" v-model="msg.CorpType">
             <option value="0" disabled="true" selected="selected" class="dispaly-none">选择类型</option>
             <option value="1">客户</option>
@@ -64,7 +64,7 @@
         <label for="" class="am-u-sm-3 am-form-label">获取方式</label>
         <div class="am-u-sm-9">
 
-          <span class="right" @click="selectClick('GetWay')">{{choseMsg.GetWay}}</span>
+          <span class="right select_span" @click="selectClick('GetWay')">{{choseMsg.GetWay}}</span>
           <!-- <select name="" id="" v-model="msg.GetWay">
             <option value="0" disabled="true" selected="selected" class="dispaly-none">选择方式</option>
             <option value="1">陌拜</option>
@@ -81,7 +81,7 @@
         <label for="" class="am-u-sm-3 am-form-label">级别</label>
         <div class="am-u-sm-9">
 
-          <span class="right" @click="selectClick('Grade')">{{choseMsg.Grade}}</span>
+          <span class="right select_span" @click="selectClick('Grade')">{{choseMsg.Grade}}</span>
           <!-- <select name="" id="" v-model="msg.Grade">
             <option value="0" disabled="true" selected="selected" class="dispaly-none">选择级别</option>
             <option value="1">一般</option>
@@ -176,10 +176,10 @@ export default {
   computed: {
     choseMsg () {
       let json = {}
-      json.CorpNature = this.selectarr.CorpNature[this.msg.CorpNature - 1] ? this.selectarr.CorpNature[this.msg.CorpNature - 1].key : '选择性质'
-      json.CorpType = this.selectarr.CorpType[this.msg.CorpType - 1] ? this.selectarr.CorpType[this.msg.CorpType - 1].key : '选择类型'
-      json.GetWay = this.selectarr.GetWay[this.msg.GetWay - 1] ? this.selectarr.GetWay[this.msg.GetWay - 1].key : '选择方式'
-      json.Grade = this.selectarr.Grade[this.msg.Grade - 1] ? this.selectarr.Grade[this.msg.Grade - 1].key : '选择级别'
+      json.CorpNature = this.selectarr.CorpNature[this.msg.CorpNature - 1] ? this.selectarr.CorpNature[this.msg.CorpNature - 1].key : '选择性质>'
+      json.CorpType = this.selectarr.CorpType[this.msg.CorpType - 1] ? this.selectarr.CorpType[this.msg.CorpType - 1].key : '选择类型>'
+      json.GetWay = this.selectarr.GetWay[this.msg.GetWay - 1] ? this.selectarr.GetWay[this.msg.GetWay - 1].key : '选择方式>'
+      json.Grade = this.selectarr.Grade[this.msg.Grade - 1] ? this.selectarr.Grade[this.msg.Grade - 1].key : '选择级别>'
       return json
     }
   },
@@ -202,7 +202,6 @@ export default {
         })
         return
       }
-      alert(window.JSON.stringify(this.msg))
       this.msg.OwnUserId = this.$store.state.user.data.Id
       this.$ajax.post('/api/Customers/add', this.msg).then(res => {
         if (res.data.RetCode === '10000') {

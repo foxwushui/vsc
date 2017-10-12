@@ -37,30 +37,35 @@
       <div class="am-form-group am-container">
         <label for="" class="am-u-sm-3 am-form-label">企业性质</label>
         <div class="am-u-sm-9">
-          <select name="" id="" v-model="msg.CorpNature">
+          <span class="right select_span" @click="selectClick('CorpNature')">{{choseMsg.CorpNature}}</span>
+          <!-- <select name="" id="" v-model="msg.CorpNature">
             <option value="0" disabled="true" selected="selected" class="dispaly-none">选择性质</option>
             <option value="1">终端企业</option>
             <option value="2">中介</option>
             <option value="3">银行</option>
-          </select>
+          </select> -->
         </div>
       </div>
       
       <div class="am-form-group am-container">
         <label for="" class="am-u-sm-3 am-form-label">类型</label>
         <div class="am-u-sm-9">
-          <select name="" id="" v-model="msg.CorpType">
+
+          <span class="right select_span" @click="selectClick('CorpType')">{{choseMsg.CorpType}}</span>
+          <!-- <select name="" id="" v-model="msg.CorpType">
             <option value="0" disabled="true" selected="selected" class="dispaly-none">选择类型</option>
             <option value="1">客户</option>
             <option value="2">渠道商</option>
-          </select>
+          </select> -->
         </div>
       </div>
 
       <div class="am-form-group am-container">
         <label for="" class="am-u-sm-3 am-form-label">获取方式</label>
         <div class="am-u-sm-9">
-          <select name="" id="" v-model="msg.GetWay">
+
+          <span class="right select_span" @click="selectClick('GetWay')">{{choseMsg.GetWay}}</span>
+          <!-- <select name="" id="" v-model="msg.GetWay">
             <option value="0" disabled="true" selected="selected" class="dispaly-none">选择方式</option>
             <option value="1">陌拜</option>
             <option value="2">转介绍</option>
@@ -68,19 +73,21 @@
             <option value="4">微信</option>
             <option value="5">QQ</option>
             <option value="6">其他</option>
-          </select>
+          </select> -->
         </div>
       </div>
 
       <div class="am-form-group am-container">
         <label for="" class="am-u-sm-3 am-form-label">级别</label>
         <div class="am-u-sm-9">
-          <select name="" id="" v-model="msg.Grade">
+
+          <span class="right select_span" @click="selectClick('Grade')">{{choseMsg.Grade}}</span>
+          <!-- <select name="" id="" v-model="msg.Grade">
             <option value="0" disabled="true" selected="selected" class="dispaly-none">选择级别</option>
             <option value="1">一般</option>
             <option value="2">重要</option>
             <option value="3">核心</option>
-          </select>
+          </select> -->
         </div>
       </div>
 
@@ -98,14 +105,89 @@
 export default {
   name: 'addContacts',
   data () {
-    return {}
+    return {
+      selectarr: {
+        CorpNature: [{
+          key: '终端企业',
+          value: '1'
+        },
+        {
+          key: '中介',
+          value: '2'
+        },
+        {
+          key: '银行',
+          value: '3'
+        }],
+        CorpType: [{
+          key: '客户',
+          value: '1'
+        },
+        {
+          key: '渠道',
+          value: '2'
+        }],
+        GetWay: [{
+          key: '陌拜',
+          value: '1'
+        },
+        {
+          key: '转介绍',
+          value: '2'
+        },
+        {
+          key: '电销',
+          value: '3'
+        },
+        {
+          key: '微信',
+          value: '4'
+        },
+        {
+          key: 'QQ',
+          value: '5'
+        },
+        {
+          key: '其他',
+          value: '6'
+        }],
+        Grade: [{
+          key: '一般',
+          value: '1'
+        },
+        {
+          key: '重要',
+          value: '2'
+        },
+        {
+          key: '核心',
+          value: '3'
+        }]
+      }}
   },
   computed: {
     msg () {
       return this.$store.state.user.contacts
+    },
+    choseMsg () {
+      let json = {}
+      json.CorpNature = this.selectarr.CorpNature[this.msg.CorpNature - 1] ? this.selectarr.CorpNature[this.msg.CorpNature - 1].key : '选择性质>'
+      json.CorpType = this.selectarr.CorpType[this.msg.CorpType - 1] ? this.selectarr.CorpType[this.msg.CorpType - 1].key : '选择类型>'
+      json.GetWay = this.selectarr.GetWay[this.msg.GetWay - 1] ? this.selectarr.GetWay[this.msg.GetWay - 1].key : '选择方式>'
+      json.Grade = this.selectarr.Grade[this.msg.Grade - 1] ? this.selectarr.Grade[this.msg.Grade - 1].key : '选择级别>'
+      return json
     }
   },
   methods: {
+    selectClick (str) {
+      this.dd.biz.util.chosen({
+        source: this.selectarr[str],
+        selectedKey: this.choseMsg[str],
+        onSuccess: res => {
+          this.msg[str] = res.value
+        }
+      })
+    },
     update () {
       let json = this.validate()
       if (!json.isValidata) {

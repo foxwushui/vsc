@@ -1,5 +1,5 @@
 <template>
-  <div class="choseContact">
+  <div class="choseContact wraper" ref="viewBox">
     <!-- 选择银行账户 -->
     <div class="cells">
       <div class="am-container cell" v-for="(item,index) of CorpList" :key="item.Id"  @click="chose_click(item.Id)">
@@ -21,7 +21,13 @@ export default {
   name: 'choseContact',
   data () {
     return {
-      CorpList: []
+      CorpList: [],
+      msg: {
+        OwnUserId: this.$store.state.user.data.Id,
+        PageIndex: 1,
+        PageSize: 10,
+        maxpageIndex: 1
+      }
     }
   },
   computed: {
@@ -44,13 +50,10 @@ export default {
     },
     getTradeCompany () {
       this.$ajax.get('/api/Customers/GetList', {
-        params: {
-          OwnUserId: this.userId,
-          PageIndex: 1,
-          PageSize: 100
-        }
+        params: this.msg
       }).then(res => {
-        this.CorpList = res.data.Message.CustomersList
+        this.msg.maxpageIndex = Math.ceil(res.data.Message.Total / this.msg.PageSize)
+        this.CorpList = this.CorpList.concat(res.data.Message.CustomersList)
       })
     },
     ddReady () {
@@ -62,7 +65,22 @@ export default {
         title: '选择贴现公司'
       })
       this.getTradeCompany()
+    },
+    handlescroll () {
+      var maxHeight = this.box.scrollHeight - document.body.clientHeight
+      if ((maxHeight - this.box.scrollTop) <= 10) {
+        if (this.msg.PageIndex >= this.msg.maxpageIndex) {
+          return
+        }
+        // 加载下一页
+        this.msg.PageIndex++
+        this.getTradeCompany()
+      }
     }
+  },
+  mounted () {
+    this.box = this.$refs.viewBox
+    this.box.addEventListener('scroll', this.handlescroll)
   },
   created () {
     this.ddReady()

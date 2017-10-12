@@ -21,7 +21,11 @@
         </div> -->
         <div class="am-g">
           <div class="am-u-sm-3">账号信息</div>
-          <div class="am-u-sm-9">{{detail.InSalesOrderCorp.AccountBank}}</div>
+           
+          <div class="am-u-sm-9">
+            <textarea v-html="detail.InSalesOrderCorp.AccountBank" readonly rows="5" class="showtext"></textarea>
+            <!-- {{detail.InSalesOrderCorp.AccountBank}} -->
+            </div>
         </div>
         <div class="am-g">
           <div class="am-u-sm-3">买断价格</div>

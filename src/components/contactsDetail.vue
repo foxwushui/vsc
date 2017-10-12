@@ -50,10 +50,10 @@
           <div v-show="Accountlist.length && isAccountlist">
             <div v-for="(item,index) of Accountlist" :key="item.Id" class="am-g more_list" @click="accountClick(index,item.Id)">
 
-              <div class="am-u-sm-6">
-                <div class="title">账户信息</div>
+              <div class="am-u-sm-12">
+                <div class="title">账户信息：</div>
                 <div class="msg">
-                  <p>{{item.AccountBank}}</p>
+                  <textarea v-html="item.AccountBank" readonly rows="5" class="showtext"></textarea>
                 </div>
               </div>
               

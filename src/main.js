@@ -14,8 +14,8 @@ import './assets/css/amazeui.css'
 import './assets/css/main.css'
 
 // ajax拦截器  请求之前和请求错误
-// axios.defaults.baseURL = 'http://ddingapi.91hpzj.com/'
-// axios.defaults.timeout = 2500
+axios.defaults.baseURL = 'http://ddingapi.91hpzj.com/'
+axios.defaults.timeout = 2500
 axios.interceptors.request.use(function (config) {
   // 显示加载中
   window.dd.device.notification.showPreloader()
