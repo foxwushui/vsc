@@ -47,9 +47,9 @@
         <label for="" class="am-u-sm-3 am-form-label">买断价格</label>
         <div class="am-u-sm-9">
           <div class="otype">
-            <input type="number" step="0.01" style="float:left;width:100px;" id="" placeholder="买断价格" v-model.trim="msg.OfferAmount">
-            <span :class="msg.OfferType==1 ? 'active left' : 'noactive left' " @click="chooseotype(1)">利率</span>
-            <span :class="msg.OfferType==2 ? 'active right' : 'noactive right' " @click="chooseotype(2)">十万</span>
+            <input type="number" step="0.01" id="" placeholder="每十万买断价格" v-model.trim="msg.OfferAmount">
+            <!-- <span :class="msg.OfferType==1 ? 'active left' : 'noactive left' " @click="chooseotype(1)">利率</span>
+            <span :class="msg.OfferType==2 ? 'active right' : 'noactive right' " @click="chooseotype(2)">十万</span> -->
           </div>
         </div>
       </div>
@@ -82,20 +82,22 @@ export default {
   name: 'addBusiness',
   data () {
     return {
-      msg: {
-        CorpId: this.$store.state.user.chose.CorpId || 0,
-        CorpName: this.$store.state.user.chose.CorpName || '选择贴现公司',
-        AccountBank: '',
-        OfferType: 1,
-        pic: [],
-        CreateUserId: this.$store.state.user.data.Id
-      },
       imgs: []
     }
   },
   computed: {
     chose_msg () {
       return this.$store.state.user.chose
+    },
+    msg () {
+      return {
+        CorpId: this.$store.state.user.chose.CorpId || 0,
+        CorpName: this.$store.state.user.chose.CorpName || '选择贴现公司',
+        AccountBank: '',
+        OfferType: 2,
+        pic: [],
+        CreateUserId: this.$store.state.user.data.Id
+      }
     }
   },
   methods: {
@@ -147,10 +149,10 @@ export default {
       })
       this.choseEd()
     },
-    // 选择买断方式
-    chooseotype (n) {
-      this.msg.OfferType = n
-    },
+    // // 选择买断方式
+    // chooseotype (n) {
+    //   this.msg.OfferType = n
+    // },
     onFileChange (e) {
       let file = e.target.files[0]
       let reader = new FileReader()

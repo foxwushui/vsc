@@ -34,13 +34,7 @@ export default {
         text: '我下属的'
       }],
       tabIndex: 0,
-      lists: [],
-      msg: {
-        OwnUserId: this.$store.state.user.data.Id,
-        PageIndex: 1,
-        PageSize: 10,
-        maxpageIndex: 1
-      }
+      lists: []
     }
   },
   methods: {
@@ -104,6 +98,14 @@ export default {
   computed: {
     isReady () {
       return this.$store.state.user.isReady
+    },
+    msg () {
+      return {
+        OwnUserId: this.$store.state.user.data.Id,
+        PageIndex: 1,
+        PageSize: 10,
+        maxpageIndex: 1
+      }
     }
   },
   mounted () {

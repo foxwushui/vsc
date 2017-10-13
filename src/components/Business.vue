@@ -20,8 +20,12 @@ export default {
   name: 'business',
   data () {
     return {
-      lists: [],
-      msg: {
+      lists: []
+    }
+  },
+  computed: {
+    msg () {
+      return {
         CreateUserId: this.$store.state.user.data.Id,
         PageIndex: 1,
         PageSize: 10,

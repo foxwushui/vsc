@@ -37,6 +37,7 @@
       <div class="am-form-group am-container">
         <label for="" class="am-u-sm-3 am-form-label">企业性质</label>
         <div class="am-u-sm-9">
+          <i class="am-icon-angle-right right for_select"></i>
           <span class="right select_span" @click="selectClick('CorpNature')">{{choseMsg.CorpNature}}</span>
           <!-- <select name="" id="" v-model="msg.CorpNature">
             <option value="0" disabled="true" selected="selected" class="dispaly-none">选择性质</option>
@@ -51,6 +52,7 @@
         <label for="" class="am-u-sm-3 am-form-label">类型</label>
         <div class="am-u-sm-9">
 
+          <i class="am-icon-angle-right right for_select"></i>
           <span class="right select_span" @click="selectClick('CorpType')">{{choseMsg.CorpType}}</span>
           <!-- <select name="" id="" v-model="msg.CorpType">
             <option value="0" disabled="true" selected="selected" class="dispaly-none">选择类型</option>
@@ -64,6 +66,7 @@
         <label for="" class="am-u-sm-3 am-form-label">获取方式</label>
         <div class="am-u-sm-9">
 
+          <i class="am-icon-angle-right right for_select"></i>
           <span class="right select_span" @click="selectClick('GetWay')">{{choseMsg.GetWay}}</span>
           <!-- <select name="" id="" v-model="msg.GetWay">
             <option value="0" disabled="true" selected="selected" class="dispaly-none">选择方式</option>
@@ -81,6 +84,7 @@
         <label for="" class="am-u-sm-3 am-form-label">级别</label>
         <div class="am-u-sm-9">
 
+          <i class="am-icon-angle-right right for_select"></i>
           <span class="right select_span" @click="selectClick('Grade')">{{choseMsg.Grade}}</span>
           <!-- <select name="" id="" v-model="msg.Grade">
             <option value="0" disabled="true" selected="selected" class="dispaly-none">选择级别</option>
@@ -176,10 +180,10 @@ export default {
   computed: {
     choseMsg () {
       let json = {}
-      json.CorpNature = this.selectarr.CorpNature[this.msg.CorpNature - 1] ? this.selectarr.CorpNature[this.msg.CorpNature - 1].key : '选择性质>'
-      json.CorpType = this.selectarr.CorpType[this.msg.CorpType - 1] ? this.selectarr.CorpType[this.msg.CorpType - 1].key : '选择类型>'
-      json.GetWay = this.selectarr.GetWay[this.msg.GetWay - 1] ? this.selectarr.GetWay[this.msg.GetWay - 1].key : '选择方式>'
-      json.Grade = this.selectarr.Grade[this.msg.Grade - 1] ? this.selectarr.Grade[this.msg.Grade - 1].key : '选择级别>'
+      json.CorpNature = this.selectarr.CorpNature[this.msg.CorpNature - 1] ? this.selectarr.CorpNature[this.msg.CorpNature - 1].key : '选择性质'
+      json.CorpType = this.selectarr.CorpType[this.msg.CorpType - 1] ? this.selectarr.CorpType[this.msg.CorpType - 1].key : '选择类型'
+      json.GetWay = this.selectarr.GetWay[this.msg.GetWay - 1] ? this.selectarr.GetWay[this.msg.GetWay - 1].key : '选择方式'
+      json.Grade = this.selectarr.Grade[this.msg.Grade - 1] ? this.selectarr.Grade[this.msg.Grade - 1].key : '选择级别'
       return json
     }
   },

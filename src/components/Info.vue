@@ -1,6 +1,8 @@
 <template>
-  <div class="info">
-      信息页
+  <div class="info wraper_b">      
+    <div class="noMsg">
+      <img src="../assets/imgs/my_kf.png" alt="">
+    </div>
   </div>
 </template>
 

@@ -21,18 +21,20 @@ export default {
   name: 'choseContact',
   data () {
     return {
-      CorpList: [],
-      msg: {
-        OwnUserId: this.$store.state.user.data.Id,
-        PageIndex: 1,
-        PageSize: 10,
-        maxpageIndex: 1
-      }
+      CorpList: []
     }
   },
   computed: {
     userId () {
       return this.$store.state.user.data.Id
+    },
+    msg () {
+      return {
+        OwnUserId: this.$store.state.user.data.Id,
+        PageIndex: 1,
+        PageSize: 10,
+        maxpageIndex: 1
+      }
     }
   },
   methods: {

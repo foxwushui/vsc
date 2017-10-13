@@ -56,7 +56,8 @@ html,body {height: 100%;overflow: hidden;background: #f3f3f3;}
 .wraper{position: absolute;left: 0;right: 0;top: 0px;bottom: 0;overflow: auto;}
 .am-form-group{background: #fff; border-bottom: 1px solid #f1f1f1; margin-bottom: 0; padding-bottom: 0.6rem;}
 label{font-weight: normal;}
-.am-form-group .select_span{padding-top: 0.6rem;}
+.am-form-group .select_span{padding-top: 0.6rem; padding-right: 5px;}
+.for_select{padding-top: 0.6rem;}
 .cell-cont{width: 85%;}
 .am-form .showtext[readonly],.showtext[readonly]{border:none;resize: none;width: 100%; background: none;}
 
@@ -110,8 +111,7 @@ label{font-weight: normal;}
 .businessDetail .am-container .corpName .am-u-sm-2 img{width: 85%}
 .businessDetail .am-container .corpName .am-u-sm-10{font-size: 18px;}
 .businessDetail .am-container .corpName .am-u-sm-10 p{font-size: 14px; color: #AAA; padding: 0; margin: 0;}
-.businessDetail .am-container .am-u-sm-3,.am-u-sm-9,.am-u-sm-5,.am-u-sm-4{padding: 0; line-height: 2.5rem;}
-.businessDetail .am-container .am-u-sm-3{color: #AAA;}
+.businessDetail .am-container .am-u-sm-3{color: #AAA; padding: 0;}
 .businessDetail .am-container .item{margin:1rem 0; position: relative;}
 .businessDetail .am-container .item .spimg{position: absolute;top: 0px; right: 20px;}
 .businessDetail .am-container .item .am-u-sm-5 span{ height: 22px; line-height: 22px; background-color: #d8d8d8; text-align: center;font-size: 14px;}
