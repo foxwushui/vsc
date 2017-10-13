@@ -1,5 +1,5 @@
 <template>
-  <div class="business wraper_b" ref="viewBox">
+  <div class="business wraper_b" ref="viewBox_b">
      <div class="am-container" v-for="(item,index) of lists" :key="item.Id"  @click="cellClick(item.MainId)">
         <h6>{{item.CorpName}}<span><i></i>{{item.Status | selectTypes('Status')}}</span></h6>
         <!-- <p>打款名称：{{item.TradeCorp}}</p>
@@ -87,7 +87,7 @@ export default {
     }
   },
   mounted () {
-    this.box = this.$refs.viewBox
+    this.box = this.$refs.viewBox_b
     this.box.addEventListener('scroll', this.handlescroll)
   },
   created () {

@@ -1,5 +1,5 @@
 <template>
-  <div class='contacts wraper_b' ref="viewBox">
+  <div class='contacts wraper_b' ref="viewBox_c">
     <!-- <div class="am-g tabs">
       <div class="am-u-sm-6 tab" v-for="(item,index) of tab" :key="item.id" @click="tabClick(index)" :class="{active: index==tabIndex}">{{item.text}}</div>
     </div> -->
@@ -109,7 +109,7 @@ export default {
     }
   },
   mounted () {
-    this.box = this.$refs.viewBox
+    this.box = this.$refs.viewBox_c
     this.box.addEventListener('scroll', this.handlescroll)
   },
   created () {

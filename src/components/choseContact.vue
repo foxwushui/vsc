@@ -1,5 +1,5 @@
 <template>
-  <div class="choseContact wraper" ref="viewBox">
+  <div class="choseContact wraper" ref="viewBox_cc">
     <!-- 选择银行账户 -->
     <div class="cells">
       <div class="am-container cell" v-for="(item,index) of CorpList" :key="item.Id"  @click="chose_click(item.Id)">
@@ -81,7 +81,7 @@ export default {
     }
   },
   mounted () {
-    this.box = this.$refs.viewBox
+    this.box = this.$refs.viewBox_cc
     this.box.addEventListener('scroll', this.handlescroll)
   },
   created () {
