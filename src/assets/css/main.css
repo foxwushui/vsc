@@ -60,6 +60,9 @@ label{font-weight: normal;}
 .for_select{padding-top: 0.6rem;}
 .cell-cont{width: 85%;}
 .am-form .showtext[readonly],.showtext[readonly]{border:none;resize: none;width: 100%; background: none;}
+.am-form .showtext::-webkit-input-placeholder,.am-form .showtext::placeholder{
+   text-align: right; 
+}
 
 
 .am-form-group.noBg{background: none;}

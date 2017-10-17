@@ -23,7 +23,7 @@
         </label>
         <div class="am-u-sm-9" @click="chose()">
 
-          <textarea v-html="msg.AccountBank" readonly rows="5" class="showtext"></textarea>
+          <textarea v-html="msg.AccountBank" readonly rows="5" class="showtext" placeholder="选择账户"></textarea>
 
           <!-- <input type="text" id="" placeholder="选择账户" v-model.trim="msg.AccountBank" readonly> -->
         </div>
@@ -103,6 +103,10 @@ export default {
   methods: {
     chose () {
       if (!this.msg.CorpId) {
+        this.dd.device.notification.toast({
+          icon: 'error',
+          text: '请选择贴现公司'
+        })
         return
       }
       this.$router.push({path: '/chose', query: {id: this.msg.CorpId}})

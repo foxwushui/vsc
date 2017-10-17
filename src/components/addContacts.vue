@@ -4,13 +4,13 @@
       <div class="am-form-group  am-container">
         <label for="name" class="am-u-sm-2 am-form-label">姓名<span>*</span></label>
         <div class="am-u-sm-10">
-          <input type="text" id="name" placeholder="输入联系人姓名（必填）" v-model.trim="msg.LinkMan">
+          <input type="text" id="name" placeholder="输入联系人姓名" v-model.trim="msg.LinkMan">
         </div>
       </div>
       <div class="am-form-group am-container">
         <label for="tel" class="am-u-sm-2 am-form-label">电话<span>*</span></label>
         <div class="am-u-sm-10">
-          <input type="tel" id="tel" placeholder="请输入手机号或固定号码（必填）" v-model.trim="msg.Mobile">
+          <input type="tel" id="tel" placeholder="请输入手机号或固定号码" v-model.trim="msg.Mobile">
         </div>
       </div>
       <div class="am-form-group am-container">
