@@ -109,10 +109,10 @@ export default {
         })
         return
       }
-      this.$router.push({path: '/chose', query: {id: this.msg.CorpId}})
+      this.$router.push({path: '/other/choseBank', query: {id: this.msg.CorpId}})
     },
     choseContact () {
-      this.$router.push({path: '/choseContact'})
+      this.$router.push({path: '/other/choseContact'})
     },
     choseEd () {
       this.msg.AccountBank = this.chose_msg.AccountBank

@@ -2,7 +2,7 @@
   <div id="app">
     <!-- 主体部分，使用uirouter -->
     <!-- <transition name="component-fade" mode="out-in"> -->
-      <router-view></router-view>
+    <router-view></router-view>
     <!-- </transition> -->
     <!-- 底部tabbar -->
     <Tabbar v-show="tabbarShow"></Tabbar>

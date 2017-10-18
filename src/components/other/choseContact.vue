@@ -3,7 +3,7 @@
     <!-- 选择银行账户 -->
     <div class="cells">
       <div class="am-container cell" v-for="(item,index) of CorpList" :key="item.Id"  @click="chose_click(item.Id)">
-        <div class="cell-icon am-fl"><img src="../assets/imgs/logo.png" width="45" /></div>
+        <div class="cell-icon am-fl"><img src="../../assets/imgs/logo.png" width="45" /></div>
         <div class="cell-cont am-fl">
           <div class="cell-title">{{item.CorpName}}</div>
           <div class="cell-tips">

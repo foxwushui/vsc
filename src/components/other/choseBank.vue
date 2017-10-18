@@ -2,7 +2,7 @@
   <div class="chose wraper">
     <!-- 选择银行账户 -->
     <div v-for="(item,index) of TradeCompanyList" :key="item.Id" @click="chose_click(item.AccountBank)" class="am-container cell">
-      <div class="cell-icon am-fl"><img src="../assets/imgs/logo.png" width="45" /></div>
+      <div class="cell-icon am-fl"><img src="../../assets/imgs/logo.png" width="45" /></div>
       <div class="cell-cont am-fl">
         <div class="cell-title">账户信息</div>
         <div class="cell-tips">
@@ -15,7 +15,7 @@
 
 <script>
 export default {
-  name: 'chose',
+  name: 'choseBank',
   data () {
     return {
       TradeCompanyList: {}
@@ -43,7 +43,7 @@ export default {
       })
     },
     addAccount () {
-      this.$router.push({path: '/addAccount', query: {id: this.cid}})
+      this.$router.push({path: '/other/addAccount', query: {id: this.cid}})
     },
     ddReady () {
       // dd相关

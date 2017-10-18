@@ -1,8 +1,7 @@
-<template>
-  <div class="info wraper_b">      
-    <div class="noMsg">
-      <img src="../assets/imgs/my_kf.png" alt="" width="260">
-    </div>
+<template>  
+  <div>
+    <!-- 子路由   个人信息页面 -->
+    <router-view></router-view>
   </div>
 </template>
 
@@ -11,24 +10,10 @@ export default {
   name: 'info',
   data () {
     return {}
-  },
-  methods: {
-    ddReady () {
-      this.dd.biz.navigation.setRight({
-        show: false
-      })
-      this.dd.biz.navigation.setTitle({
-        title: '我的'
-      })
-    }
-  },
-  created () {
-    this.$store.state.tabbar = {
-      show: true,
-      tabIndex: 2
-    }
-    this.ddReady()
   }
 }
 </script>
 
+<style>
+
+</style>

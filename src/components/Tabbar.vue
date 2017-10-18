@@ -17,13 +17,13 @@ export default {
       },
       {
         name: '业务',
-        url: '/Business',
+        url: '/business',
         img: require('../assets/imgs/bus.png'),
         img_a: require('../assets/imgs/bus_active.png')
       },
       {
         name: '我的',
-        url: '/Info',
+        url: '/info',
         img: require('../assets/imgs/my.png'),
         img_a: require('../assets/imgs/my_active.png')
       }]

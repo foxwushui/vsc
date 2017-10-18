@@ -71,11 +71,11 @@ export default {
   data () {
     return {
       imgs: {
-        logo: require('../assets/imgs/logo_b.png'),
-        msg: require('../assets/imgs/msg.png'),
-        tel: require('../assets/imgs/tel.png'),
-        bf: require('../assets/imgs/bf.png'),
-        tel_l: require('../assets/imgs/tel_l.png')
+        logo: require('../../assets/imgs/logo_b.png'),
+        msg: require('../../assets/imgs/msg.png'),
+        tel: require('../../assets/imgs/tel.png'),
+        bf: require('../../assets/imgs/bf.png'),
+        tel_l: require('../../assets/imgs/tel_l.png')
       },
       msg: {
         CorpType: '',
@@ -123,7 +123,7 @@ export default {
     },
     // 编辑联系人
     upContacts () {
-      this.$router.push({path: '/upContacts'})
+      this.$router.push({path: '/contacts/up'})
     },
     my_call () {
       this.dd.biz.telephone.showCallMenu({

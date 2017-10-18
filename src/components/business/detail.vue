@@ -59,14 +59,14 @@ export default {
   name: 'businessDetail',
   data () {
     return {
-      img_logo: require('../assets/imgs/logo.png'),
+      img_logo: require('../../assets/imgs/logo.png'),
       detail: {},
       pics: [],
       offertype: ['利率', '十万'],
       spimg: [
         '',
-        require('../assets/imgs/sp_succ.png'),
-        require('../assets/imgs/sp_err.png')
+        require('../../assets/imgs/sp_succ.png'),
+        require('../../assets/imgs/sp_err.png')
       ]
     }
   },
