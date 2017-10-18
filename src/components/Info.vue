@@ -10,6 +10,8 @@ export default {
   name: 'info',
   data () {
     return {}
+  },
+  created () {
   }
 }
 </script>

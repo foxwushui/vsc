@@ -93,9 +93,9 @@ export default new Router({
           component: resolve => require(['../components/info/index.vue'], resolve)
         },
         {
-          path: 'businessDraft',
-          name: 'businessDraft',
-          component: resolve => require(['../components/info/businessDraft.vue'], resolve)
+          path: 'list',
+          name: 'list',
+          component: resolve => require(['../components/info/list.vue'], resolve)
         }
       ]
     },

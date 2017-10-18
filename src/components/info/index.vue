@@ -44,7 +44,7 @@ export default {
   },
   methods: {
     infoClick () {
-      this.$router.push({path: '/info/businessDraft'})
+      this.$router.push({path: '/info/list'})
     },
     ddReady () {
       this.dd.biz.navigation.setRight({
