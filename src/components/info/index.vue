@@ -12,11 +12,11 @@
 
     <div class="info_cont am-g">
       <div class="am-u-sm-6">
-        <p>100<span>张</span></p>
+        <p>{{msg.incount}}<span>张</span></p>
         <span>今日进票</span>
       </div>
       <div class="am-u-sm-6">
-        <p>1000<span>张</span></p>
+        <p>{{msg.outcount}}<span>张</span></p>
         <span>本月进票</span>
       </div>
     </div>
@@ -35,7 +35,9 @@
 export default {
   name: 'info',
   data () {
-    return {}
+    return {
+      msg: {}
+    }
   },
   computed: {
     userDate () {
@@ -46,6 +48,15 @@ export default {
     infoClick () {
       this.$router.push({path: '/info/list'})
     },
+    getCont () {
+      this.$ajax.get('/api/SalesOrderCorp/GetInAndOutCount', {
+        params: {
+          userid: this.userDate.Id
+        }
+      }).then(res => {
+        this.msg = res.data.Message[0]
+      })
+    },
     ddReady () {
       this.dd.biz.navigation.setRight({
         show: false
@@ -53,6 +64,7 @@ export default {
       this.dd.biz.navigation.setTitle({
         title: '我的'
       })
+      this.getCont()
     }
   },
   created () {
