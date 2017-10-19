@@ -149,9 +149,23 @@ export default {
                   code: res.code
                 }
               }).then(res => {
-                // 保存用户信息
-                this.$store.state.user.data = res.data.Message
-                this.ddReady()
+                if (res.data.RetCode !== '10000') {
+                  this.dd.device.notification.alert({
+                    message: '用户不存在',
+                    title: '提示',
+                    buttonName: '收到',
+                    onSuccess: res => {
+                      this.dd.biz.navigation.close()
+                    },
+                    onFail: function (err) {
+                      console.log(err)
+                    }
+                  })
+                } else {
+                  // 保存用户信息
+                  this.$store.state.user.data = res.data.Message
+                  this.ddReady()
+                }
               })
             }
           })

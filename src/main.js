@@ -26,7 +26,6 @@ axios.interceptors.request.use(function (config) {
 axios.interceptors.response.use(function (response) {
   // 加载完成
   window.dd.device.notification.hidePreloader()
-  console.log(response)
   return response
 }, function (error) {
   return window.Promise.reject(error)
