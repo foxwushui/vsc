@@ -150,7 +150,6 @@ export default {
                 }
               }).then(res => {
                 // 保存用户信息
-                alert(window.JSON.stringify(res.data.Message))
                 this.$store.state.user.data = res.data.Message
                 this.ddReady()
               })

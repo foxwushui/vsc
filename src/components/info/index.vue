@@ -1,7 +1,5 @@
 <template>  
   <div class="info wraper_b">
-    <h4>我的</h4>
-
     <div class="info_top am-container">
       <div class="info_tl left">
         <img src="../../assets/imgs/logo.png" width="45" />

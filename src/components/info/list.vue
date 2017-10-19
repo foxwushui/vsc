@@ -4,11 +4,11 @@
       <div class="am-u-sm-6" :class="{active: index==tabIndex}" v-for="(item, index) of tabs" :key="item.id" @click="tabClick(index)">{{item.text}}</div>
     </div>
     <div class="my_list_c">
-      <div class="list am-container" v-for="item of lists" :key="item.Id">
-        <h6>{{item.CorpName}}</h6>
+      <div class="list am-container" v-for="item of lists" :key="item.Id" @click="listClick(item.Id)">
+        <h6>{{item.CorpName}}<span v-if="tabIndex">{{item.Status | selectTypes('Status')}}</span></h6>
         <dl>
           <dt>打款信息：</dt>
-          <dd>{{item.AccountBank}} <span v-if="tabIndex">{{item.Status | selectTypes('Status')}}</span></dd>
+          <dd>{{item.AccountBank}} </dd>
         </dl>
         <dl>
           <dt v-if="!tabIndex">买断金额：</dt>
@@ -59,6 +59,9 @@ export default {
       this.msg.pageIndex = 1
       this.getList()
     },
+    listClick (id) {
+      this.$router.push({path: '/business/detail', query: {id: id, model: this.tabIndex, isOut: this.tabIndex}})
+    },
     getList () {
       this.$ajax.get('/api/SalesOrderCorp/' + this.tabs[this.tabIndex].api, {
         params: this.msg
@@ -107,4 +110,5 @@ export default {
 .my_list_c h6{line-height: 60px; font-weight: normal; border-bottom: 1px dashed #f2f2f2;}
 .my_list_c dt{float: left; font-weight: normal;}
 .my_list_c dd{padding-left: 6.8rem;}
+.my_list_c  h6 span{font-size: 1.2rem; vertical-align: middle; border:1px solid #999; border-radius: 4px; padding: 2px 8px; margin-left: 10px; color: #999;}
 </style>

@@ -40,7 +40,7 @@ export default {
     },
     cellClick (id) {
       // 审批详细
-      this.$router.push({path: '/business/detail', query: {id: id}})
+      this.$router.push({path: '/business/detail', query: {id: id, model: '0', isOut: '1'}})
     },
     getList () {
       this.$ajax.get('/api/SalesOrderCorp/GetList', {

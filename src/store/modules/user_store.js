@@ -1,10 +1,10 @@
 export default {
   state: {
     data: {
-      Id: '4',
-      RealName: '陈志'
+      Id: '',
+      RealName: ''
     },
-    isReady: true,
+    isReady: false,
     contacts: {},
     chose: {}
   }

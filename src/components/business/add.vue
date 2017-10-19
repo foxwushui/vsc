@@ -2,11 +2,14 @@
   <div class="addBusiness addBusiness">
     <form class="am-form am-form-horizontal" @submit.prevent="add">
       <div class="am-form-group  am-container">
-          <label for="tel" class="am-u-sm-4 am-form-label">选择贴现公司
+          <label for="tel" class="am-u-sm-4 am-form-label" v-if="!querys.id">选择贴现公司          
             <span>*</span>
           </label>
+          <label for="tel" class="am-u-sm-4 am-form-label" v-else >选择出口公司 
+             <span>*</span>
+          </label>
           <div class="am-u-sm-8" @click="choseContact()">
-            <input type="text" id="" placeholder="选择贴现公司" v-model.trim="msg.CorpName">
+            <input type="text" id="" placeholder="选择公司" v-model.trim="msg.CorpName">
           </div>
 
           <!-- <select name="" id="" v-model="msg.CorpId">
@@ -44,7 +47,8 @@
       </div> -->
 
       <div class="am-form-group am-container">
-        <label for="" class="am-u-sm-3 am-form-label">买断价格</label>
+        <label for="" class="am-u-sm-3 am-form-label" v-if="!querys.id" >买断价格</label>
+        <label for="" class="am-u-sm-3 am-form-label" v-else >卖断价格</label>
         <div class="am-u-sm-9">
           <div class="otype">
             <input type="number" step="0.01" id="" placeholder="每十万买断价格" v-model.trim="msg.OfferAmount">
@@ -54,7 +58,8 @@
         </div>
       </div>
       <div class="am-form-group am-container">
-        <label for="" class="am-u-sm-3 am-form-label">买断金额</label>
+        <label for="" class="am-u-sm-3 am-form-label" v-if="!querys.id" >买断金额</label>
+        <label for="" class="am-u-sm-3 am-form-label"v-else>卖断金额</label>
         <div class="am-u-sm-9">
           <input type="number" step="0.01" id="" placeholder="买断金额" v-model.trim="msg.TotalAmount">
         </div>
@@ -91,13 +96,18 @@ export default {
     },
     msg () {
       return {
+        MainId: 0,
+        TradeType: 1,
         CorpId: this.$store.state.user.chose.CorpId || 0,
-        CorpName: this.$store.state.user.chose.CorpName || '选择贴现公司',
+        CorpName: this.$store.state.user.chose.CorpName || '选择公司',
         AccountBank: '',
         OfferType: 2,
         pic: [],
         CreateUserId: this.$store.state.user.data.Id
       }
+    },
+    querys () {
+      return this.$route.query
     }
   },
   methods: {
@@ -105,7 +115,7 @@ export default {
       if (!this.msg.CorpId) {
         this.dd.device.notification.toast({
           icon: 'error',
-          text: '请选择贴现公司'
+          text: '请选择公司'
         })
         return
       }
@@ -128,6 +138,8 @@ export default {
         })
         return
       }
+      this.msg.MainId = this.querys.id || 0
+      this.msg.TradeType = this.querys.model === '0' ? 2 : 1
       this.$ajax({
         url: '/api/SalesOrderCorp/add',
         method: 'POST',
@@ -187,7 +199,7 @@ export default {
         msg: '输入错误'
       }
       if (!this.msg.CorpId) {
-        json.msg = '请选择贴现公司'
+        json.msg = '请选择公司'
         return json
       }
       if (!this.msg.AccountBank) {

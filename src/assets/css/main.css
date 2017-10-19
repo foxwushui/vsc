@@ -190,8 +190,7 @@ label{font-weight: normal;}
 
 
 
-.info h4{ background: #ff5a09; color: #fff; font-weight: normal; line-height: 1.8; text-align:center; margin: 0;}
-.info_top{background: #ff5a09; padding-bottom: 20px; color: #fff;}
+.info_top{background: #ff5a09; padding-bottom: 20px; color: #fff; padding-top: 20px;}
 .info_cont{background: #fff; text-align: center; font-size: 1.6rem; padding-bottom: 10px;border-bottom: 1px solid #f1f1f1;}
 .info_cont .am-u-sm-6:first-child{border-right: 1px solid #f1f1f1; }
 .info_cont p{margin: 0; font-size: 2rem;}
