@@ -1,7 +1,7 @@
 <template>
   <div class="business wraper_b" ref="viewBox_b">
      <div class="am-container" v-for="(item,index) of lists" :key="item.Id"  @click="cellClick(item.MainId)">
-        <h6>{{item.CorpName}}<span><i></i>{{item.Status | selectTypes('Status')}}</span></h6>
+        <h6>{{item.CorpName}}<span :class="'shSpan_' + item.Status" class="shSpan"><i :class="item.Status | iconType"></i>{{item.Status | selectTypes('Status')}}</span></h6>
         <!-- <p>打款名称：{{item.TradeCorp}}</p>
         <p>打款账号：{{item.BankAcount}}</p> -->
         <p>账号信息：{{item.AccountBank}}</p>

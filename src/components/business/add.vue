@@ -47,7 +47,7 @@
       </div> -->
 
       <div class="am-form-group am-container">
-        <label for="" class="am-u-sm-3 am-form-label" v-if="!querys.id" >买断价格 dasdas</label>
+        <label for="" class="am-u-sm-3 am-form-label" v-if="!querys.id" >买断价格</label>
         <label for="" class="am-u-sm-3 am-form-label" v-else >卖断价格</label>
         <div class="am-u-sm-9">
           <div class="otype">
@@ -167,7 +167,6 @@ export default {
         },
         data: this.msg
       }).then(res => {
-        alert(window.JSON.stringify(res.data))
         if (this.msg.MainId) {
           this.$router.go(-2)
         } else {

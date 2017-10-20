@@ -54,6 +54,7 @@ export default {
         }
       }).then(res => {
         this.msg = res.data.Message[0]
+        this.getMenu()
       })
     },
     getMenu () {
@@ -73,7 +74,6 @@ export default {
         title: '我的'
       })
       this.getCont()
-      this.getMenu()
     }
   },
   created () {

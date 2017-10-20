@@ -59,6 +59,10 @@ Vue.filter('selectTypes', function (val, name) {
   }
   return json[name][val - 1]
 })
+Vue.filter('iconType', function (val) {
+  var arr = ['am-icon-clock-o', 'am-icon-check-circle-o', 'am-icon-close']
+  return arr[val - 1]
+})
 Vue.filter('trim', function (val) {
   return val.trim()
 })

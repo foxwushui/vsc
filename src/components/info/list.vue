@@ -5,7 +5,7 @@
     </div>
     <div class="my_list_c">
       <div class="list am-container" v-for="item of lists" :key="item.Id" @click="listClick(item.MainId)">
-        <h6>{{item.CorpName}}<span v-if="tabIndex">{{item.Status | selectTypes('Status')}}</span></h6>
+        <h6>{{item.CorpName}}<span v-if="tabIndex" :class="'shSpan_' + item.Status" class="shSpan"><i :class="item.Status | iconType"></i>{{item.Status | selectTypes('Status')}}</span></h6>
         <dl>
           <dt>打款信息：</dt>
           <dd>{{item.AccountBank}} </dd>
@@ -108,7 +108,7 @@ export default {
 </script>
 
 <style>
-.my_list_t{ line-height: 45px; text-align: center; background: #e1e1e1; margin-top: 10px; color: #666;}
+.my_list_t{ line-height: 45px; text-align: center; background: #e1e1e1; color: #666;}
 .my_list_t .active{background: #fff; color: #ff5a09;}
 .my_list_c .list{ border-bottom: 1px solid #f1f1f1; background: #fff;}
 .my_list_c h6{line-height: 60px; font-weight: normal; border-bottom: 1px dashed #f2f2f2;}

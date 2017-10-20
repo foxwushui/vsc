@@ -190,7 +190,6 @@ label{font-weight: normal;}
 .dispaly-none{display: none;}
 
 
-
 .info_top{background: #ff5a09; padding-bottom: 20px; color: #fff; padding-top: 20px;}
 .info_cont{background: #fff; text-align: center; font-size: 1.6rem; padding-bottom: 10px;border-bottom: 1px solid #f1f1f1; color: #999; padding-top: 10px;}
 .info_cont .am-u-sm-6:first-child{border-right: 1px solid #f1f1f1; }
@@ -201,3 +200,8 @@ label{font-weight: normal;}
 .info_list .con a{ overflow: hidden; display: block; color: #000; }
 .businessDetail .sub{border:none;width: 60%;margin: 20px auto 30px;text-align: center; line-height: 45px;background: #ff5a09;color: #fff;border-radius: 4px;font-size: 20px;display: block;}
 .info_list_l i{color: #ff5a09; margin-right: 5px;}
+
+
+.shSpan i{margin-right: 3px;}
+.shSpan.shSpan_2{ color: #60C7B3; border-color: #60C7B3; }
+.shSpan.shSpan_3{ color: #E63C10; border-color: #E63C10; }
