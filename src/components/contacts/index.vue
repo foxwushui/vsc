@@ -127,12 +127,13 @@ export default {
           url: location.href
         }
       }).then(res => {
+        let dataCfg = res.data.Message
         var data = {
-          agentId: res.data.AgentId,
-          corpId: res.data.CorpId,
-          timeStamp: res.data.TimeStamp,
-          nonceStr: res.data.NonceStr,
-          signature: res.data.Signature,
+          agentId: dataCfg.AgentId,
+          corpId: dataCfg.CorpId,
+          timeStamp: dataCfg.TimeStamp,
+          nonceStr: dataCfg.NonceStr,
+          signature: dataCfg.Signature,
           type: 0,
           jsApiList: ['runtime.info', 'biz.telephone.showCallMenu']
         }
@@ -166,6 +167,8 @@ export default {
                   this.$store.state.user.data = res.data.Message
                   this.ddReady()
                 }
+              }).catch(err => {
+                alert(err)
               })
             }
           })

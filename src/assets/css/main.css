@@ -52,6 +52,7 @@ html,body {height: 100%;overflow: hidden;background: #f3f3f3;}
   background: none;
 }
 
+
 .wraper_b{position:absolute;left: 0; right: 0;top: 0;bottom: 56px; overflow: auto;}
 .wraper{position: absolute;left: 0;right: 0;top: 0px;bottom: 0;overflow: auto;}
 .am-form-group{background: #fff; border-bottom: 1px solid #f1f1f1; margin-bottom: 0; padding-bottom: 0.6rem;}
@@ -191,9 +192,12 @@ label{font-weight: normal;}
 
 
 .info_top{background: #ff5a09; padding-bottom: 20px; color: #fff; padding-top: 20px;}
-.info_cont{background: #fff; text-align: center; font-size: 1.6rem; padding-bottom: 10px;border-bottom: 1px solid #f1f1f1;}
+.info_cont{background: #fff; text-align: center; font-size: 1.6rem; padding-bottom: 10px;border-bottom: 1px solid #f1f1f1; color: #999; padding-top: 10px;}
 .info_cont .am-u-sm-6:first-child{border-right: 1px solid #f1f1f1; }
-.info_cont p{margin: 0; font-size: 2rem;}
+.info_cont p{margin: 0; font-size: 2rem; color: #000;}
 .info_cont p span{font-size: 1.2rem; margin-left: 2px;}
 .info_list{ margin: 10px auto;}
 .info_list .con{background: #fff; overflow: hidden; border-top:1px solid #f1f1f1; border-bottom: 1px solid #f1f1f1; line-height: 45px;}
+.info_list .con a{ overflow: hidden; display: block; color: #000; }
+.businessDetail .sub{border:none;width: 60%;margin: 20px auto 30px;text-align: center; line-height: 45px;background: #ff5a09;color: #fff;border-radius: 4px;font-size: 20px;display: block;}
+.info_list_l i{color: #ff5a09; margin-right: 5px;}

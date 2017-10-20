@@ -56,7 +56,7 @@
       </div>
     </div>
 
-    <input type="button" value="我来出票" v-if="!parseInt(querys.isOut)" @click="add" />
+    <input type="button" value="我来出票" class="sub" v-if="!parseInt(querys.isOut)" @click="add" />
 
   </div>
 </template>

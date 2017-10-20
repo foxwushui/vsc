@@ -36,7 +36,7 @@ export default {
   methods: {
     addContacts () {
       // 添加审批
-      this.$router.push({path: '/business/add'})
+      this.$router.push({path: '/business/add', query: {isOut: '1'}})
     },
     cellClick (id) {
       // 审批详细

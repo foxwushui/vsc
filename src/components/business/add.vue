@@ -9,7 +9,7 @@
              <span>*</span>
           </label>
           <div class="am-u-sm-8" @click="choseContact()">
-            <input type="text" id="" placeholder="选择公司" v-model.trim="msg.CorpName">
+            <input type="text" id="" placeholder="选择公司" v-model.trim="msg.CorpName" readonly>
           </div>
 
           <!-- <select name="" id="" v-model="msg.CorpId">
@@ -51,7 +51,8 @@
         <label for="" class="am-u-sm-3 am-form-label" v-else >卖断价格</label>
         <div class="am-u-sm-9">
           <div class="otype">
-            <input type="number" step="0.01" id="" placeholder="每十万买断价格" v-model.trim="msg.OfferAmount">
+            <input type="number" step="0.01" id="" placeholder="每十万买断价格" v-if="!querys.id"  v-model.trim="msg.OfferAmount">
+            <input type="number" step="0.01" id="" placeholder="每十万卖断价格" v-else v-model.trim="msg.OfferAmount">
             <!-- <span :class="msg.OfferType==1 ? 'active left' : 'noactive left' " @click="chooseotype(1)">利率</span>
             <span :class="msg.OfferType==2 ? 'active right' : 'noactive right' " @click="chooseotype(2)">十万</span> -->
           </div>
@@ -61,7 +62,8 @@
         <label for="" class="am-u-sm-3 am-form-label" v-if="!querys.id" >买断金额</label>
         <label for="" class="am-u-sm-3 am-form-label"v-else>卖断金额</label>
         <div class="am-u-sm-9">
-          <input type="number" step="0.01" id="" placeholder="买断金额" v-model.trim="msg.TotalAmount">
+          <input type="number" step="0.01" id="" placeholder="买断金额" v-if="!querys.id" v-model.trim="msg.TotalAmount">
+          <input type="number" step="0.01" id="" placeholder="卖断金额" v-else v-model.trim="msg.TotalAmount">
         </div>
       </div>
       <div class="pic_title">图片</div>
@@ -69,7 +71,7 @@
         <div class="pic_list_img left" v-for="img in imgs" :key="img.Id">
           <img v-bind:src="img" width="80" height="80" />
         </div>
-        <div class="up left">
+        <div class="up left" v-if="parseInt(querys.isOut)">
           <input class="file" type="file" accept="image/*" multiple @change="onFileChange"> +
         </div>
       </div>
@@ -87,7 +89,8 @@ export default {
   name: 'addBusiness',
   data () {
     return {
-      imgs: []
+      imgs: [],
+      pics: []
     }
   },
   computed: {
@@ -121,6 +124,17 @@ export default {
       }
       this.$router.push({path: '/other/choseBank', query: {id: this.msg.CorpId}})
     },
+    getdetail () {
+      if (!parseInt(this.querys.isOut)) {
+        this.$ajax.get('/api/SalesOrder/GetModel', {
+          params: {
+            id: this.querys.id
+          }
+        }).then(res => {
+          this.msg.pic = this.imgs = res.data.Message.BillPics ? res.data.Message.BillPics.split(',') : []
+        })
+      }
+    },
     choseContact () {
       this.$router.push({path: '/other/choseContact'})
     },
@@ -153,7 +167,12 @@ export default {
         },
         data: this.msg
       }).then(res => {
-        this.$router.go(-1)
+        alert(window.JSON.stringify(res.data))
+        if (this.msg.MainId) {
+          this.$router.go(-2)
+        } else {
+          this.$router.go(-1)
+        }
       })
     },
     ddReady () {
@@ -164,6 +183,7 @@ export default {
         title: '提交审批'
       })
       this.choseEd()
+      this.getdetail()
     },
     // // 选择买断方式
     // chooseotype (n) {

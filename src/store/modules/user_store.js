@@ -1,8 +1,7 @@
 export default {
   state: {
     data: {
-      Id: '',
-      RealName: ''
+      Id: ''
     },
     isReady: false,
     contacts: {},

@@ -19,10 +19,13 @@
       </div>
     </div>
 
-    <div class="info_list">
-      <div class="con am-container" @click="infoClick">
-        <div class="info_list_l left">出票业务</div>
-        <div class="info_list_r right"><i class="am-icon-angle-right right"></i></div>
+    <div class="info_list">      
+      <div class="con am-container" v-for="item of menu" :key="item.Id">
+        <router-link :to="item.Url.trim()">
+          <div class="info_list_l left">
+            <i class="am-icon-folder-open"></i>{{item.MenuName}}</div>
+          <div class="info_list_r right"><i class="am-icon-angle-right right"></i></div>
+        </router-link>
       </div>
     </div>
 
@@ -34,7 +37,8 @@ export default {
   name: 'info',
   data () {
     return {
-      msg: {}
+      msg: {},
+      menu: []
     }
   },
   computed: {
@@ -43,9 +47,6 @@ export default {
     }
   },
   methods: {
-    infoClick () {
-      this.$router.push({path: '/info/list'})
-    },
     getCont () {
       this.$ajax.get('/api/SalesOrderCorp/GetInAndOutCount', {
         params: {
@@ -53,6 +54,15 @@ export default {
         }
       }).then(res => {
         this.msg = res.data.Message[0]
+      })
+    },
+    getMenu () {
+      this.$ajax.get('/api/user/GetMenus', {
+        params: {
+          userid: this.userDate.Id
+        }
+      }).then(res => {
+        this.menu = res.data.Message
       })
     },
     ddReady () {
@@ -63,6 +73,7 @@ export default {
         title: '我的'
       })
       this.getCont()
+      this.getMenu()
     }
   },
   created () {
