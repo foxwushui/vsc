@@ -122,58 +122,58 @@ export default {
       this.ddReady()
     } else {
       // 首次进入应用
-      this.$ajax.get('/api/user/GetDDingConfig', {
-        params: {
-          url: location.href
-        }
-      }).then(res => {
-        let dataCfg = res.data.Message
-        var data = {
-          agentId: dataCfg.AgentId,
-          corpId: dataCfg.CorpId,
-          timeStamp: dataCfg.TimeStamp,
-          nonceStr: dataCfg.NonceStr,
-          signature: dataCfg.Signature,
-          type: 0,
-          jsApiList: ['runtime.info', 'biz.telephone.showCallMenu']
-        }
-        this.dd.config(data)
-      }).then(() => {
+      // this.$ajax.get('/api/user/GetDDingConfig', {
+      //   params: {
+      //     url: location.href
+      //   }
+      // }).then(res => {
+      //   let dataCfg = res.data.Message
+      //   var data = {
+      //     agentId: dataCfg.AgentId,
+      //     corpId: dataCfg.CorpId,
+      //     timeStamp: dataCfg.TimeStamp,
+      //     nonceStr: dataCfg.NonceStr,
+      //     signature: dataCfg.Signature,
+      //     type: 0,
+      //     jsApiList: ['runtime.info', 'biz.telephone.showCallMenu']
+      //   }
+      //   this.dd.config(data)
+      // }).then(() => {
         // 入口页 免登陆
-        this.dd.ready(() => {
-          this.$store.state.user.isReady = true
-          this.dd.runtime.permission.requestAuthCode({
-            corpId: 'dingf53c8d834194138b35c2f4657eb6378f',
-            onSuccess: res => {
-              this.$ajax.get('/api/User/GetUserInfo', {
-                params: {
-                  code: res.code
+      this.dd.ready(() => {
+        this.$store.state.user.isReady = true
+        this.dd.runtime.permission.requestAuthCode({
+          corpId: 'dingf53c8d834194138b35c2f4657eb6378f',
+          onSuccess: res => {
+            this.$ajax.get('/api/User/GetUserInfo', {
+              params: {
+                code: res.code
+              }
+            }).then(res => {
+              // 保存用户信息
+              this.$store.state.user.data = res.data.Message
+              this.ddReady()
+            }).catch(err => {
+              console.log(err)
+              this.dd.device.notification.alert({
+                message: '用户不存在',
+                title: '提示',
+                buttonName: '收到',
+                onSuccess: res => {
+                  this.dd.biz.navigation.close()
+                },
+                onFail: function (err) {
+                  console.log(err)
                 }
-              }).then(res => {
-                // 保存用户信息
-                this.$store.state.user.data = res.data.Message
-                this.ddReady()
-              }).catch(err => {
-                console.log(err)
-                this.dd.device.notification.alert({
-                  message: '用户不存在',
-                  title: '提示',
-                  buttonName: '收到',
-                  onSuccess: res => {
-                    this.dd.biz.navigation.close()
-                  },
-                  onFail: function (err) {
-                    console.log(err)
-                  }
-                })
               })
-            }
-          })
-        })
-        this.dd.error(err => {
-          alert(window.JSON.stringify(err))
+            })
+          }
         })
       })
+      this.dd.error(err => {
+        alert(window.JSON.stringify(err))
+      })
+      // })
     }
   }
 }

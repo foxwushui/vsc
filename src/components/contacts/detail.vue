@@ -9,10 +9,12 @@
         <img v-bind:src="imgs.msg" width="40" />
           发消息
         </div>
-        <div class="am-u-sm-4" @click="my_call()">
-        <img v-bind:src="imgs.tel" width="40" />
-          电话
-        </div>
+        <a :href="'tel:'+msg.Mobile">
+          <div class="am-u-sm-4" @click="my_call()">
+          <img v-bind:src="imgs.tel" width="40" />
+            电话
+          </div>
+        </a>
         <div class="am-u-sm-4">
         <img v-bind:src="imgs.bf" width="40" />
           写拜访记录
@@ -34,11 +36,16 @@
           <p>{{msg.LinkMan}}</p>
         </div>
       </div>
+
+        <a :href="'tel:'+msg.Mobile">
       <div class="list" @click="my_call()">
         <div class="title">电话</div>
         <strong>+86-{{msg.Mobile}}</strong>
         <img v-bind:src="imgs.tel_l" width="10" />
       </div>
+        </a>
+
+
     </div>
     <div class="am-container more">
         <div class="more_t">
