@@ -3,6 +3,12 @@
     <!-- <div class="am-g tabs">
       <div class="am-u-sm-6 tab" v-for="(item,index) of tab" :key="item.id" @click="tabClick(index)" :class="{active: index==tabIndex}">{{item.text}}</div>
     </div> -->
+    <div class="search">
+      <form  @submit.prevent="search"  action="">
+      <input type="search" name="" id="" placeholder="搜索" v-model.trim="msg.CorpName" autocomplete="off"  />
+      <p v-if="msg.isSearch">共{{msg.total}}项<i class="am-icon-remove right" @click="ofSearch"></i></p>
+      </form>
+    </div>
     <div class="cells" v-if="lists.length">
       <div class="am-container cell" v-for="(item,index) of lists" :key="item.Id"  @click="cellClick(item.Id)">
         <div class="cell-icon am-fl"><img src="../../assets/imgs/logo.png" width="45" /></div>
@@ -38,6 +44,21 @@ export default {
     }
   },
   methods: {
+    search () {
+      this.msg.PageIndex = 1
+      this.lists = []
+      this.msg.total = 0
+      this.getList(() => {
+        this.msg.isSearch = this.msg.CorpName
+      })
+    },
+    ofSearch () {
+      this.msg.PageIndex = 1
+      this.lists = []
+      this.msg.total = 0
+      this.msg.isSearch = this.msg.CorpName = ''
+      this.getList()
+    },
     addContact () {
     // 添加联系人
       this.$router.push({path: '/contacts/add'})
@@ -50,12 +71,14 @@ export default {
     cellClick (id) {
       this.$router.push({path: '/contacts/detail', query: {id: id}})
     },
-    getList () {
+    getList (fn) {
       this.$ajax.get('/api/Customers/GetList', {
         params: this.msg
       }).then(res => {
+        this.msg.total = res.data.Message.Total
         this.msg.maxpageIndex = Math.ceil(res.data.Message.Total / this.msg.PageSize)
         this.lists = this.lists.concat(res.data.Message.CustomersList)
+        fn && fn()
       })
     },
     ddReady () {
@@ -104,7 +127,9 @@ export default {
         OwnUserId: this.$store.state.user.data.Id,
         PageIndex: 1,
         PageSize: 10,
-        maxpageIndex: 1
+        maxpageIndex: 1,
+        CorpName: '',
+        isSearch: false
       }
     }
   },

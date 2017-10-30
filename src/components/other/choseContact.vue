@@ -1,5 +1,12 @@
 <template>
   <div class="choseContact wraper" ref="viewBox_cc">
+    
+    <div class="search">
+      <form  @submit.prevent="search"  action="">
+      <input type="search" name="" id="" placeholder="搜索" v-model.trim="msg.CorpName" autocomplete="off"  />
+      <p v-if="msg.isSearch">共{{msg.total}}项<i class="am-icon-remove right" @click="ofSearch"></i></p>
+      </form>
+    </div>
     <!-- 选择银行账户 -->
     <div class="cells">
       <div class="am-container cell" v-for="(item,index) of CorpList" :key="item.Id"  @click="chose_click(item.Id)">
@@ -33,11 +40,28 @@ export default {
         OwnUserId: this.$store.state.user.data.Id,
         PageIndex: 1,
         PageSize: 10,
-        maxpageIndex: 1
+        maxpageIndex: 1,
+        CorpName: '',
+        isSearch: false
       }
     }
   },
   methods: {
+    search () {
+      this.msg.PageIndex = 1
+      this.CorpList = []
+      this.msg.total = 0
+      this.getTradeCompany(() => {
+        this.msg.isSearch = this.msg.CorpName
+      })
+    },
+    ofSearch () {
+      this.msg.PageIndex = 1
+      this.CorpList = []
+      this.msg.total = 0
+      this.msg.isSearch = this.msg.CorpName = ''
+      this.getTradeCompany()
+    },
     chose_click (id) {
       this.$store.state.user.chose.CorpId = id
       for (let i = 0; i < this.CorpList.length; i++) {
@@ -50,12 +74,14 @@ export default {
       this.$store.state.user.chose.AccountBank = ''
       this.$router.go(-1)
     },
-    getTradeCompany () {
+    getTradeCompany (fn) {
       this.$ajax.get('/api/Customers/GetList', {
         params: this.msg
       }).then(res => {
+        this.msg.total = res.data.Message.Total
         this.msg.maxpageIndex = Math.ceil(res.data.Message.Total / this.msg.PageSize)
         this.CorpList = this.CorpList.concat(res.data.Message.CustomersList)
+        fn && fn()
       })
     },
     ddReady () {

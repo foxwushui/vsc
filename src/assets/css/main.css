@@ -206,3 +206,9 @@ label{font-weight: normal;}
 .shSpan i{margin-right: 3px;}
 .shSpan.shSpan_2{ color: #60C7B3; border-color: #60C7B3; }
 .shSpan.shSpan_3{ color: #E63C10; border-color: #E63C10; }
+
+
+.search{ background: #fff; padding-top: 10px; overflow: hidden;}
+.search input{ display: block; display: flex;  width: 95%; margin: 0 auto 10px; border:none; background: #f1f1f1; line-height: 1.8; padding-left: 10px; border-radius:5px;-webkit-appearance: none;}
+.search p{ margin: 0; background: #f3f3f3; padding: 5px 15px; border-top:1px solid #ddd; border-bottom: 1px solid #ddd;}
+.search i{font-weight:normal;}
