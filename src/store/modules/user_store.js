@@ -1,9 +1,9 @@
 export default {
   state: {
     data: {
-      Id: '5'
+      Id: ''
     },
-    isReady: true,
+    isReady: false,
     contacts: {},
     chose: {}
   }
