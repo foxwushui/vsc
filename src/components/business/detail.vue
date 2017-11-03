@@ -1,5 +1,5 @@
 <template>
-  <div class="businessDetail">
+  <div class="businessDetail wraper">
     <div class="am-container top" v-if="detail">
       <div class="corpName am-g">
         <div class="am-u-sm-2">

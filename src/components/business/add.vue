@@ -1,5 +1,5 @@
 <template>
-  <div class="addBusiness addBusiness">
+  <div class="addBusiness addBusiness wraper">
     <form class="am-form am-form-horizontal" @submit.prevent="add">
       <div class="am-form-group  am-container">
           <label for="tel" class="am-u-sm-4 am-form-label" v-if="!querys.id">选择贴现公司          
@@ -32,14 +32,71 @@
         </div>
       </div>
 
-      <!-- <div class="am-form-group am-container">
-        <label for="" class="am-u-sm-3 am-form-label">账号</label>
+    <div class="am-form-group am-container">
+        <label for="" class="am-u-sm-3 am-form-label">操作顺序</label>
         <div class="am-u-sm-9">
-          <input type="text" id="" placeholder="账号" v-model="msg.BankAcount" readonly>
+
+          <i class="am-icon-angle-right right for_select"></i>
+          <span class="right select_span" @click="selectClick('OperationOrder')">{{selectMsg.OperationOrder}}</span>
         </div>
       </div>
 
-      <div class="am-form-group am-container">
+
+    <div class="am-form-group am-container" v-if="!querys.id">
+        <label for="" class="am-u-sm-3 am-form-label">操作方式</label>
+        <div class="am-u-sm-9">
+
+          <i class="am-icon-angle-right right for_select"></i>
+          <span class="right select_span" @click="selectClick('OperationWay')">{{selectMsg.OperationWay}}</span>
+        </div>
+      </div>
+
+          <div class="am-form-group am-container" v-if="!querys.id">
+        <label for="" class="am-u-sm-3 am-form-label">是否先制单</label>
+        <div class="am-u-sm-9">
+
+          <i class="am-icon-angle-right right for_select"></i>
+          <span class="right select_span" @click="selectClick('IsMakeOrder')">{{selectMsg.IsMakeOrder}}</span>
+        </div>
+      </div>
+
+
+               <div class="am-form-group am-container" v-if="!querys.id">
+        <label for="" class="am-u-sm-3 am-form-label">是否付全款</label>
+        <div class="am-u-sm-9">
+
+          <i class="am-icon-angle-right right for_select"></i>
+          <span class="right select_span" @click="selectClick('IsPayAllMoney')">{{selectMsg.IsPayAllMoney}}</span>
+        </div>
+      </div>
+
+
+
+      <div class="am-form-group am-container" v-if="!querys.id">
+        <label for="" class="am-u-sm-3 am-form-label" >小款</label>
+        <div class="am-u-sm-9">
+          <div class="otype">
+            <input type="number" step="0.01" id="" placeholder="小款金额" v-model.trim="msg.ProofFee">
+            <!-- <span :class="msg.OfferType==1 ? 'active left' : 'noactive left' " @click="chooseotype(1)">利率</span>
+            <span :class="msg.OfferType==2 ? 'active right' : 'noactive right' " @click="chooseotype(2)">十万</span> -->
+          </div>
+        </div>
+      </div>
+
+         <div class="am-form-group am-container" v-if="!querys.id">
+        <label for="" class="am-u-sm-3 am-form-label" >优惠</label>
+        <div class="am-u-sm-9">
+          <div class="otype">
+            <input type="number" step="0.01" id="" placeholder="优惠金额" v-model.trim="msg.EnquiryFee">
+            <!-- <span :class="msg.OfferType==1 ? 'active left' : 'noactive left' " @click="chooseotype(1)">利率</span>
+            <span :class="msg.OfferType==2 ? 'active right' : 'noactive right' " @click="chooseotype(2)">十万</span> -->
+          </div>
+        </div>
+      </div>
+
+      
+
+        <!-- <div class="am-form-group am-container">
         <label for="" class="am-u-sm-3 am-form-label">开户行</label>
         <div class="am-u-sm-9">
           <input type="text" id="" placeholder="开户行" v-model="msg.AccountBank" readonly>
@@ -90,15 +147,62 @@ export default {
   data () {
     return {
       imgs: [],
-      pics: []
-    }
-  },
-  computed: {
-    chose_msg () {
-      return this.$store.state.user.chose
-    },
-    msg () {
-      return {
+      pics: [],
+      selectarr: {
+        OperationOrder: [{
+          key: '先收票后打款',
+          value: '1'
+        },
+        {
+          key: '先打款后收票',
+          value: '2'
+        }],
+        OperationWay: [{
+          key: '线下操作',
+          value: '1'
+        },
+        {
+          key: '汇票之家',
+          value: '2'
+        },
+        {
+          key: '喜氏平台',
+          value: '3'
+        },
+        {
+          key: '汇票栈',
+          value: '4'
+        },
+        {
+          key: '同城票据网',
+          value: '5'
+        },
+        {
+          key: '汇票线',
+          value: '6'
+        },
+        {
+          key: '深度票据网',
+          value: '7'
+        }],
+        IsMakeOrder: [{
+          key: '否',
+          value: '0'
+        },
+        {
+          key: '是',
+          value: '1'
+        }],
+        IsPayAllMoney: [{
+          key: '否',
+          value: '0'
+        },
+        {
+          key: '是',
+          value: '1'
+        }]
+      },
+      msg: {
         MainId: 0,
         TradeType: 1,
         CorpId: this.$store.state.user.chose.CorpId || 0,
@@ -106,14 +210,42 @@ export default {
         AccountBank: '',
         OfferType: 2,
         pic: [],
-        CreateUserId: this.$store.state.user.data.Id
+        CreateUserId: this.$store.state.user.data.Id,
+        OperationOrder: '0',
+        OperationWay: '0',
+        IsMakeOrder: '0',
+        IsPayAllMoney: '0',
+        ProofFee: '',
+        EnquiryFee: ''
       }
+    }
+  },
+  computed: {
+    chose_msg () {
+      return this.$store.state.user.chose
+    },
+    selectMsg () {
+      let json = {}
+      json.OperationOrder = this.selectarr.OperationOrder[this.msg.OperationOrder - 1] ? this.selectarr.OperationOrder[this.msg.OperationOrder - 1].key : '选择顺序'
+      json.OperationWay = this.selectarr.OperationWay[this.msg.OperationWay - 1] ? this.selectarr.OperationWay[this.msg.OperationWay - 1].key : '选择方式'
+      json.IsMakeOrder = this.selectarr.IsMakeOrder[this.msg.IsMakeOrder] ? this.selectarr.IsMakeOrder[this.msg.IsMakeOrder].key : '请选择'
+      json.IsPayAllMoney = this.selectarr.IsPayAllMoney[this.msg.IsPayAllMoney] ? this.selectarr.IsPayAllMoney[this.msg.IsPayAllMoney].key : '请选择'
+      return json
     },
     querys () {
       return this.$route.query
     }
   },
   methods: {
+    selectClick (str) {
+      this.dd.biz.util.chosen({
+        source: this.selectarr[str],
+        selectedKey: this.selectMsg[str],
+        onSuccess: res => {
+          this.msg[str] = res.value
+        }
+      })
+    },
     chose () {
       if (!this.msg.CorpId) {
         this.dd.device.notification.toast({

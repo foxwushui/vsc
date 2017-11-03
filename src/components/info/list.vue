@@ -1,5 +1,5 @@
 <template>
-  <div class="wraper my_list"  ref="viewBox">
+  <div class="wraper my_list wraper"  ref="viewBox">
     <div class="my_list_t am-g">
       <div class="am-u-sm-6" :class="{active: index==tabIndex}" v-for="(item, index) of tabs" :key="item.id" @click="tabClick(index)">{{item.text}}</div>
     </div>
@@ -53,7 +53,8 @@ export default {
         pageIndex: 1,
         pageSize: 10,
         maxpageIndex: 1,
-        CreateUserId: this.userData.Id
+        CreateUserId: this.userData.Id,
+        BelongUserId: this.userData.Id
       }
     }
   },

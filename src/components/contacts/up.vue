@@ -1,5 +1,5 @@
 <template>
-  <div class="addContacts">
+  <div class="addContacts wraper">
     <form class="am-form am-form-horizontal" @submit.prevent="update">
       <div class="am-form-group  am-container">
         <label for="name" class="am-u-sm-2 am-form-label">姓名<span>*</span></label>

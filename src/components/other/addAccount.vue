@@ -1,5 +1,5 @@
 <template>
-  <div class="addAccount">
+  <div class="addAccount wraper">
     <form class="am-form am-form-horizontal" @submit.prevent="add">
        <div class="am-form-group am-container">
         <label for="" class="am-u-sm-3 am-form-label">账户信息</label>

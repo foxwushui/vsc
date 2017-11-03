@@ -1,5 +1,5 @@
 <template>
-  <div class="contactsDetail">
+  <div class="contactsDetail wraper">
     <div class="am-container top">
         <img v-bind:src="imgs.logo" width="80" />
         <p>{{msg.CorpName}}</p>
