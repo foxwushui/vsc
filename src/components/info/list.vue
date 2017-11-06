@@ -5,16 +5,27 @@
     </div>
     <div class="my_list_c">
       <div class="list am-container" v-for="item of lists" :key="item.Id" @click="listClick(item.MainId)">
-        <h6>{{item.CorpName}}<span v-if="tabIndex" :class="'shSpan_' + item.Status" class="shSpan"><i :class="item.Status | iconType"></i>{{item.Status | selectTypes('Status')}}</span></h6>
-        <dl>
-          <dt>打款信息：</dt>
-          <dd>{{item.AccountBank}} </dd>
-        </dl>
-        <dl>
-          <dt v-if="!tabIndex">买断金额：</dt>
-          <dt v-else>卖断金额：</dt>
-          <dd>{{item.TotalAmount}}元 </dd>
-        </dl>
+
+        <div class="am-g">
+          <div class="am-u-sm-3">
+            <h6>{{item.CorpName}}<span v-if="tabIndex" :class="'shSpan_' + item.Status" class="shSpan"><i :class="item.Status | iconType"></i>{{item.Status | selectTypes('Status')}}</span></h6>
+          </div>
+        </div>
+        
+        <div class="am-g">
+          <div class="am-u-sm-3">打款信息：</div>
+          <div class="am-u-sm-9">{{item.AccountBank}} </div>
+        </div>
+        
+        
+        <div class="am-g">
+          <div class="am-u-sm-3" v-if="!tabIndex">买断金额：</div>
+          <div class="am-u-sm-3" v-else>卖断金额：</div>
+          <div class="am-u-sm-9">{{item.TotalAmount}} </div>
+        </div>
+
+
+
       </div>
         
       <div class="noMsg" v-if="!lists.length">
@@ -111,8 +122,9 @@ export default {
 <style>
 .my_list_t{ line-height: 45px; text-align: center; background: #e1e1e1; color: #666;}
 .my_list_t .active{background: #fff; color: #ff5a09;}
-.my_list_c .list{ border-bottom: 1px solid #f1f1f1; background: #fff;}
-.my_list_c h6{line-height: 60px; font-weight: normal; border-bottom: 1px dashed #f2f2f2;}
+.my_list_c .am-u-sm-3{padding-right: 0;}
+.my_list_c .list{ border-bottom: 1px solid #f1f1f1; background: #fff; padding-bottom: 2rem; overflow: hidden;}
+.my_list_c h6{line-height: 60px; font-weight: normal; border-bottom: 1px dashed #f2f2f2; margin: 0;}
 .my_list_c dt{float: left; font-weight: normal;}
 .my_list_c dd{padding-left: 6.8rem;}
 .my_list_c  h6 span{font-size: 1.2rem; vertical-align: middle; border:1px solid #999; border-radius: 4px; padding: 2px 8px; margin-left: 10px; color: #999;}

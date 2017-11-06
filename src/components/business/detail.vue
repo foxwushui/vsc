@@ -56,7 +56,12 @@
       </div>
     </div>
 
-    <input type="button" value="我来出票" class="sub" v-if="!parseInt(querys.isOut)" @click="add" />
+    <div class="am-g">
+      <div class="am-u-sm-6"><input type="button" value="票据分配" class="sub" v-if="!parseInt(querys.isOut)" @click="sales" /></div>
+      <div class="am-u-sm-6"><input type="button" value="我来出票" class="sub" v-if="!parseInt(querys.isOut)" @click="add" /></div>
+    </div>
+    
+    
 
   </div>
 </template>
@@ -75,7 +80,9 @@ export default {
         require('../../assets/imgs/sp_succ.png'),
         require('../../assets/imgs/sp_err.png')
       ],
-      models: ['InSalesOrderCorp', 'OutSalesOrderCorp']
+      models: ['InSalesOrderCorp', 'OutSalesOrderCorp'],
+      salesArr: [],
+      InSalesOrderCorpId: ''
     }
   },
   computed: {
@@ -84,6 +91,25 @@ export default {
     }
   },
   methods: {
+    sales () {
+      this.$ajax.get('/api/user/GetManagerList').then(res => {
+        res.data.Message.ManagerList.map((e, i) => {
+          this.salesArr.push({key: e.RealName, value: e.Id})
+        })
+        this.dd.biz.util.chosen({
+          source: this.salesArr,
+          selectedKey: this.salesArr[0].key,
+          onSuccess: res => {
+            this.$ajax.post('/api/SalesOrderCorp/UpdateBelongUserId', {
+              id: this.detail.Id,
+              BelongUserId: res.value
+            }).then(res => {
+              this.$router.go(-1)
+            })
+          }
+        })
+      })
+    },
     add () {
       this.$router.push({path: '/business/add', query: this.querys})
     },
@@ -121,7 +147,6 @@ export default {
     }
   },
   created () {
-    console.log(this.querys)
     this.$store.state.tabbar.show = false
     this.ddready()
   }
